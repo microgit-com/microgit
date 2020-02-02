@@ -1,0 +1,33 @@
+name: microgit.cr
+version: 0.1.0
+
+authors:
+  - Håkan Nylén <hakan@dun.se>
+
+targets:
+  microgit:
+    main: src/microgit.cr
+
+crystal: 0.32.1
+
+dependencies:
+  lucky:
+    github: luckyframework/lucky
+    version: ~> 0.18.2
+  authentic:
+    github: luckyframework/authentic
+    version: ~> 0.5.0
+  carbon:
+    github: luckyframework/carbon
+    version: ~> 0.1.1
+  dotenv:
+    github: gdotdesign/cr-dotenv
+    version: 0.3.0
+  lucky_flow:
+    github: luckyframework/lucky_flow
+    version: ~> 0.6.0
+  jwt:
+    github: crystal-community/jwt
+    version: ~> 1.2.0
+  git:
+    github: crystal-git/git
