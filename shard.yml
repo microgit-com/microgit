@@ -31,3 +31,5 @@ dependencies:
     version: ~> 1.2.0
   git:
     github: crystal-git/git
+  kilt:
+    github: jeromegn/kilt

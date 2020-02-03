@@ -8,7 +8,7 @@
  */
 
 let mix = require("laravel-mix");
-
+const tailwindcss = require('tailwindcss')
 // Customize the notifier to be less noisy
 let WebpackNotifierPlugin = require('webpack-notifier');
 let webpackNotifier = new WebpackNotifierPlugin({
@@ -31,7 +31,9 @@ mix
     // https://github.com/tcoopman/image-webpack-loader
     imgLoaderOptions: { enabled: false },
     // Stops Mix from clearing the console when compilation succeeds
-    clearConsole: false
+    clearConsole: false,
+    processCssUrls: false,
+    postCss: [ tailwindcss('tailwind.config.js') ],
   })
   // Set public path so manifest gets output here
   .setPublicPath("public")

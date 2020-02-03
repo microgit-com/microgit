@@ -48,6 +48,10 @@ shards:
     github: crystal-community/jwt
     version: 1.2.0
 
+  kilt:
+    github: jeromegn/kilt
+    version: 0.6.0
+
   lucky:
     github: luckyframework/lucky
     version: 0.18.2
