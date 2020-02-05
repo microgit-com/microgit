@@ -33,7 +33,7 @@
       </div>
     </nav>
     <div class="container mx-auto">
-      <%= Shared::FlashMessages.new(@context.flash) %>
+    <% Shared::FlashMessages.new(@context.flash) %>
     <% content %>
     </div>
   </body>

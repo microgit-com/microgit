@@ -7,6 +7,10 @@ class User < BaseModel
     column encrypted_password : String
   end
 
+  def slug
+    "confact"
+  end
+
   def emailable : Carbon::Address
     Carbon::Address.new(email)
   end

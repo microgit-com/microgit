@@ -37,8 +37,8 @@ shards:
     version: 0.1.2
 
   git:
-    github: crystal-git/git
-    version: 0.5.3
+    github: microgit-com/libgit2.cr
+    commit: bb5759536277ec48cbc3b030d41a8a21f6057b5c
 
   habitat:
     github: luckyframework/habitat
@@ -75,10 +75,6 @@ shards:
   pg:
     github: will/crystal-pg
     version: 0.19.0
-
-  safec:
-    github: mosop/safec
-    version: 0.2.1
 
   selenium:
     github: ysbaddaden/selenium-webdriver-crystal

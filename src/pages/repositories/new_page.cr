@@ -9,12 +9,12 @@ class Repositories::NewPage < MainLayout
 
   def render_repository_form(op)
     form_for Repositories::Create do
-      mount Shared::Field.new(op.name), &.text_input(autofocus: "true")
-      mount Shared::Field.new(op.description)
-      mount Shared::Field.new(op.slug)
-      mount Shared::Field.new(op.privated)
+      mount Shared::Field.new(op.name), &.text_input(autofocus: "true", append_class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-2")
+      mount Shared::Field.new(op.description), &.text_input(append_class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-2")
+      mount Shared::Field.new(op.slug), &.text_input(append_class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-2")
+      mount Shared::Field.new(op.privated), &.text_input(append_class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-2")
 
-      submit "Save", data_disable_with: "Saving..."
+      submit "Save", data_disable_with: "Saving...", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
     end
   end
 end

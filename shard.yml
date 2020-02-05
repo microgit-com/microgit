@@ -30,6 +30,6 @@ dependencies:
     github: crystal-community/jwt
     version: ~> 1.2.0
   git:
-    github: crystal-git/git
+    github: microgit-com/libgit2.cr
   kilt:
     github: jeromegn/kilt
