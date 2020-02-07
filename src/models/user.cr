@@ -4,11 +4,12 @@ class User < BaseModel
 
   table do
     column email : String
+    column username : String
     column encrypted_password : String
   end
 
   def slug
-    "confact"
+    username
   end
 
   def emailable : Carbon::Address
