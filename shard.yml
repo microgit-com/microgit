@@ -33,3 +33,5 @@ dependencies:
     github: microgit-com/libgit2.cr
   kilt:
     github: jeromegn/kilt
+  markd:
+    github: icyleaf/markd

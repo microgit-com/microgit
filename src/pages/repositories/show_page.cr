@@ -1,5 +1,8 @@
 class Repositories::ShowPage < MainLayout
   needs repository : Repository
+  needs repo : MicrogitGit
+  needs readme : Git::TreeEntry
+  needs readme_content : Git::Blob
   quick_def page_title, @repository.name
 
   def content

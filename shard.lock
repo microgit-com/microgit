@@ -38,7 +38,7 @@ shards:
 
   git:
     github: microgit-com/libgit2.cr
-    commit: bb5759536277ec48cbc3b030d41a8a21f6057b5c
+    commit: ce99119054b8f0a7f0a114ee2cfb4ddc27cb5640
 
   habitat:
     github: luckyframework/habitat
@@ -67,6 +67,10 @@ shards:
   lucky_router:
     github: luckyframework/lucky_router
     version: 0.2.2
+
+  markd:
+    github: icyleaf/markd
+    version: 0.2.0
 
   openssl_ext:
     github: stakach/openssl_ext
