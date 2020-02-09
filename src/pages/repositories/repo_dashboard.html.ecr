@@ -39,7 +39,7 @@
     <div class="w-full p-3 bg-gray-200 border-b border-gray-400">
       <%= @readme.name %>
     </div>
-    <div class="w-full p-3">
+    <div class="w-full p-3 markdown">
       <%= Markd.to_html(@readme_content.content) %>
     </div>
   </div>
