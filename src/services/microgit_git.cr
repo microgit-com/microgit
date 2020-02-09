@@ -8,6 +8,7 @@ class MicrogitGit
   end
 
   def last_commit
+    return nil if @repo_git.empty?
     raw.last_commit
   end
 
@@ -26,6 +27,8 @@ class MicrogitGit
   end
 
   def commit_count(ref = last_commit)
+    return 0 if @repo_git.empty?
+    return 0 if ref.nil?
     walker = @repo_git.walk(ref.sha)
     count = 0
     walker.each do |c|
@@ -36,15 +39,21 @@ class MicrogitGit
   end
 
   def find_file(file_path)
-    tree.path(file_path)
+    return nil if tree.nil?
+    return nil if @repo_git.empty?
+    tree.try {|t| t.path(file_path) }
   end
 
   def find_file_blob(file_path = nil)
+    return nil if @repo_git.empty?
     entry = find_file(file_path)
+    return nil if entry.nil?
     Git::Blob.lookup(@repo_git, entry.oid)
   end
 
   def tree(ref = last_commit)
+    return nil if ref.nil?
+    return nil if @repo_git.empty?
     ref.tree
   end
 

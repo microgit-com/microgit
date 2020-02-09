@@ -1,15 +1,15 @@
-<% if !@repo.raw.empty? %>
+<% if !@repo.raw.empty? && !@repo.tree.nil? %>
 
 <div class="bg-gray-200 my-3 border-solid border border-gray-400 m-auto p-3 rounded">
   <div class="flex">
     <div class="w-3/4 h-12">
-      <p><%= @repo.last_commit.message %></p>
-      <p><%=@repo.last_commit.author.name %> <span class="text-gray-600">authored <%= @repo.last_commit.author.time %> ago</span></p>
+      <p><%= @repo.last_commit.try { |c| c.message} %></p>
+      <p><%=@repo.last_commit.try { |c| c.author.name} %> <span class="text-gray-600">authored <%= @repo.last_commit.try { |c| distance_of_time_in_words(c.author.time, Time.utc) } %> ago</span></p>
     </div>
     <div class="w-1/4 h-12">
       <div class="flex flex-wrap mb-4">
         <div class="w-full md:w-2/3">
-            <input id="repo_commit" class="appearance-none block w-full py-3 px-2 mb-4 md:mb-0 leading-snug text-gray-700 bg-white border border-gray-400 focus:border-gray-500 rounded md:rounded-r-none focus:outline-none" type="text" value="<%=@repo.last_commit.sha%>">
+            <input id="repo_commit" class="appearance-none block w-full py-3 px-2 mb-4 md:mb-0 leading-snug text-gray-700 bg-white border border-gray-400 focus:border-gray-500 rounded md:rounded-r-none focus:outline-none" type="text" value="<%=@repo.last_commit.try { |c| c.sha }%>">
         </div>
         <div class="w-full md:w-1/3">
             <button id="repo_commit_copy_btn" class="inline-block w-full py-4 px-2 leading-none text-white bg-blue-500 hover:bg-blue-600 rounded md:rounded-l-none" data-config-id="form-action">Copy</button>
@@ -27,23 +27,25 @@
   </thead>
 
   <tbody>
-    <% @repo.tree.each do |tree| %>
+    <% @repo.tree.try { |t| t.each do |tree| %>
       <tr>
         <td class="border px-4 py-2"><%= tree.name %></td>
       </tr>
-    <% end %>
+    <% end } %>
   </tbody>
 </table>
+<% unless @readme.nil? %>
 <div class="my-3 border-solid border border-gray-400 m-auto rounded">
   <div class="flex flex-wrap">
     <div class="w-full p-3 bg-gray-200 border-b border-gray-400">
-      <%= @readme.name %>
+      <%= @readme.try { |r| r.name }%>
     </div>
     <div class="w-full p-3 markdown">
-      <%= Markd.to_html(@readme_content.content) %>
+      <%=@readme_content %>
     </div>
   </div>
 </div>
+<% end %>
 <% else %>
 <div class="justify-center text-center max-h-full p-4">
   <h3>Its empty!</h3>

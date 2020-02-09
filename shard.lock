@@ -88,6 +88,10 @@ shards:
     github: luckyframework/shell-table.cr
     commit: 078a04ea58ead5203bb435a3b5fff448ddabaeea
 
+  sluggr:
+    github: microgit-com/sluggr
+    commit: 789ba497be050135465e8ef12b9b969514c5d2fd
+
   teeplate:
     github: luckyframework/teeplate
     version: 0.8.0

@@ -35,3 +35,5 @@ dependencies:
     github: jeromegn/kilt
   markd:
     github: icyleaf/markd
+  sluggr:
+    github: microgit-com/sluggr
