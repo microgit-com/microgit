@@ -1,7 +1,7 @@
 class Repositories::Issues::Create < BrowserAction
   nested_route do
     repository = RepositoryQuery.find(repository_id)
-    SaveIssue.create(params) do |operation, issue|
+    SaveIssue.create(params, repository_id: repository.id, author_id: current_user.id) do |operation, issue|
       if issue
         flash.success = "The record has been saved"
         redirect Show.with(repository_id, issue.id)

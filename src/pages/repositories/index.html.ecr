@@ -1,0 +1,18 @@
+<h2>Repositories</h2>
+<table class="table-auto w-full">
+  <thead>
+    <tr>
+      <th class="px-4 py-2">Name</th>
+      <th class="px-4 py-2">Description</th>
+    </tr>
+  </thead>
+<tbody>
+  <% @repositories.each do |repository| %>
+    <tr>
+      <td class="border px-4 py-2"><% link repository.name, Repositories::Show.with(repository) %></td>
+      <td class="border px-4 py-2"><%= repository.description %></td>
+      <td class="border px-4 py-2">Destroy</td>
+    </tr>
+  <% end %>
+</tbody>
+</table>

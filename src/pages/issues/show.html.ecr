@@ -1,0 +1,13 @@
+<h1><%=@issue.name.to_s%></h1>
+<p>Author: <%=@issue.author.username.to_s%></p>
+
+<div class="my-3 border-solid border border-gray-400 m-auto rounded">
+  <div class="flex flex-wrap">
+    <div class="w-full p-3 bg-gray-200 border-b border-gray-400">
+      Description
+    </div>
+    <div class="w-full p-3 markdown">
+      <%= Markd.to_html(@issue.description) %>
+    </div>
+  </div>
+</div>

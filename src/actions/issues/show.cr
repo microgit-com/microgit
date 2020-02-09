@@ -1,5 +1,6 @@
 class Repositories::Issues::Show < BrowserAction
   nested_route do
-    html ShowPage, issue: IssueQuery.new.find(issue_id), repository: RepositoryQuery.find(repository_id)
+    issue = IssueQuery.new.preload_repository.preload_author.preload_assignee.find(issue_id)
+    html ShowPage, issue: issue, repository: issue.repository
   end
 end

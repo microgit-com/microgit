@@ -4,17 +4,8 @@ class Repositories::Issues::IndexPage < MainLayout
   quick_def page_title, "All"
 
   def content
-    h1 "All Issues"
-    render_issues
+    render_template "repositories/repo_links.html.ecr"
+    render_template "issues/index.html.ecr"
   end
 
-  def render_issues
-    ul do
-      @issues.each do |issue|
-        li do
-          link issue.name, Show.with(@repository, issue)
-        end
-      end
-    end
-  end
 end

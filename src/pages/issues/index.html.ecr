@@ -1,0 +1,17 @@
+<h2>Issues</h2>
+<table class="table-auto w-full">
+  <thead>
+    <tr>
+      <th class="px-4 py-2">Name</th>
+      <th class="px-4 py-2">Author</th>
+    </tr>
+  </thead>
+<tbody>
+  <% @issues.each do |issue| %>
+    <tr>
+      <td class="border px-4 py-2"><% link issue.name, Repositories::Issues::Show.with(@repository, issue) %></td>
+      <td class="border px-4 py-2"><%=issue.author.username.to_s%></td>
+    </tr>
+  <% end %>
+</tbody>
+</table>

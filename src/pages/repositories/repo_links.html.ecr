@@ -1,0 +1,5 @@
+<div class="mb-5">
+  <% link "Dashboard", Repositories::Show.with(@repository), class: "block lg:inline-block lg:mt-0 lg:ml-3 text-blue-900 hover:text-blue-700" %>
+  <% link "issues", Repositories::Issues::Index.with(@repository), class: "block lg:inline-block lg:mt-0 lg:ml-3 text-blue-900 hover:text-blue-700" %>
+  <a class="block lg:inline-block lg:mt-0 lg:ml-3 text-blue-900 hover:text-blue-700" href="">Merge Requests</a>
+</div>

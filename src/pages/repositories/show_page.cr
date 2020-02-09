@@ -7,6 +7,7 @@ class Repositories::ShowPage < MainLayout
 
   def content
     render_template "repositories/repo_info.html.ecr"
+    render_template "repositories/repo_links.html.ecr"
     render_template "repositories/repo_dashboard.html.ecr"
     render_actions
   end
