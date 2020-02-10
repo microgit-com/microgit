@@ -3,6 +3,6 @@ class Repositories::Issues::Delete < BrowserAction
     repository = RepositoryQuery.find(repository_id)
     IssueQuery.find(issue_id).delete
     flash.success = "Deleted the record"
-    redirect Index.with(repository)
+    redirect Index.with(repository.user.slug, repository.slug)
   end
 end

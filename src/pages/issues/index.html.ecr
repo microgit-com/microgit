@@ -9,9 +9,10 @@
 <tbody>
   <% @issues.each do |issue| %>
     <tr>
-      <td class="border px-4 py-2"><% link issue.name, Repositories::Issues::Show.with(@repository, issue) %></td>
+      <td class="border px-4 py-2"><% link issue.name, Repositories::Issues::Show.with(@repository.user.slug, @repository.slug, issue) %></td>
       <td class="border px-4 py-2"><%=issue.author.username.to_s%></td>
     </tr>
   <% end %>
 </tbody>
 </table>
+<% link "New issue", Repositories::Issues::New.with(@repository.id), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
