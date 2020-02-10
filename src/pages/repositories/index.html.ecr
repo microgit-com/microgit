@@ -9,7 +9,7 @@
 <tbody>
   <% @repositories.each do |repository| %>
     <tr>
-      <td class="border px-4 py-2"><% link repository.name, Repositories::Show.with(repository) %></td>
+      <td class="border px-4 py-2"><% link repository.name, Repositories::Show.with(@current_user.slug, repository.slug) %></td>
       <td class="border px-4 py-2"><%= repository.description %></td>
       <td class="border px-4 py-2">Destroy</td>
     </tr>

@@ -1,7 +1,12 @@
 class Repositories::Show < BrowserAction
-  route do
-    repository = RepositoryQuery.new.preload_user.find(repository_id)
-    repo = MicrogitGit.new(repository)
+  get "/:user_slug/:repository_slug" do
+    user = UserQuery.new.username(user_slug).first
+    repository = RepositoryQuery.new.preload_user.user_id(user.id).slug(repository_slug).first
+    begin
+      repo = MicrogitGit.new(repository)
+    rescue Exception
+      raise Lucky::RouteNotFoundError.new(context)
+    end
     readme = nil
     readme_content = nil
     unless repo.raw.empty?

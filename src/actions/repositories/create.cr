@@ -5,7 +5,7 @@ class Repositories::Create < BrowserAction
         repository = RepositoryQuery.new.preload_user.find(repository.id)
         Git::Repo.init_at(repository.git_path, true)
         flash.success = "The record has been saved"
-        redirect Show.with(repository.id)
+        redirect Show.with(repository.user.slug, repository.slug)
       else
         flash.failure = "It looks like the form is not valid"
         html NewPage, operation: operation

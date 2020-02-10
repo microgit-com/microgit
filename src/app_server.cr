@@ -8,8 +8,8 @@ class AppServer < Lucky::BaseAppServer
       Lucky::FlashHandler.new,
       Lucky::ErrorHandler.new(action: Errors::Show),
       HTTP::GitHandler.new,
-      Lucky::RouteHandler.new,
       Lucky::StaticFileHandler.new("./public", false),
+      Lucky::RouteHandler.new,
       Lucky::RouteNotFoundHandler.new,
     ] of HTTP::Handler
   end
