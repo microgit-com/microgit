@@ -13,7 +13,10 @@ class MicrogitGit
   end
 
   def size
-    ((File.size(@repo.git_path).to_f / 1024) / 1024).round(2)
+    output = IO::Memory.new
+    cmd = "du -sk #{@repo.git_path}"
+    Process.run(cmd, shell: true, output: output)
+    ((output.to_s.split.first.to_f / 1024)).round(2)
   end
 
   def root_ref
@@ -29,11 +32,9 @@ class MicrogitGit
   def commit_count(ref = last_commit)
     return 0 if @repo_git.empty?
     return 0 if ref.nil?
-    walker = @repo_git.walk(ref.sha)
     count = 0
-    walker.each do |c|
+    @repo_git.walk(ref.sha) do |c|
       count += 1
-      next
     end
     count
   end
@@ -57,33 +58,55 @@ class MicrogitGit
     ref.tree
   end
 
-  def log(options)
-    default_options = {
-      limit: 10,
-      offset: 0,
-      path: nil,
-      follow: false,
-      skip_merges: false,
-      disable_walk: false,
-      after: nil,
-      before: nil
-    }
-
-    options = default_options.merge(options)
-    options[:limit] ||= 0
-    options[:offset] ||= 0
-    actual_ref = options[:ref] || root_ref
-    sha = sha_from_ref(actual_ref)
-
-    log_by_walk(sha, options)
+  def log_by_walk(sha, options)
+   walker = @repo_git.walk(sha)
+   walker.to_a
   end
 
-  def log_by_walk(sha, options)
-   raw.walk.to_a
- end
+  def log_by_shell(sha, options)
+    cmd = git_command("--git-dir=#{@repo.git_path} log")
+    cmd += " -n #{options["limit"].to_i}"
+    cmd += " --format=%H"
+    cmd += " --skip=#{options.fetch("offset", 0).to_i}" if options.fetch("offset", false)
+    cmd += " --follow" if options.fetch("follow", false)
+    cmd += " --no-merges" if options.fetch("skip_merges", false)
+    cmd += " --after=#{options.fetch("after", Time.utc).try { |t| t}}" if options.fetch("after", false)
+    cmd += " --before=#{options.fetch("before", Time.utc).try { |t| t}}" if options.fetch("before", false)
+    cmd += " #{sha}"
+    cmd += " -- #{options["path"]}" if options.fetch("path", false)
+
+    raw_output = IO::Memory.new
+
+    Process.run(cmd, shell: true, output: raw_output)
+
+    log = [] of Git::Commit
+    output = raw_output.to_s
+
+    output.split("\n").each do |c|
+      next if c.empty?
+      log << Git::Commit.lookup(@repo_git, c.strip)
+    end
+
+    return log
+  end
+
+  def last_for_path(ref, path = nil)
+    log_by_shell(
+     ref, {
+     path: path,
+     limit: 1
+     }
+    ).first
+  end
 
   def sha_from_ref(ref)
     raw.rev_parse(ref).oid
+  end
+
+  def git_command(command)
+    git_bin = ENV["git_path"]? || "git"
+    command = "#{git_bin} #{command}"
+    command
   end
 
 end

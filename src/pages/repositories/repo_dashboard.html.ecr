@@ -23,6 +23,7 @@
   <thead>
     <tr>
       <th class="px-4 py-2">Name</th>
+      <th class="px-4 py-2">Last commit</th>
     </tr>
   </thead>
 
@@ -30,6 +31,7 @@
     <% @repo.tree.try { |t| t.each do |tree| %>
       <tr>
         <td class="border px-4 py-2"><%= tree.name %></td>
+        <td class="border px-4 py-2"><%= @repo.last_for_path("master", tree.name).try { |c| c.message } %></td>
       </tr>
     <% end } %>
   </tbody>
