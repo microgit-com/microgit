@@ -10,7 +10,7 @@
     <% @api_tokens.each do |token| %>
       <tr>
         <td class="border px-4 py-2"><%= token.token %></td>
-        <td class="border px-4 py-2"><% link "Destroy", ApiTokens::Delete.with(token.id), delete_confirm: "Are you sure you want to delete token?" %></td>
+        <td class="border px-4 py-2"><% link "Destroy", ApiTokens::Delete.with(token.id), data_confirm: "Are you sure you want to delete token?" %></td>
       </tr>
     <% end %>
   </tbody>
