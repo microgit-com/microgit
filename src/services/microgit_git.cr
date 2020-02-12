@@ -29,6 +29,13 @@ class MicrogitGit
     end
   end
 
+  def commit_topic(commit_message : String) : String
+    commit_message.split("\n\n").first
+  end
+  def commit_message(commit_message : String) : String
+    commit_message.split("\n\n").second
+  end
+
   def commit_count(ref = last_commit)
     return 0 if @repo_git.empty?
     return 0 if ref.nil?
