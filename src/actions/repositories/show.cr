@@ -1,7 +1,11 @@
 class Repositories::Show < BrowserAction
-  get "/:user_slug/:repository_slug" do
-    user = UserQuery.new.username(user_slug).first
-    repository = RepositoryQuery.new.preload_user.user_id(user.id).slug(repository_slug).first
+  get "/:namespace_slug/:repository_slug" do
+    namespace = NamespaceQuery.new.preload_user.preload_team.slug(namespace_slug).first
+    if namespace.item.is_a?(User)
+      repository = RepositoryQuery.new.preload_user.user_id(namespace.item.id).slug(repository_slug).first
+    else
+      repository = RepositoryQuery.new.preload_team.team_id(namespace.item.id).slug(repository_slug).first
+    end
     begin
       repo = MicrogitGit.new(repository)
     rescue Exception

@@ -6,10 +6,11 @@ class User < BaseModel
     column email : String
     column username : String
     column encrypted_password : String
+    has_one namespace : Namespace
   end
 
   def slug
-    username
+    namespace.slug
   end
 
   def emailable : Carbon::Address

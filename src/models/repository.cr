@@ -4,15 +4,33 @@ class Repository < BaseModel
     column description : String?
     column slug : String
     column privated : Bool
-    belongs_to user : User
+    belongs_to user : User?
+    belongs_to team : Team?
+    belongs_to created_by : User
+    has_many issues : Issue
+    #polymorphic owner, associations: [:user, :team]
+  end
+
+  def namespace
+    if user
+      user.try { |u| u.namespace! }
+    elsif team
+      team.try { |t| t.namespace! }
+    else
+      nil
+    end
+  end
+
+  def namespace_slug
+    namespace.try { |n| n.slug } || ""
   end
 
   def git_url
-    ["", user.slug, "#{slug}.git"].join("/")
+    ["", namespace.try { |n| n.slug }, "#{slug}.git"].join("/")
   end
 
   def git_path
-    path = [ENV["project_root"]? || FileUtils.pwd, "repositories", user.slug, "#{slug}.git"]
+    path = [ENV["project_root"]? || FileUtils.pwd, "repositories", namespace.try { |n| n.slug }, "#{slug}.git"]
     path.join('/')
   end
 

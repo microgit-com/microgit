@@ -5,7 +5,7 @@ class Repositories::Issues::Update < BrowserAction
     SaveIssue.update(issue, params) do |operation, issue|
       if operation.saved?
         flash.success = "The record has been updated"
-        redirect Show.with(repository.user.slug, repository.slug, issue.id)
+        redirect Show.with(repository.namespace_slug, repository.slug, issue.id)
       else
         flash.failure = "It looks like the form is not valid"
         html EditPage, operation: operation, issue: issue, repository: repository

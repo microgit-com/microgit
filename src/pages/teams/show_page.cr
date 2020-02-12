@@ -27,7 +27,7 @@ class Teams::ShowPage < MainLayout
       end
       li do
         text "slug: "
-        strong @team.slug.to_s
+        strong @team.namespace.slug.to_s
       end
       li do
         text "description: "

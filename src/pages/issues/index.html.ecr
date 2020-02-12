@@ -9,7 +9,7 @@
 <tbody>
   <% @issues.each do |issue| %>
     <tr>
-      <td class="border px-4 py-2"><% link issue.name, Repositories::Issues::Show.with(@repository.user.slug, @repository.slug, issue) %></td>
+      <td class="border px-4 py-2"><% link issue.name, Repositories::Issues::Show.with(@repository.namespace_slug, @repository.slug, issue) %></td>
       <td class="border px-4 py-2"><%=issue.author.username.to_s%></td>
     </tr>
   <% end %>
