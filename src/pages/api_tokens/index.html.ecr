@@ -1,0 +1,18 @@
+<h1>Api Tokens</h1>
+<table class="table-auto w-full">
+  <thead>
+    <tr>
+      <th class="px-4 py-2">Token</th>
+      <th class="px-4 py-2">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @api_tokens.each do |token| %>
+      <tr>
+        <td class="border px-4 py-2"><%= token.token %></td>
+        <td class="border px-4 py-2"><% link "Destroy", ApiTokens::Delete.with(token.id), delete_confirm: "Are you sure you want to delete token?" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% link "New Token", ApiTokens::Create, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 inline-block rounded focus:outline-none focus:shadow-outline" %>
