@@ -1,8 +1,9 @@
-class Repositories::ShowPage < MainLayout
+class Repositories::ShowPage < ShowLayout
   needs repository : Repository
   needs repo : MicrogitGit
   needs readme : Git::TreeEntry | Nil
   needs readme_content : String | Nil
+  needs current_user : User | Nil
   quick_def page_title, @repository.name
 
   def content
