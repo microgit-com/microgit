@@ -1,6 +1,6 @@
 class Repositories::Show < BrowserAction
   include Auth::AllowGuests
-  
+
   get "/:namespace_slug/:repository_slug" do
     namespace = NamespaceQuery.new.preload_user.preload_team.slug(namespace_slug).first
     if namespace.item.is_a?(User)
@@ -8,14 +8,7 @@ class Repositories::Show < BrowserAction
     else
       repository = RepositoryQuery.new.preload_team.preload_user.team_id(namespace.item.id).slug(repository_slug).first
     end
-    begin
-      answer = RepositoryPolicy.show?(repository, current_user)
-      unless answer
-        raise Lucky::RouteNotFoundError.new(context)
-      end
-    rescue ex : Exception
-      raise Lucky::RouteNotFoundError.new(context)
-    end
+    RepositoryPolicy.show?(repository, current_user, context)
     begin
       repo = MicrogitGit.new(repository)
     rescue Exception

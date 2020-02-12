@@ -6,14 +6,7 @@ class Repositories::Edit < BrowserAction
     else
       repository = RepositoryQuery.new.preload_team.preload_user.team_id(namespace.item.id).slug(repository_slug).first
     end
-    begin
-      answer = RepositoryPolicy.show?(repository, current_user)
-      unless answer
-        raise Lucky::RouteNotFoundError.new(context)
-      end
-    rescue ex : Exception
-      raise Lucky::RouteNotFoundError.new(context)
-    end
+    RepositoryPolicy.show?(repository, current_user, context)
     html EditPage,
       operation: SaveRepository.new(repository),
       repository: repository

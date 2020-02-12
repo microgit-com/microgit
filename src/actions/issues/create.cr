@@ -1,6 +1,6 @@
 class Repositories::Issues::Create < BrowserAction
   nested_route do
-    repository = RepositoryQuery.find(repository_id)
+    repository = RepositoryQuery.new.preload_user.preload_team.find(repository_id)
     SaveIssue.create(params, repository_id: repository.id, author_id: current_user.id) do |operation, issue|
       if issue
         flash.success = "The record has been saved"

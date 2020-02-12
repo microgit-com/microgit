@@ -2,6 +2,7 @@ class Repositories::Issues::Update < BrowserAction
   nested_route do
     issue = IssueQuery.find(issue_id)
     repository = RepositoryQuery.find(repository_id)
+    RepositoryPolicy.show?(repository, current_user, context)
     SaveIssue.update(issue, params) do |operation, issue|
       if operation.saved?
         flash.success = "The record has been updated"
