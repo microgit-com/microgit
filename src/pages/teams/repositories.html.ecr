@@ -1,0 +1,19 @@
+<h2>Repositories</h2>
+<table class="table-auto w-full">
+  <thead>
+    <tr>
+      <th class="px-4 py-2">Name</th>
+      <th class="px-4 py-2">Description</th>
+    </tr>
+  </thead>
+<tbody>
+  <% @repositories.each do |repository| %>
+    <tr>
+      <td class="border px-4 py-2"><% link repository.name, ::Repositories::Show.with(repository.namespace_slug, repository.slug) %></td>
+      <td class="border px-4 py-2"><%= repository.description %></td>
+      <td class="border px-4 py-2">Destroy</td>
+    </tr>
+  <% end %>
+</tbody>
+</table>
+<% link "New Repository", Teams::Repositories::New.with(@team.id), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 inline-block rounded focus:outline-none focus:shadow-outline" %>

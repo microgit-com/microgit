@@ -1,5 +1,6 @@
 class Teams::ShowPage < MainLayout
   needs team : Team
+  needs repositories : RepositoryQuery
   quick_def page_title, @team.name
 
   def content
@@ -7,6 +8,7 @@ class Teams::ShowPage < MainLayout
     h1 @team.name
     render_actions
     render_team_fields
+    render_template "teams/repositories.html.ecr"
   end
 
   def render_actions

@@ -7,6 +7,6 @@ class Repositories::Issues::Index < BrowserAction
       repository = RepositoryQuery.new.preload_team.preload_user.team_id(namespace.item.id).slug(repository_slug).first
     end
     RepositoryPolicy.show?(repository, current_user, context)
-    html IndexPage, issues: IssueQuery.new.preload_author, repository: repository
+    html IndexPage, issues: IssueQuery.new.preload_author.repository_id(repository.id), repository: repository
   end
 end

@@ -3,6 +3,7 @@ class Team < BaseModel
     column name : String
     column description : String
     has_one namespace : Namespace
+    has_many repositories : Repository
   end
 
   def slug

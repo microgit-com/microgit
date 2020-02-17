@@ -1,0 +1,16 @@
+<h2>Teams</h2>
+<table class="table-auto w-full">
+  <thead>
+    <tr>
+      <th class="px-4 py-2">Name</th>
+    </tr>
+  </thead>
+<tbody>
+  <% @teams.each do |team| %>
+    <tr>
+      <td class="border px-4 py-2"><% link team.name, Teams::Show.with(team) %></td>
+    </tr>
+  <% end %>
+</tbody>
+</table>
+<% link "New team", Teams::New, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 inline-block rounded focus:outline-none focus:shadow-outline" %>
