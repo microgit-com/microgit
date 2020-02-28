@@ -4,6 +4,7 @@ class Repositories::ShowPage < ShowLayout
   needs readme : Git::TreeEntry | Nil
   needs readme_content : String | Nil
   needs current_user : User | Nil
+  needs namespace_slug : String | Nil
   quick_def page_title, @repository.name
 
   def content

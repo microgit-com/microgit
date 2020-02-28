@@ -28,10 +28,12 @@
   </thead>
 
   <tbody>
-    <% @repo.tree.try { |t| t.each do |tree| %>
+    <% @repo.tree.try { |t| t.each do |tree|
+      commit = @repo.last_for_path("master", tree.name)
+      %>
       <tr>
         <td class="border px-4 py-2 text-base subpixel-antialiased"><%= tree.name %></td>
-        <td class="border px-4 py-2 text-base subpixel-antialiased"><%= @repo.last_for_path("master", tree.name).try { |c| @repo.commit_topic(c.message) } %></td>
+        <td class="border px-4 py-2 text-base subpixel-antialiased"><a href="/<%=@namespace_slug%>/<%=@repository.slug%>/commit/master/<%= commit.try { |c| c.sha } %>"><%= commit.try { |c| @repo.commit_topic(c.message) } %></a></td>
       </tr>
     <% end } %>
   </tbody>

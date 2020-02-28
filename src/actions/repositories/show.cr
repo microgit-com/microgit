@@ -18,6 +18,6 @@ class Repositories::Show < BrowserAction
         readme_content = Markd.to_html(readme_content.try { |r| r.content })
       end
     end
-    html ShowPage, repository: repository, repo: repo, readme: readme, readme_content: readme_content
+    html ShowPage, repository: repository, repo: repo, readme: readme, readme_content: readme_content, namespace_slug: namespace_slug
   end
 end
