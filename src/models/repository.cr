@@ -8,7 +8,7 @@ class Repository < BaseModel
     belongs_to team : Team?
     belongs_to created_by : User
     has_many issues : Issue
-    #polymorphic owner, associations: [:user, :team]
+    # polymorphic owner, associations: [:user, :team]
   end
 
   def namespace

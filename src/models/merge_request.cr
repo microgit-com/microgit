@@ -1,15 +1,16 @@
-class Issue < BaseModel
+class MergeRequest < BaseModel
   enum Status
     Open
     Close
+    Merged
   end
 
   table do
     column name : LuckyEncrypted::StringEncrypted
     column description : String
+    column branch : String
+    column status : Int32
     belongs_to repository : Repository
     belongs_to author : User
-    belongs_to assignee : User?
-    column status : Int32
   end
 end

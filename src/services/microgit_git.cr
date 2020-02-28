@@ -32,6 +32,7 @@ class MicrogitGit
   def commit_topic(commit_message : String) : String
     commit_message.split("\n\n").first
   end
+
   def commit_message(commit_message : String) : String
     commit_message.split("\n\n").second
   end
@@ -49,7 +50,7 @@ class MicrogitGit
   def find_file(file_path)
     return nil if tree.nil?
     return nil if @repo_git.empty?
-    tree.try {|t| t.path(file_path) }
+    tree.try { |t| t.path(file_path) }
   end
 
   def find_file_blob(file_path = nil)
@@ -66,8 +67,8 @@ class MicrogitGit
   end
 
   def log_by_walk(sha, options)
-   walker = @repo_git.walk(sha)
-   walker.to_a
+    walker = @repo_git.walk(sha)
+    walker.to_a
   end
 
   def log_by_shell(sha, options)
@@ -77,8 +78,8 @@ class MicrogitGit
     cmd += " --skip=#{options.fetch("offset", 0).to_i}" if options.fetch("offset", false)
     cmd += " --follow" if options.fetch("follow", false)
     cmd += " --no-merges" if options.fetch("skip_merges", false)
-    cmd += " --after=#{options.fetch("after", Time.utc).try { |t| t}}" if options.fetch("after", false)
-    cmd += " --before=#{options.fetch("before", Time.utc).try { |t| t}}" if options.fetch("before", false)
+    cmd += " --after=#{options.fetch("after", Time.utc).try { |t| t }}" if options.fetch("after", false)
+    cmd += " --before=#{options.fetch("before", Time.utc).try { |t| t }}" if options.fetch("before", false)
     cmd += " #{sha}"
     cmd += " -- #{options["path"]}" if options.fetch("path", false)
 
@@ -99,10 +100,10 @@ class MicrogitGit
 
   def last_for_path(ref, path = nil)
     log_by_shell(
-     ref, {
-     path: path,
-     limit: 1
-     }
+      ref, {
+      path:  path,
+      limit: 1,
+    }
     ).first
   end
 
@@ -115,5 +116,4 @@ class MicrogitGit
     command = "#{git_bin} #{command}"
     command
   end
-
 end
