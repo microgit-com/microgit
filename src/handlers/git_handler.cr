@@ -27,5 +27,4 @@ class HTTP::GitHandler
       return false unless authenticated_user
     end
   end
-
 end

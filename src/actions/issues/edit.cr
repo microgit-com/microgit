@@ -1,8 +1,9 @@
 class Repositories::Issues::Edit < BrowserAction
-  nested_route do
+  include ::RepositoryHelper
+
+  get "/:namespace_slug/:repository_slug/issues/:issue_id/edit" do
     issue = IssueQuery.find(issue_id)
-    repository = RepositoryQuery.find(repository_id)
-    RepositoryPolicy.show?(repository, current_user, context)
+    repository = check_access
     html EditPage,
       operation: SaveIssue.new(issue),
       issue: issue,

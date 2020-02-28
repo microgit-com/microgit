@@ -7,5 +7,4 @@ class Repositories::Issues::IndexPage < MainLayout
     render_template "repositories/repo_links.html.ecr"
     render_template "issues/index.html.ecr"
   end
-
 end
