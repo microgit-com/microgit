@@ -1,7 +1,9 @@
 class Repositories::Issues::New < BrowserAction
-  nested_route do
-    repository = RepositoryQuery.find(repository_id)
-    RepositoryPolicy.show?(repository, current_user, context)
-    html NewPage, operation: SaveIssue.new, repository: repository
+  include RepositoryHelper
+
+  get "/:namespace_slug/:repository_slug/issues/new" do
+    repository = check_access
+    namespace = get_namespace
+    html NewPage, operation: SaveIssue.new, repository: repository, namespace: namespace
   end
 end

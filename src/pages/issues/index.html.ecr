@@ -15,4 +15,4 @@
   <% end %>
 </tbody>
 </table>
-<% link "New issue", Repositories::Issues::New.with(@repository.id), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+<% link "New issue", Repositories::Issues::New.with(@namespace.slug, @repository.slug), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>

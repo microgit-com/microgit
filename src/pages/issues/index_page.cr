@@ -1,6 +1,7 @@
 class Repositories::Issues::IndexPage < MainLayout
   needs issues : IssueQuery
   needs repository : Repository
+  needs namespace : Namespace
   quick_def page_title, "All"
 
   def content
