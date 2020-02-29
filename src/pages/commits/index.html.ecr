@@ -1,0 +1,18 @@
+<h2>Commits</h2>
+<table class="table-auto w-full">
+  <thead>
+    <tr>
+      <th class="px-4 py-2">Message</th>
+      <th class="px-4 py-2">Author / Authored</th>
+    </tr>
+  </thead>
+<tbody>
+  <% @repo.raw.walk(@repo.raw.head.target_id, Git::Sort::Topological) do |commit|
+    %>
+    <tr>
+      <td class="border px-4 py-2 text-base subpixel-antialiased"><a href="/<%=@namespace.slug%>/<%=@repository.slug%>/commits/master/<%= commit.try { |c| c.sha } %>"><%= commit.try { |c| @repo.commit_topic(c.message) } %></a></td>
+      <td class="border px-4 py-2 text-base subpixel-antialiased"><p class="text-sm antialiased"><%=commit.author.name %> <span class="text-gray-600">authored <%= commit.try { |c| distance_of_time_in_words(c.author.time, Time.utc) } %> ago</span></p></td>
+    </tr>
+  <% end %>
+</tbody>
+</table>

@@ -1,7 +1,7 @@
 class Commits::Show < BrowserAction
   include RepositoryHelper
 
-  get "/:namespace_slug/:repository_slug/commit/:branch_name/:sha" do
+  get "/:namespace_slug/:repository_slug/commits/:branch_name/:sha" do
     repository = check_access
     begin
       repo = MicrogitGit.new(repository)

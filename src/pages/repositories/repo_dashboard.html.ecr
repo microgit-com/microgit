@@ -33,7 +33,7 @@
       %>
       <tr>
         <td class="border px-4 py-2 text-base subpixel-antialiased"><%= tree.name %></td>
-        <td class="border px-4 py-2 text-base subpixel-antialiased"><a href="/<%=@namespace_slug%>/<%=@repository.slug%>/commit/master/<%= commit.try { |c| c.sha } %>"><%= commit.try { |c| @repo.commit_topic(c.message) } %></a></td>
+        <td class="border px-4 py-2 text-base subpixel-antialiased"><a href="/<%=@namespace_slug%>/<%=@repository.slug%>/commits/master/<%= commit.try { |c| c.sha } %>"><%= commit.try { |c| @repo.commit_topic(c.message) } %></a></td>
       </tr>
     <% end } %>
   </tbody>
