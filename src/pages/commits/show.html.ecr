@@ -18,3 +18,8 @@
 </div>
 
 <h2 class="text-xl mt-8">Changes</h2>
+<p><%=@diff.size %> Changes </p>
+
+<% @diff.each_patch do |patch| %>
+  <% render_template "commits/_diff_file.html.ecr" %>
+<% end %>

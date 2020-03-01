@@ -10,7 +10,8 @@ class Commits::Show < BrowserAction
     end
 
     commit = Git::Commit.lookup(repo.raw, sha)
+    diff = commit.diff
 
-    html ShowPage, repo: repo, commit: commit, repository: repository
+    html ShowPage, repo: repo, commit: commit, repository: repository, diff: diff
   end
 end

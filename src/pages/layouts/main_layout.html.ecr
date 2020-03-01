@@ -3,6 +3,7 @@
   <head>
     <title>Microgit</title>
     <% css_link asset("css/app.css"), data_turbolinks_track: "reload" %>
+    <link href="/css/prism.css" rel="stylesheet" media="screen" data-turbolinks-track="reload">
     <% js_link asset("js/app.js"), defer: "true", data_turbolinks_track: "reload" %>
     <% meta name: "turbolinks-cache-control", content: "no-cache" %>
     <% csrf_meta_tags %>
@@ -36,5 +37,6 @@
     <% Shared::FlashMessages.new(@context.flash) %>
     <% content %>
     </div>
+    <script src="/js/prism.js" data-turbolinks-track="reload"></script>
   </body>
 </html>
