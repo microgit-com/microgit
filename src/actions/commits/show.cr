@@ -10,7 +10,14 @@ class Commits::Show < BrowserAction
     end
 
     commit = Git::Commit.lookup(repo.raw, sha)
-    diff = commit.diff
+
+    #revwalk = Git::RevWalk.new(repo.raw)
+    #revwalk.push(sha)
+    #revwalk.sorting(LibGit::Sort::Topological)
+    #diffed = revwalk.next
+    diff = commit.parent.diff(commit)
+
+
 
     html ShowPage, repo: repo, commit: commit, repository: repository, diff: diff
   end

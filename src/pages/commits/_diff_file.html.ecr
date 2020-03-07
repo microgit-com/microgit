@@ -1,17 +1,16 @@
 <div class="my-3 border-solid border border-gray-400 m-auto rounded">
   <div class="flex flex-wrap">
     <div class="w-full p-3 bg-gray-200 border-b border-gray-400">
-      <%=patch.delta.new_file.path %> <%=patch.delta.status%>
+      <%=patchy.file %> <%=patch.delta.new_file.size%> <span class="inline-block float-right"><%=patch.delta.status%></span>
     </div>
-<div class="w-full p-3">
-<% patch.hunks do |hunk| %>
-<% hunk.lines do |line| %>
-<pre>
-<code class="block <%= line_color(line) %>">
-<%=file_lines(line)%>
-</code>
+<div class="w-full">
+<div class="p-1 bg-gray-200 text-gray-700">
+  <%= patchy.body.lines[4]%>
+</div>
+<% patchy.all_lines[1..-1].each do |line| %>
+<pre class="p-1 <%= line_color(line) %>">
+<%=HTML.escape(line.content)%>
 </pre>
-<% end %>
 <% end %>
 </div>
   </div>

@@ -38,7 +38,11 @@ shards:
 
   git:
     github: microgit-com/libgit2.cr
-    commit: 6d4b9e27f1c80d545608de357c8b281abe214b87
+    commit: 18db855a10606242e6de8b6c87d536603dee7da9
+
+  git_diff_parser:
+    github: microgit-com/git_diff_parser
+    commit: 97a599c0f3745411316c1211eaf00d1764a5864c
 
   habitat:
     github: luckyframework/habitat

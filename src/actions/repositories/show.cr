@@ -3,6 +3,9 @@ class Repositories::Show < BrowserAction
   include RepositoryHelper
 
   get "/:namespace_slug/:repository_slug" do
+    if namespace_slug == "" || repository_slug == ""
+      raise Lucky::RouteNotFoundError.new(context)
+    end
     repository = check_access
     begin
       repo = MicrogitGit.new(repository)

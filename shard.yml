@@ -39,3 +39,5 @@ dependencies:
     github: microgit-com/sluggr
   lucky_encrypted:
     github: microgit-com/lucky_encrypted
+  git_diff_parser:
+    github: microgit-com/git_diff_parser
