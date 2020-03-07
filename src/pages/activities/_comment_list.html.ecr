@@ -1,0 +1,13 @@
+<% @comments.each do |comment| %>
+<div class="flex my-2">
+  <div class="w-1/12">
+    <div class="bg-gray-400 rounded-full h-16 w-16 flex items-center justify-center"></div>
+  </div>
+  <div class="w-11/12">
+    <p><%=comment.user.username%></p>
+    <div class="my-3 min-w-full p-3 border-solid border border-gray-400 m-auto rounded">
+      <%=Markd.to_html(comment.text)%>
+    </div>
+  </div>
+</div>
+<% end %>

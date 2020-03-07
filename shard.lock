@@ -17,7 +17,7 @@ shards:
     version: 0.1.1
 
   cry:
-    github: luckyframework/cry
+    github: paulcsmith/cry
     version: 0.4.2
 
   db:
@@ -38,11 +38,11 @@ shards:
 
   git:
     github: microgit-com/libgit2.cr
-    commit: 18db855a10606242e6de8b6c87d536603dee7da9
+    commit: 93092175d567f3448c5912042a1ece1153b4eedb
 
   git_diff_parser:
     github: microgit-com/git_diff_parser
-    commit: 97a599c0f3745411316c1211eaf00d1764a5864c
+    commit: 097438d402f34b47f236b9a2a1845277a2d3cb61
 
   habitat:
     github: luckyframework/habitat
@@ -58,7 +58,7 @@ shards:
 
   lucky:
     github: luckyframework/lucky
-    version: 0.18.3
+    version: 0.19.0
 
   lucky_cli:
     github: luckyframework/lucky_cli

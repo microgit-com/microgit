@@ -1,9 +1,21 @@
 class Repositories::MergeRequests::ShowPage < MainLayout
   needs merge_request : MergeRequest
   needs repository : Repository
+  needs namespace : Namespace
+  needs comments : ActivityForItemsQuery
+  needs operation : SaveActivityForItems
   quick_def page_title, @merge_request.name
 
   def content
-    h1 @merge_request.name.to_s
+    render_template "repositories/repo_links.html.ecr"
+    render_template "merge_requests/show.html.ecr"
+    render_comment_form(@operation)
+  end
+
+  def render_comment_form(op)
+    form_for MergeRequests::Activities::Create.with(@namespace.slug, @repository.slug, @merge_request.id) do
+      textarea(op.text, rows: "10", cols: "20", class: "form-textarea mt-1 block w-full shadow appearance-none")
+      submit "Save", data_disable_with: "Saving...", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded focus:outline-none focus:shadow-outline"
+    end
   end
 end

@@ -1,5 +1,5 @@
-<h1><%=@issue.name.to_s%></h1>
-<p>Author: <%=@issue.author.username.to_s%></p>
+<h1><%=@merge_request.name.to_s%></h1>
+<p>Author: <%=@merge_request.author.username.to_s%></p>
 
 <div class="my-3 border-solid border border-gray-400 m-auto rounded">
   <div class="flex flex-wrap">
@@ -7,7 +7,7 @@
       Description
     </div>
     <div class="w-full p-3 markdown">
-      <%= Markd.to_html(@issue.description) %>
+      <%= Markd.to_html(@merge_request.description) %>
     </div>
   </div>
 </div>

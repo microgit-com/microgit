@@ -14,9 +14,15 @@ class Repositories::MergeRequests::NewPage < MainLayout
       mount Shared::Field.new(op.name)
       mount Shared::Field.new(op.description)
       mount Shared::Field.new(op.branch)
-      mount Shared::Field.new(op.status)
+      #select_tag(op.branch) do
+      #  options_for_select(op.branch, options_for_branches)
+      #end
 
       submit "Save", data_disable_with: "Saving..."
     end
+  end
+
+  private def options_for_branches
+    return [{"master", "master"}]
   end
 end

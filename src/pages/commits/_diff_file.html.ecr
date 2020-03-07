@@ -3,14 +3,20 @@
     <div class="w-full p-3 bg-gray-200 border-b border-gray-400">
       <%=patchy.file %> <%=patch.delta.new_file.size%> <span class="inline-block float-right"><%=patch.delta.status%></span>
     </div>
-<div class="w-full">
-<div class="p-1 bg-gray-200 text-gray-700">
+<div class="w-full overflow-scroll">
+<div class="py-3 px-1 bg-gray-400 text-gray-800">
   <%= patchy.body.lines[4]%>
 </div>
 <% patchy.all_lines[1..-1].each do |line| %>
-<pre class="p-1 <%= line_color(line) %>">
-<%=HTML.escape(line.content)%>
-</pre>
+<div class="flex">
+  <div class="w-13 bg-gray-400 text-gray-800 p-3 text-center text-sm"><%= line.mode == GitDiffParser::Line::Mode::Removed ? line.number : "-" %></div>
+  <div class="w-13 bg-gray-400 text-gray-800 p-3 text-center text-sm"><%= line.mode == GitDiffParser::Line::Mode::Modified ? line.number : "-" %></div>
+  <div class="w-full">
+    <pre class="p-1 <%= line_color(line) %>">
+    <%=HTML.escape(line.content)%>
+    </pre>
+  </div>
+</div>
 <% end %>
 </div>
   </div>
