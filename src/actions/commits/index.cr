@@ -10,18 +10,8 @@ class Commits::Index < BrowserAction
       raise Lucky::RouteNotFoundError.new(context)
     end
 
-    html IndexPage, repo: repo, repository: repository, namespace: namespace
-  end
+    target = Git::Branch.lookup(repo.raw, "master")
 
-  get "/:namespace_slug/:repository_slug/commits/:ref" do
-    repository = check_access
-    namespace = get_namespace
-    begin
-      repo = MicrogitGit.new(repository)
-    rescue Exception
-      raise Lucky::RouteNotFoundError.new(context)
-    end
-
-    html IndexPage, repo: repo, repository: repository, namespace: namespace
+    html IndexPage, repo: repo, target: target.target_id, ref: "master", repository: repository, namespace: namespace
   end
 end

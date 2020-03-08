@@ -2,6 +2,8 @@ class Commits::IndexPage < MainLayout
   needs repo : MicrogitGit
   needs repository : Repository
   needs namespace : Namespace
+  needs target : String | Git::Oid
+  needs ref : String
   quick_def page_title, "All"
 
   def content
