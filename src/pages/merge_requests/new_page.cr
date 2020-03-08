@@ -13,7 +13,7 @@ class Repositories::MergeRequests::NewPage < MainLayout
     form_for MergeRequests::Create.with(@namespace.slug, @repository.slug) do
       mount Shared::Field.new(op.name)
       mount Shared::Field.new(op.description)
-      label_for(op.branch) 
+      label_for(op.branch)
       select_input(op.branch, class: "shadow block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") do
         options_for_select(op.branch, options_for_branches)
       end
@@ -22,7 +22,13 @@ class Repositories::MergeRequests::NewPage < MainLayout
     end
   end
 
-  private def options_for_branches
-    return [{"master", "master"}]
+  private def options_for_branches : Array(Tuple(String, String))
+    branch_names = [] of {String, String}
+    
+    repo = MicrogitGit.new(@repository)
+    branches = repo.raw.branches
+    branches.each_name.each { |b| branch_names << {b, b} }
+
+    return branch_names
   end
 end

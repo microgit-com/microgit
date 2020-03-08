@@ -1,5 +1,6 @@
 <h1><%=@merge_request.name.to_s%></h1>
 <p>Author: <%=@merge_request.author.username.to_s%></p>
+<p>Branch: <%=@merge_request.branch%></p>
 
 <div class="my-3 border-solid border border-gray-400 m-auto rounded">
   <div class="flex flex-wrap">
@@ -12,7 +13,9 @@
   </div>
 </div>
 
-<h2>Activity</h2>
+<% link "Merge", to: Merge.with(@namespace.slug, @repository.slug, @merge_request.id), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded focus:outline-none focus:shadow-outline" %>
+
+<h2 class="mt-3">Activity</h2>
 <% render_template "activities/_comment_list.html.ecr" %>
 
 <h2>Comment</h2>

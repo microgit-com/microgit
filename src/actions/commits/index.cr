@@ -12,4 +12,16 @@ class Commits::Index < BrowserAction
 
     html IndexPage, repo: repo, repository: repository, namespace: namespace
   end
+
+  get "/:namespace_slug/:repository_slug/commits/:ref" do
+    repository = check_access
+    namespace = get_namespace
+    begin
+      repo = MicrogitGit.new(repository)
+    rescue Exception
+      raise Lucky::RouteNotFoundError.new(context)
+    end
+
+    html IndexPage, repo: repo, repository: repository, namespace: namespace
+  end
 end
