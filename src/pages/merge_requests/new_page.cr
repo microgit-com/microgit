@@ -13,12 +13,12 @@ class Repositories::MergeRequests::NewPage < MainLayout
     form_for MergeRequests::Create.with(@namespace.slug, @repository.slug) do
       mount Shared::Field.new(op.name)
       mount Shared::Field.new(op.description)
-      mount Shared::Field.new(op.branch)
-      #select_tag(op.branch) do
-      #  options_for_select(op.branch, options_for_branches)
-      #end
+      label_for(op.branch) 
+      select_input(op.branch, class: "shadow block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") do
+        options_for_select(op.branch, options_for_branches)
+      end
 
-      submit "Save", data_disable_with: "Saving..."
+      submit "Save", data_disable_with: "Saving...", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded focus:outline-none focus:shadow-outline"
     end
   end
 
