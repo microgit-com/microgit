@@ -1,5 +1,5 @@
 class MergeRequest < BaseModel
-  enum Status
+  enum Status : Int32
     Open
     Close
     Merged

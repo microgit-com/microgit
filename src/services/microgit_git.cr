@@ -7,6 +7,13 @@ class MicrogitGit
     @repo_git
   end
 
+  def get_branch_diff(target_branch) : Git::Diff
+    target_commit = Git::Commit.lookup(raw, target_branch.target_id)
+    master_commit = raw.last_commit
+
+    master_commit.diff(target_commit)
+  end
+
   def last_commit
     return nil if @repo_git.empty?
     raw.last_commit
@@ -17,6 +24,20 @@ class MicrogitGit
     cmd = "du -sk #{@repo.git_path}"
     Process.run(cmd, shell: true, output: output)
     ((output.to_s.split.first.to_f / 1024)).round(2)
+  end
+
+  def merge_branch(merge_request, user) : Git::Oid
+    target = Git::Branch.lookup(raw, merge_request.branch)
+
+    target_commit = Git::Commit.lookup(raw, target.target_id)
+    master_commit = raw.last_commit
+
+    commit_author = Git::Signature.new("Håkan Nylén", user.email)
+    array_commits = [master_commit, target_commit]
+
+    commit_data = Git::CommitData.new("Merge commit of #{merge_request.branch}", array_commits, master_commit.tree, commit_author, commit_author, "HEAD")
+
+    Git::Commit.create(raw, commit_data)
   end
 
   def root_ref

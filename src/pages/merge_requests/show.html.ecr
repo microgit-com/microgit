@@ -1,6 +1,7 @@
 <h1><%=@merge_request.name.to_s%></h1>
 <p>Author: <%=@merge_request.author.username.to_s%></p>
 <p>Branch: <%=@merge_request.branch%></p>
+<p>Status: <%=MergeRequest::Status.from_value(@merge_request.status)%></p>
 
 <div class="my-3 border-solid border border-gray-400 m-auto rounded">
   <div class="flex flex-wrap">

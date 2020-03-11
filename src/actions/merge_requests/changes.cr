@@ -9,6 +9,11 @@ class Repositories::MergeRequests::Changes < BrowserAction
     rescue Exception
       raise Lucky::RouteNotFoundError.new(context)
     end
-    html ChangesPage, repo: repo, merge_request: merge_request, repository: repository, namespace: namespace
+
+    target = Git::Branch.lookup(repo.raw, merge_request.branch)
+
+    diff = repo.get_branch_diff(target)
+
+    html ChangesPage, repo: repo, diff: diff, merge_request: merge_request, repository: repository, namespace: namespace
   end
 end
