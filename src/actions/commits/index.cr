@@ -10,6 +10,8 @@ class Commits::Index < BrowserAction
       raise Lucky::RouteNotFoundError.new(context)
     end
 
-    html IndexPage, repo: repo, repository: repository, namespace: namespace
+    target = Git::Branch.lookup(repo.raw, "master")
+
+    html IndexPage, repo: repo, target: target.target_id, ref: "master", repository: repository, namespace: namespace
   end
 end

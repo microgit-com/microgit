@@ -2,15 +2,15 @@
 <table class="table-auto w-full">
   <thead>
     <tr>
-      <th class="px-4 py-2">Name</th>
-      <th class="px-4 py-2">Author</th>
+      <th class="px-4 py-2 bg-gray-200 border-solid border rounded text-base antialiased">Name</th>
+      <th class="px-4 py-2 bg-gray-200 border-solid border rounded text-base antialiased">Author</th>
     </tr>
   </thead>
 <tbody>
   <% @merge_requests.each do |merge_request| %>
     <tr>
       <td class="border px-4 py-2"><% link merge_request.name.to_s, Repositories::MergeRequests::Show.with(@repository.namespace_slug, @repository.slug, merge_request) %></td>
-      <td class="border px-4 py-2">confactiii</td>
+      <td class="border px-4 py-2"><%=merge_request.author.username%></td>
     </tr>
   <% end %>
 </tbody>

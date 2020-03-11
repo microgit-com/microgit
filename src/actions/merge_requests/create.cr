@@ -3,7 +3,7 @@ class Repositories::MergeRequests::Create < BrowserAction
   post "/:namespace_slug/:repository_slug/merge_requests/new" do
     repository = check_access
     namespace = get_namespace
-    SaveMergeRequest.create(params, repository_id: repository.id, author_id: current_user.id) do |operation, merge_request|
+    SaveMergeRequest.create(params, repository_id: repository.id, author_id: current_user.id, status: 0) do |operation, merge_request|
       if merge_request
         flash.success = "The record has been saved"
         redirect Show.with(repository.namespace_slug, repository.slug, merge_request.id)

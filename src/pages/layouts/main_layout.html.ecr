@@ -11,28 +11,30 @@
   </head>
 
   <body>
-    <nav class="container mx-auto px-2 flex flex-wrap items-center justify-between py-4">
-      <div class="flex flex-shrink-0 mr-6"><a class="text-xl text-indigo-500 font-semibold" href="/">Microgit</a></div>
-      <div class="block lg:hidden">
-         <button class="flex items-center py-2 px-3 text-indigo-500 rounded border border-indigo-500"><svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg></button>    </div>
-      <div class="hidden lg:flex lg:flex-grow lg:items-center w-full lg:w-auto">
-        <div class="lg:mx-auto">
-          <% unless @current_user.nil? %>
-            <a class="block lg:inline-block mt-4 lg:mt-0 mr-10 text-blue-900 hover:text-blue-700" href="/teams">Teams</a>
-            <a class="block lg:inline-block mt-4 lg:mt-0 text-blue-900 hover:text-blue-700" href="<%= "/repositories"%>">Repositories</a>
-          <% end %>
+    <div class="nav-bg">
+      <nav class="container mx-auto px-2 flex flex-wrap items-center justify-between py-4">
+        <div class="flex flex-shrink-0 mr-6"><a class="text-xl text-indigo-500 font-semibold" href="/">Microgit</a></div>
+        <div class="block lg:hidden">
+           <button class="flex items-center py-2 px-3 text-indigo-500 rounded border border-indigo-500"><svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg></button>    </div>
+        <div class="hidden lg:flex lg:flex-grow lg:items-center w-full lg:w-auto">
+          <div class="lg:mx-auto">
+            <% unless @current_user.nil? %>
+              <a class="block lg:inline-block mt-4 lg:mt-0 mr-10 text-blue-900 hover:text-blue-700" href="/teams">Teams</a>
+              <a class="block lg:inline-block mt-4 lg:mt-0 text-blue-900 hover:text-blue-700" href="<%= "/repositories"%>">Repositories</a>
+            <% end %>
+          </div>
+          <div>
+            <% if @current_user.nil? %>
+              <a class="block lg:inline-block mt-4 lg:mt-0 lg:mr-8 text-blue-900 hover:text-blue-700" href="/users/sign_in">Sign in</a>
+              <a class="inline-block py-3 px-6 mt-4 lg:mt-0 leading-none text-white bg-indigo-500 hover:bg-indigo-600 rounded shadow" href="/users/sign_up">Sign up</a>
+            <% else %>
+              <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'" href="/users/edit">User</a>
+              <% link "Sign out", to: SignIns::Delete, class: "block lg:inline-block lg:mt-0 lg:ml-3 text-blue-900 hover:text-blue-700" %>
+            <% end %>
+          </div>
         </div>
-        <div>
-          <% if @current_user.nil? %>
-            <a class="block lg:inline-block mt-4 lg:mt-0 lg:mr-8 text-blue-900 hover:text-blue-700" href="/users/sign_in">Sign in</a>
-            <a class="inline-block py-3 px-6 mt-4 lg:mt-0 leading-none text-white bg-indigo-500 hover:bg-indigo-600 rounded shadow" href="/users/sign_up">Sign up</a>
-          <% else %>
-            <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'" href="/users/edit">User</a>
-            <% link "Sign out", to: SignIns::Delete, class: "block lg:inline-block lg:mt-0 lg:ml-3 text-blue-900 hover:text-blue-700" %>
-          <% end %>
-        </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
     <div class="container mx-auto flex-grow lg:px-3 md:px-3 sm:px-1">
     <% Shared::FlashMessages.new(@context.flash) %>
     <% content %>

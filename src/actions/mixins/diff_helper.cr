@@ -11,9 +11,9 @@ module DiffHelper
 
   def line_color(line)
     if line.mode == GitDiffParser::Line::Mode::Modified
-      return "bg-green-200 text-green-700"
+      return "bg-green-200 text-green-800"
     elsif line.mode == GitDiffParser::Line::Mode::Removed
-      return "bg-red-200 text-red-700"
+      return "bg-red-200 text-red-800"
     else
       return "overflow-scroll"
     end
