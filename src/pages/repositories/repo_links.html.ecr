@@ -1,6 +1,6 @@
 <div class="mb-5">
-  <% link "Dashboard", Repositories::Show.with(@repository.namespace_slug, @repository.slug), class: "block lg:inline-block lg:mt-0 lg:ml-3 text-blue-900 hover:text-blue-700" %>
-  <% link "Issues", Repositories::Issues::Index.with(@repository.namespace_slug, @repository.slug), class: "block lg:inline-block lg:mt-0 lg:ml-3 text-blue-900 hover:text-blue-700" %>
-  <% link "Merge Requests", Repositories::MergeRequests::Index.with(@repository.namespace_slug, @repository.slug), class: "block lg:inline-block lg:mt-0 lg:ml-3 text-blue-900 hover:text-blue-700" %>
-  <% link "Edit", Repositories::Edit.with(@repository.namespace_slug, @repository.slug), class: "block lg:inline-block lg:mt-0 lg:ml-3 text-blue-900 hover:text-blue-700" %>
+  <% link "Dashboard", Repositories::Show.with(@repository.namespace_slug, @repository.slug), class: "inline-block lg:mt-0 lg:ml-3 text-blue-900 hover:text-blue-700 px-2" %>
+  <% link "Issues", Repositories::Issues::Index.with(@repository.namespace_slug, @repository.slug), class: "inline-block lg:mt-0 lg:ml-3 text-blue-900 hover:text-blue-700 px-2" %>
+  <% link "Merge Requests", Repositories::MergeRequests::Index.with(@repository.namespace_slug, @repository.slug), class: "inline-block lg:mt-0 lg:ml-3 text-blue-900 hover:text-blue-700 px-2" %>
+  <% link "Edit", Repositories::Edit.with(@repository.namespace_slug, @repository.slug), class: "inline-block lg:mt-0 lg:ml-3 text-blue-900 hover:text-blue-700 px-2" %>
 </div>
