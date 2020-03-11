@@ -35,7 +35,7 @@ class MicrogitGit
     commit_author = Git::Signature.new("Håkan Nylén", user.email)
     array_commits = [master_commit, target_commit]
 
-    commit_data = Git::CommitData.new("Merge commit of #{merge_request.branch}", array_commits, master_commit.tree, commit_author, commit_author, "HEAD")
+    commit_data = Git::CommitData.new("Merge commit of #{merge_request.branch}", array_commits, target_commit.tree, commit_author, commit_author, "HEAD")
 
     Git::Commit.create(raw, commit_data)
   end
