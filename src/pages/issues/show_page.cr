@@ -6,6 +6,7 @@ class Repositories::Issues::ShowPage < MainLayout
   needs operation : SaveActivityForItems
 
   def content
+    render_template "repositories/repo_info_small.html.ecr"
     render_template "repositories/repo_links.html.ecr"
     render_template "issues/show.html.ecr"
     render_comment_form(@operation)
