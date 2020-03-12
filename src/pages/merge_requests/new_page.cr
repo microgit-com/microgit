@@ -5,6 +5,7 @@ class Repositories::MergeRequests::NewPage < MainLayout
   quick_def page_title, "New"
 
   def content
+    render_template "repositories/repo_info_small.html.ecr"
     h1 "New"
     render_merge_request_form(@operation)
   end
@@ -24,7 +25,7 @@ class Repositories::MergeRequests::NewPage < MainLayout
 
   private def options_for_branches : Array(Tuple(String, String))
     branch_names = [] of {String, String}
-    
+
     repo = MicrogitGit.new(@repository)
     branches = repo.raw.branches
     branches.each_name.each { |b| branch_names << {b, b} }

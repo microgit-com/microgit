@@ -4,6 +4,7 @@ class Repositories::EditPage < MainLayout
   quick_def page_title, "Edit"
 
   def content
+    render_template "repositories/repo_info_small.html.ecr"
     h1 "Edit"
     render_repository_form(@operation)
   end

@@ -8,6 +8,7 @@ class Repositories::MergeRequests::ShowPage < MainLayout
   quick_def page_title, @merge_request.name
 
   def content
+    render_template "repositories/repo_info_small.html.ecr"
     render_template "repositories/repo_links.html.ecr"
     render_template "merge_requests/show.html.ecr"
     render_comment_form(@operation)

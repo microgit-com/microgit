@@ -7,6 +7,7 @@ class Repositories::MergeRequests::ChangesPage < MainLayout
   include DiffHelper
 
   def content
+    render_template "repositories/repo_info_small.html.ecr"
     render_template "repositories/repo_links.html.ecr"
     render_template "merge_requests/changes.html.ecr"
   end
