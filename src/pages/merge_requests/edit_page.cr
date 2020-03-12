@@ -5,7 +5,6 @@ class Repositories::MergeRequests::EditPage < MainLayout
   quick_def page_title, "Edit"
 
   def content
-    render_template "repositories/repo_info_small.html.ecr"
     h1 "Edit"
     render_merge_request_form(@operation)
   end

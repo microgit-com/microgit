@@ -6,7 +6,6 @@ class Repositories::Branches::ShowPage < MainLayout
   include DiffHelper
 
   def content
-    render_template "repositories/repo_info_small.html.ecr"
     render_template "repositories/repo_links.html.ecr"
     render_template "branches/show.html.ecr"
   end

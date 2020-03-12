@@ -4,7 +4,6 @@ class Repositories::Issues::NewPage < MainLayout
   quick_def page_title, "New"
 
   def content
-    render_template "repositories/repo_info_small.html.ecr"
     h1 "New"
     render_issue_form(@operation)
   end
