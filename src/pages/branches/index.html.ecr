@@ -1,0 +1,16 @@
+<h2>Branches</h2>
+<table class="table-auto w-full">
+  <thead>
+    <tr>
+      <th class="px-4 py-2">Branch</th>
+    </tr>
+  </thead>
+<tbody>
+  <% @branches.each do |branch|
+    %>
+    <tr>
+      <td class="border px-4 py-2 text-base subpixel-antialiased"><a href="/<%=@namespace.slug%>/<%=@repository.slug%>/branches/<%=branch%>"><%= branch %></a></td>
+    </tr>
+  <% end %>
+</tbody>
+</table>

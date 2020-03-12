@@ -18,26 +18,7 @@
     </div>
   </div>
 </div>
-<h2 class="text-xl mt-8">Files</h2>
-<table class="table-auto w-full">
-  <thead>
-    <tr>
-      <th class="px-4 py-2 bg-gray-200 border-solid border rounded text-base antialiased">Name</th>
-      <th class="px-4 py-2 bg-gray-200 border-solid border rounded text-base antialiased">Last commit</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @repo.tree.try { |t| t.each do |tree|
-      commit = @repo.last_for_path("master", tree.name)
-      %>
-      <tr>
-        <td class="border px-4 py-2 text-base subpixel-antialiased"><%= tree.name %></td>
-        <td class="border px-4 py-2 text-base subpixel-antialiased"><a href="/<%=@namespace_slug%>/<%=@repository.slug%>/commits/master/<%= commit.try { |c| c.sha } %>"><%= commit.try { |c| @repo.commit_topic(c.message) } %></a></td>
-      </tr>
-    <% end } %>
-  </tbody>
-</table>
+<% render_template "repositories/files.html.ecr" %>
 <% unless @readme.nil? %>
 <div class="mb-8 mt-8 border-solid border border-gray-400 m-auto rounded">
   <div class="flex flex-wrap">
