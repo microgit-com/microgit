@@ -6,6 +6,7 @@ class Repositories::MergeRequests::ShowPage < MainLayout
   needs operation : SaveActivityForItems
   needs diff : Git::Diff
   quick_def page_title, @merge_request.name
+  quick_def single_page, @merge_request.name
 
   def content
     render_template "repositories/repo_info_small.html.ecr"

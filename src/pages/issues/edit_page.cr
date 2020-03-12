@@ -3,6 +3,7 @@ class Repositories::Issues::EditPage < MainLayout
   needs issue : Issue
   needs repository : Repository
   quick_def page_title, "Edit"
+  quick_def single_page, "Issues Edit"
 
   def content
     render_template "repositories/repo_info_small.html.ecr"

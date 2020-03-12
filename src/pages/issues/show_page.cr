@@ -4,6 +4,7 @@ class Repositories::Issues::ShowPage < MainLayout
   needs namespace : Namespace
   needs comments : ActivityForItemsQuery
   needs operation : SaveActivityForItems
+  quick_def single_page, @issue.name.to_s
 
   def content
     render_template "repositories/repo_info_small.html.ecr"

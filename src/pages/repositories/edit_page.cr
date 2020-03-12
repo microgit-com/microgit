@@ -2,6 +2,7 @@ class Repositories::EditPage < MainLayout
   needs operation : SaveRepository
   needs repository : Repository
   quick_def page_title, "Edit"
+  quick_def single_page, "Edit"
 
   def content
     render_template "repositories/repo_info_small.html.ecr"

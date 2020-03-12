@@ -3,6 +3,7 @@ class Repositories::MergeRequests::EditPage < MainLayout
   needs merge_request : MergeRequest
   needs repository : Repository
   quick_def page_title, "Edit"
+  quick_def single_page, "Merge Request Edit"
 
   def content
     render_template "repositories/repo_info_small.html.ecr"

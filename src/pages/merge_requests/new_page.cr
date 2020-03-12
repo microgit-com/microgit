@@ -3,6 +3,7 @@ class Repositories::MergeRequests::NewPage < MainLayout
   needs repository : Repository
   needs namespace : Namespace
   quick_def page_title, "New"
+  quick_def single_page, "New Merge Request"
 
   def content
     render_template "repositories/repo_info_small.html.ecr"

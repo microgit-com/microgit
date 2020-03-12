@@ -4,6 +4,7 @@ class Repositories::Branches::IndexPage < MainLayout
   needs namespace : Namespace
   needs branches : Array(String)
   quick_def page_title, "All"
+  quick_def single_page, "Branches"
 
   def content
     render_template "repositories/repo_info_small.html.ecr"

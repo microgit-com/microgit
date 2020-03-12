@@ -2,6 +2,8 @@
   <span class="p-1 text-gray-500 text-sm"><%=@repository.namespace_slug%></span>
   <span class="p-1 fa fa-chevron-right text-gray-500 text-sm"></span>
   <% link @repository.slug, Repositories::Show.with(@repository.namespace_slug, @repository.slug), class: "p-1 text-gray-500 text-sm inline-block" %>
+  <% if single_page %>
   <span class="p-1 fa fa-chevron-right text-gray-500 text-sm"></span>
-  <span class="p-1 text-gray-500 text-sm"></span>
+  <span class="p-1 text-gray-500 text-sm"><%=single_page%></span>
+  <% end %>
 </div>
