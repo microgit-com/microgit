@@ -3,7 +3,7 @@
 
 <div class="my-5">
   <% link "Description", Show.with(@repository.namespace_slug, @repository.slug, @merge_request.id), class: "block inline-block lg:mt-0 lg:ml-3 text-blue-900 hover:text-blue-700 hover:border-b-2 hover:border-blue-400 px-1" %>
-  <% link "Changes (29)", Changes.with(@repository.namespace_slug, @repository.slug, @merge_request.id), class: "block inline-block lg:mt-0 lg:ml-3 text-blue-900 border-b-2 border-gray-400 hover:text-blue-700 hover:border-b-2 hover:border-blue-400 px-1" %>
+  <% link "Changes (#{@diff.size})", Changes.with(@repository.namespace_slug, @repository.slug, @merge_request.id), class: "block inline-block lg:mt-0 lg:ml-3 text-blue-900 border-b-2 border-gray-400 hover:text-blue-700 hover:border-b-2 hover:border-blue-400 px-1" %>
 </div>
 
 <h2 class="text-xl mt-8">Changes</h2>

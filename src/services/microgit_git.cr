@@ -26,8 +26,11 @@ class MicrogitGit
     ((output.to_s.split.first.to_f / 1024)).round(2)
   end
 
-  def merge_branch(merge_request, user) : Git::Oid
+  def merge_branch(merge_request, user) : Git::Oid | Nil
     target = Git::Branch.lookup(raw, merge_request.branch)
+
+    diff = get_branch_diff(target)
+    return nil if diff.size == 0
 
     target_commit = Git::Commit.lookup(raw, target.target_id)
     master_commit = raw.last_commit

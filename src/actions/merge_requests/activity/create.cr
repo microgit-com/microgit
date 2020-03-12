@@ -11,7 +11,16 @@ class Repositories::MergeRequests::Activities::Create < BrowserAction
       else
         flash.failure = "It looks like the form is not valid"
         comments = ActivityForItemsQuery.new.preload_user.merge_request_id(merge_request_id)
-        html MergeRequests::ShowPage, operation: operation, merge_request: merge_request, repository: repository, namespace: namespace, comments: comments
+        begin
+          repo = MicrogitGit.new(repository)
+        rescue Exception
+          raise Lucky::RouteNotFoundError.new(context)
+        end
+
+        target = Git::Branch.lookup(repo.raw, merge_request.branch)
+
+        diff = repo.get_branch_diff(target)
+        html MergeRequests::ShowPage, operation: operation, diff: diff, merge_request: merge_request, repository: repository, namespace: namespace, comments: comments
       end
     end
   end
