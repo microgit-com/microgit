@@ -20,7 +20,10 @@ class Repositories::MergeRequests::Activities::Create < BrowserAction
         target = Git::Branch.lookup(repo.raw, merge_request.branch)
 
         diff = repo.get_branch_diff(target)
-        html MergeRequests::ShowPage, operation: operation, diff: diff, merge_request: merge_request, repository: repository, namespace: namespace, comments: comments
+
+        ahead, behind = repo.ahead_behind_branch(target)
+
+        html MergeRequests::ShowPage, operation: operation, diff: diff, ahead: ahead, behind: behind, merge_request: merge_request, repository: repository, namespace: namespace, comments: comments
       end
     end
   end

@@ -15,7 +15,9 @@ class Repositories::MergeRequests::Show < BrowserAction
 
     diff = repo.get_branch_diff(target)
 
+    ahead, behind = repo.ahead_behind_branch(target)
+
     comments = ActivityForItemsQuery.new.preload_user.merge_request_id(merge_request_id)
-    html ShowPage, operation: SaveActivityForItems.new, merge_request: merge_request, diff: diff, repository: repository, namespace: namespace, comments: comments
+    html ShowPage, operation: SaveActivityForItems.new, merge_request: merge_request, diff: diff, ahead: ahead, behind: behind, repository: repository, namespace: namespace, comments: comments
   end
 end
