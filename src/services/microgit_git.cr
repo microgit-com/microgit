@@ -43,6 +43,13 @@ class MicrogitGit
     Git::Commit.create(raw, commit_data)
   end
 
+  def ahead_behind_branch(target_branch)
+    target_commit = Git::Commit.lookup(raw, target_branch.target_id)
+    master_commit = raw.last_commit
+
+    @repo_git.ahead_behind(target_commit, master_commit)
+  end
+
   def root_ref
     refs = @repo_git.branches
 
