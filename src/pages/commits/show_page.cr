@@ -5,6 +5,7 @@ class Commits::ShowPage < MainLayout
   needs diff : Git::Diff
   include DiffHelper
   quick_def single_page, "Commit"
+  quick_def page_title, "Commit"
 
   def content
     render_template "repositories/repo_info_small.html.ecr"

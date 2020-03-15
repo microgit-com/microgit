@@ -14,6 +14,14 @@ class User < BaseModel
     namespace.slug
   end
 
+  def profile_pic_url
+    # create the md5 hash
+    hash = Digest::MD5.hexdigest(email.downcase)
+
+    # compile URL which can be used in <img src="RIGHT_HERE"...
+    "https://www.gravatar.com/avatar/#{hash}"
+  end
+
   def emailable : Carbon::Address
     Carbon::Address.new(email)
   end

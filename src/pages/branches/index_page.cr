@@ -3,7 +3,7 @@ class Repositories::Branches::IndexPage < MainLayout
   needs repository : Repository
   needs namespace : Namespace
   needs branches : Array(String)
-  quick_def page_title, "All"
+  quick_def page_title, "Branches"
   quick_def single_page, "Branches"
 
   def content

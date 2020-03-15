@@ -22,10 +22,10 @@
 <% unless @readme.nil? %>
 <div class="mb-8 mt-8 border-solid border border-gray-400 m-auto rounded">
   <div class="flex flex-wrap">
-    <div class="w-full p-3 bg-gray-200 border-b border-gray-400">
+    <div class="w-full p-3 bg-gray-800 text-white border-b rounded-t border-gray-400">
       <%= @readme.try { |r| r.name }%>
     </div>
-    <div class="w-full p-3 markdown">
+    <div class="w-full p-3 markdown bg-white rounded-b">
       <%=@readme_content %>
     </div>
   </div>

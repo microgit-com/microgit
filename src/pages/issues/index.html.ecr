@@ -1,18 +1,23 @@
-<h2>Issues</h2>
-<table class="table-auto w-full">
-  <thead>
-    <tr>
-      <th class="px-4 py-2 bg-gray-200 border-solid border rounded text-base antialiased">Name</th>
-      <th class="px-4 py-2 bg-gray-200 border-solid border rounded text-base antialiased">Author</th>
-    </tr>
-  </thead>
-<tbody>
-  <% @issues.each do |issue| %>
-    <tr>
-      <td class="border px-4 py-2"><% link issue.name.to_s, Repositories::Issues::Show.with(@repository.namespace_slug, @repository.slug, issue) %></td>
-      <td class="border px-4 py-2"><%=issue.author.username.to_s%></td>
-    </tr>
-  <% end %>
-</tbody>
-</table>
+<div class="flex flex-col mb-5 mt-3">
+  <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+    <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200 bg-white">
+      <table class="w-full">
+        <thead>
+          <tr>
+            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Name</th>
+            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Author</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @issues.each do |issue| %>
+            <tr>
+              <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-900"><% link issue.name.to_s, Repositories::Issues::Show.with(@repository.namespace_slug, @repository.slug, issue) %></td>
+              <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-900"><%=issue.author.username.to_s%></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 <% link "New issue", Repositories::Issues::New.with(@namespace.slug, @repository.slug), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>

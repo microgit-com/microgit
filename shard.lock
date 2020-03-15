@@ -38,7 +38,7 @@ shards:
 
   git:
     github: microgit-com/libgit2.cr
-    commit: e99416b2e23d213262e7a5ae81b9746366c9d97e
+    commit: 7069411d3357628a6294af97f88e9c718e87f8e9
 
   git_diff_parser:
     github: microgit-com/git_diff_parser

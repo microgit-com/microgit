@@ -5,6 +5,7 @@ class Repositories::Branches::ShowPage < MainLayout
   needs tree : Git::Tree | Nil
   include DiffHelper
   quick_def single_page, @branch_name
+  quick_def page_title, @branch_name
 
   def content
     render_template "repositories/repo_info_small.html.ecr"
