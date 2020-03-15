@@ -10,22 +10,22 @@
 
 <div class="my-3 border-solid border border-gray-400 m-auto rounded">
   <div class="flex flex-wrap">
-    <div class="w-full p-3 markdown">
+    <div class="w-full p-3 markdown bg-white rounded">
       <%= Markd.to_html(@merge_request.description) %>
     </div>
   </div>
 </div>
 
-<div class="border-solid border border-gray-400 m-auto rounded bg-gray-200 px-3 py-5">
+<div class="shadow m-auto rounded bg-gray-800 px-3 py-5 text-white">
   <% if @diff.size > 0 && @ahead > 0 %>
-    <% link "Merge", to: Merge.with(@namespace.slug, @repository.slug, @merge_request.id), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded focus:outline-none focus:shadow-outline" %>
-    <p class="inline-block text-gray-800"><%=@ahead%> commits + 1 merge commit will be merged to master from <%=@merge_request.branch.to_s%></p>
+    <% link "Merge", to: Merge.with(@namespace.slug, @repository.slug, @merge_request.id), class: "bg-white hover:bg-gray-700 text-gray-900 hover:text-white font-bold py-2 px-4 mt-4 rounded focus:outline-none focus:shadow-outline" %>
+    <p class="ml-2 inline-block"><%=@ahead%> commits + 1 merge commit will be merged to master from <%=@merge_request.branch.to_s%></p>
   <% elsif @behind > 0 %>
-    <span class="bg-gray-800 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded focus:outline-none opacity-50 cursor-not-allowed focus:shadow-outline">Merge</span>
-    <p class="inline-block text-gray-800"><%=@merge_request.branch.to_s%> is behind master with <%=@behind%> commits</p>
+    <span class="bg-gray-300 hover:bg-gray-600 text-black font-bold py-2 px-4 mt-4 rounded focus:outline-none opacity-50 cursor-not-allowed focus:shadow-outline">Merge</span>
+    <p class="ml-2 inline-block"><%=@merge_request.branch.to_s%> is behind master with <%=@behind%> commits</p>
   <% else %>
-    <span class="bg-gray-800 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded focus:outline-none opacity-50 cursor-not-allowed focus:shadow-outline">Merge</span>
-    <p class="inline-block text-gray-800">No changes between <%=@merge_request.branch.to_s%> and master</p>
+    <span class="bg-gray-300 hover:bg-gray-600 text-black font-bold py-2 px-4 mt-4 rounded focus:outline-none opacity-50 cursor-not-allowed focus:shadow-outline">Merge</span>
+    <p class="ml-2 inline-block">No changes between <%=@merge_request.branch.to_s%> and master</p>
   <% end %>
 </div>
 
