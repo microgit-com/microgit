@@ -1,11 +1,3 @@
-<h1><%=@merge_request.name.to_s%></h1>
-<p><%=MergeRequest::Status.from_value(@merge_request.status)%> - Opened <%=distance_of_time_in_words(@merge_request.created_at, Time.utc)%> ago by <%=@merge_request.author.username.to_s%></p>
-
-<div class="my-5">
-  <% link "Description", Show.with(@repository.namespace_slug, @repository.slug, @merge_request.id), class: "block inline-block lg:mt-0 lg:ml-3 text-blue-900 border-b-2 border-gray-400 hover:text-blue-700 hover:border-b-2 hover:border-blue-400 px-1" %>
-  <% link "Changes (#{@diff.size})", Changes.with(@repository.namespace_slug, @repository.slug, @merge_request.id), class: "block inline-block lg:mt-0 lg:ml-3 text-blue-900 hover:text-blue-700 hover:border-b-2 hover:border-blue-400 px-1" %>
-</div>
-
 <h2>Description</h2>
 
 <div class="my-3 border-solid border border-gray-400 m-auto rounded">
@@ -14,6 +6,11 @@
       <%= Markd.to_html(@merge_request.description) %>
     </div>
   </div>
+</div>
+
+<div class="my-5">
+  <% link "Description", Show.with(@repository.namespace_slug, @repository.slug, @merge_request.id), class: "block inline-block lg:mt-0 lg:ml-3 text-blue-900 border-b-2 border-gray-400 hover:text-blue-700 hover:border-b-2 hover:border-blue-400 px-1" %>
+  <% link "Changes (#{@diff.size})", Changes.with(@repository.namespace_slug, @repository.slug, @merge_request.id), class: "block inline-block lg:mt-0 lg:ml-3 text-blue-900 hover:text-blue-700 hover:border-b-2 hover:border-blue-400 px-1" %>
 </div>
 
 <div class="shadow m-auto rounded bg-gray-800 px-3 py-5 text-white">
