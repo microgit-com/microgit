@@ -1,6 +1,6 @@
 <% if !@repo.raw.empty? && !@repo.tree.nil? %>
 
-<div class="bg-gray-200 my-3 border-solid border border-gray-400 m-auto p-3 rounded">
+<div class="bg-gray-100 my-3 border-solid border m-auto p-3 align-middle min-w-full shadow overflow-hidden sm:rounded-lg border-gray-200">
   <div class="flex">
     <div class="w-3/4 h-12">
       <p class="text-base antialiased"><%= @repo.last_commit.try { |c| @repo.commit_topic(c.message) } %></p>

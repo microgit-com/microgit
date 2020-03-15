@@ -1,3 +1,6 @@
+<% if @comments.size == 0 %>
+  <div class="w-full text-center text-lg text-gray-800">No activity, yet.</div>
+<% end %>
 <% @comments.each do |comment| %>
 <div class="flex my-2">
   <div class="w-1/12">
