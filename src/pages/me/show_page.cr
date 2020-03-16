@@ -1,4 +1,6 @@
 class Me::ShowPage < MainLayout
+  quick_def page_title, "Me"
+
   def content
     h1 "This is your profile"
     h3 "Email:  #{@current_user.email}"

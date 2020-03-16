@@ -1,31 +1,28 @@
-<h1><%=@merge_request.name.to_s%></h1>
-<p><%=MergeRequest::Status.from_value(@merge_request.status)%> - Opened <%=distance_of_time_in_words(@merge_request.created_at, Time.utc)%> ago by <%=@merge_request.author.username.to_s%></p>
+<h2>Description</h2>
+
+<div class="my-3 border-solid border border-gray-400 m-auto rounded">
+  <div class="flex flex-wrap">
+    <div class="w-full p-3 markdown bg-white rounded">
+      <%= Markd.to_html(@merge_request.description) %>
+    </div>
+  </div>
+</div>
 
 <div class="my-5">
   <% link "Description", Show.with(@repository.namespace_slug, @repository.slug, @merge_request.id), class: "block inline-block lg:mt-0 lg:ml-3 text-blue-900 border-b-2 border-gray-400 hover:text-blue-700 hover:border-b-2 hover:border-blue-400 px-1" %>
   <% link "Changes (#{@diff.size})", Changes.with(@repository.namespace_slug, @repository.slug, @merge_request.id), class: "block inline-block lg:mt-0 lg:ml-3 text-blue-900 hover:text-blue-700 hover:border-b-2 hover:border-blue-400 px-1" %>
 </div>
 
-<h2>Description</h2>
-
-<div class="my-3 border-solid border border-gray-400 m-auto rounded">
-  <div class="flex flex-wrap">
-    <div class="w-full p-3 markdown">
-      <%= Markd.to_html(@merge_request.description) %>
-    </div>
-  </div>
-</div>
-
-<div class="border-solid border border-gray-400 m-auto rounded bg-gray-200 px-3 py-5">
+<div class="shadow m-auto rounded bg-gray-800 px-3 py-5 text-white">
   <% if @diff.size > 0 && @ahead > 0 %>
-    <% link "Merge", to: Merge.with(@namespace.slug, @repository.slug, @merge_request.id), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded focus:outline-none focus:shadow-outline" %>
-    <p class="inline-block text-gray-800">this will be merged to master from <%=@merge_request.branch.to_s%></p>
+    <% link "Merge", to: Merge.with(@namespace.slug, @repository.slug, @merge_request.id), class: "bg-white hover:bg-gray-700 text-gray-900 hover:text-white font-bold py-2 px-4 mt-4 rounded focus:outline-none focus:shadow-outline" %>
+    <p class="ml-2 inline-block"><%=@ahead%> commits + 1 merge commit will be merged to master from <%=@merge_request.branch.to_s%></p>
   <% elsif @behind > 0 %>
-    <span class="bg-gray-800 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded focus:outline-none opacity-50 cursor-not-allowed focus:shadow-outline">Merge</span>
-    <p class="inline-block text-gray-800"><%=@merge_request.branch.to_s%> is behind master with <%=@behind%> commits</p>
+    <span class="bg-gray-300 hover:bg-gray-600 text-black font-bold py-2 px-4 mt-4 rounded focus:outline-none opacity-50 cursor-not-allowed focus:shadow-outline">Merge</span>
+    <p class="ml-2 inline-block"><%=@merge_request.branch.to_s%> is behind master with <%=@behind%> commits</p>
   <% else %>
-    <span class="bg-gray-800 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded focus:outline-none opacity-50 cursor-not-allowed focus:shadow-outline">Merge</span>
-    <p class="inline-block text-gray-800">No changes between <%=@merge_request.branch.to_s%> and master</p>
+    <span class="bg-gray-300 hover:bg-gray-600 text-black font-bold py-2 px-4 mt-4 rounded focus:outline-none opacity-50 cursor-not-allowed focus:shadow-outline">Merge</span>
+    <p class="ml-2 inline-block">No changes between <%=@merge_request.branch.to_s%> and master</p>
   <% end %>
 </div>
 

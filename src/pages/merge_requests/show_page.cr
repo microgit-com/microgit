@@ -9,6 +9,7 @@ class Repositories::MergeRequests::ShowPage < MainLayout
   needs behind : Int32
   quick_def page_title, @merge_request.name.to_s
   quick_def single_page, @merge_request.name.to_s
+  quick_def page_title_template, render_template("merge_requests/info_header.html.ecr")
 
   def content
     render_template "repositories/repo_info_small.html.ecr"

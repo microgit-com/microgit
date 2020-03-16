@@ -19,6 +19,10 @@ class MicrogitGit
     raw.last_commit
   end
 
+  def branches
+    raw.branches
+  end
+
   def size
     output = IO::Memory.new
     cmd = "du -sk #{@repo.git_path}"

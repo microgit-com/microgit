@@ -1,28 +1,14 @@
+<h1 class="text-3xl font-bold leading-tight text-gray-900"><%= @repository.name %> <% @repository.privated ? %><span class="bg-gray-200 text-gray-800 text-sm rounded p-1 inline-block">Private</span><% : ""%></h1>
+<div>
+  <p class="inline-block text-gray-700 text-sm px-2"><span class="fa fa-dot-circle"></span> <strong><%= @repo.commit_count %></strong> Commits</p>
+  <p class="inline-block text-gray-700 text-sm px-2"><span class="fa fa-file-code"></span> <strong><%= @repo.size %> MB</strong> Files</p>
+  <p class="inline-block text-gray-700 text-sm px-2"><span class="fa fa-code-branch"></span> <strong><%= @repo.branches.each_name.size %></strong> Branches</p>
 </div>
-  <div class="bg-gray-700 mb-3 m-auto p-3 text-white">
-      <div class="container mx-auto flex-grow text-base antialiased">
-      <h1><%= @repository.name %></h1>
-      <p>
-        <%= @repository.description %>
-      </p>
 
-      <p>
-        <strong>size:</strong>
-        <%= @repo.size %> MB
-      </p>
-      <p>
-        <strong>Commit count:</strong>
-        <%= @repo.commit_count %> commits
-      </p>
-
-      <p>
-        <strong>git url:</strong>
-        <%= @repository.git_url %>
-      </p>
-      <p>
-        <strong>private?:</strong>
-        <%= @repository.privated %>
-      </p>
-  </div>
-</div>
-<div class="container mx-auto flex-grow lg:px-2 md:px-2">
+<p>
+  <strong>git url:</strong>
+  <%= @repository.git_url %>
+</p>
+<p class="text-sm">
+  <%= @repository.description %>
+</p>

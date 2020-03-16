@@ -1,9 +1,9 @@
 <div class="my-3 border-solid border border-gray-400 m-auto rounded">
   <div class="flex flex-wrap">
-    <div class="w-full p-3 bg-gray-200 border-b border-gray-400">
+    <div class="w-full p-3 bg-gray-800 border-b text-white rounded-t border-gray-400">
       <%=patchy.file %> <%=patch.delta.new_file.size%> <span class="inline-block float-right"><%=patch.delta.status%></span>
     </div>
-<div class="w-full overflow-scroll">
+<div class="w-full overflow-scroll bg-white rounded-b">
 <div class="py-3 px-1 bg-gray-400 text-gray-800">
   <%= patchy.body.lines[4]%>
 </div>

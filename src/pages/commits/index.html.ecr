@@ -1,19 +1,24 @@
-<h2>Commits</h2>
 <h3><%= @ref.nil? ? "master" : @ref %></h3>
-<table class="table-auto w-full">
-  <thead>
-    <tr>
-      <th class="px-4 py-2">Message</th>
-      <th class="px-4 py-2">Author / Authored</th>
-    </tr>
-  </thead>
-<tbody>
-  <% @repo.raw.walk(@target, Git::Sort::Topological) do |commit|
-    %>
-    <tr>
-      <td class="border px-4 py-2 text-base subpixel-antialiased"><a href="/<%=@namespace.slug%>/<%=@repository.slug%>/commits/<%= @ref.nil? ? "master" : @ref %>/<%= commit.try { |c| c.sha } %>"><%= commit.try { |c| @repo.commit_topic(c.message) } %></a></td>
-      <td class="border px-4 py-2 text-base subpixel-antialiased"><p class="text-sm antialiased"><%=commit.author.name %> <span class="text-gray-600">authored <%= commit.try { |c| distance_of_time_in_words(c.author.time, Time.utc) } %> ago</span></p></td>
-    </tr>
-  <% end %>
-</tbody>
-</table>
+<div class="flex flex-col mb-5 mt-3">
+  <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+    <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200 bg-white">
+      <table class="w-full">
+        <thead>
+          <tr>
+            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Message</th>
+            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Author / Authored</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @repo.raw.walk(@target, Git::Sort::Topological) do |commit|
+            %>
+            <tr>
+              <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-900"><a href="/<%=@namespace.slug%>/<%=@repository.slug%>/commits/<%= @ref.nil? ? "master" : @ref %>/<%= commit.try { |c| c.sha } %>"><%= commit.try { |c| @repo.commit_topic(c.message) } %></a></td>
+              <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-900"><p class="text-sm antialiased"><%=commit.author.name %> <span class="text-gray-600">authored <%= commit.try { |c| distance_of_time_in_words(c.author.time, Time.utc) } %> ago</span></p></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

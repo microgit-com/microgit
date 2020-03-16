@@ -1,4 +1,4 @@
-<div class="bg-gray-200 my-3 border-solid border border-gray-400 m-auto p-3 rounded">
+<div class="bg-white my-3 border-solid border border-gray-400 m-auto p-3 rounded">
   <div class="flex">
     <div class="w-3/4 h-12">
       <p class="text-base antialiased"><%= @commit.try { |c| @repo.commit_topic(c.message) } %></p>

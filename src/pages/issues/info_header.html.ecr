@@ -1,0 +1,7 @@
+<h2 class="text-3xl font-bold leading-tight text-gray-900">
+  <%=page_title%>
+</h2>
+<div class="">
+<img src="<%=@issue.author.profile_pic_url%>" class="mx-2 h-6 w-6 rounded-full inline-block" />
+<span class="inline-block text-gray-600"><%=@issue.author.username%> created <%=distance_of_time_in_words(@issue.created_at, Time.utc)%> ago</span>
+</div>

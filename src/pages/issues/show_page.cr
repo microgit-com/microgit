@@ -5,6 +5,8 @@ class Repositories::Issues::ShowPage < MainLayout
   needs comments : ActivityForItemsQuery
   needs operation : SaveActivityForItems
   quick_def single_page, @issue.name.to_s
+  quick_def page_title, @issue.name.to_s
+  quick_def page_title_template, render_template("issues/info_header.html.ecr")
 
   def content
     render_template "repositories/repo_info_small.html.ecr"

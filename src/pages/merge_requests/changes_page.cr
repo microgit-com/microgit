@@ -3,7 +3,9 @@ class Repositories::MergeRequests::ChangesPage < MainLayout
   needs repository : Repository
   needs namespace : Namespace
   needs diff : Git::Diff
-  quick_def page_title, @merge_request.name
+  needs behind : Int32
+  needs ahead : Int32
+  quick_def page_title, "Merge Requests Changes"
   quick_def single_page, "Merge Requests Changes"
   include DiffHelper
 

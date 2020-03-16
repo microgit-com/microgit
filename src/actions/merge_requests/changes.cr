@@ -14,6 +14,8 @@ class Repositories::MergeRequests::Changes < BrowserAction
 
     diff = repo.get_branch_diff(target)
 
-    html ChangesPage, repo: repo, diff: diff, merge_request: merge_request, repository: repository, namespace: namespace
+    ahead, behind = repo.ahead_behind_branch(target)
+
+    html ChangesPage, repo: repo, diff: diff, behind: behind, ahead: ahead, merge_request: merge_request, repository: repository, namespace: namespace
   end
 end

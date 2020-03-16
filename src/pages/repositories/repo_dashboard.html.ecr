@@ -1,6 +1,6 @@
 <% if !@repo.raw.empty? && !@repo.tree.nil? %>
 
-<div class="bg-gray-200 my-3 border-solid border border-gray-400 m-auto p-3 rounded">
+<div class="bg-gray-100 my-3 border-solid border m-auto p-3 align-middle min-w-full shadow overflow-hidden sm:rounded-lg border-gray-200">
   <div class="flex">
     <div class="w-3/4 h-12">
       <p class="text-base antialiased"><%= @repo.last_commit.try { |c| @repo.commit_topic(c.message) } %></p>
@@ -22,10 +22,10 @@
 <% unless @readme.nil? %>
 <div class="mb-8 mt-8 border-solid border border-gray-400 m-auto rounded">
   <div class="flex flex-wrap">
-    <div class="w-full p-3 bg-gray-200 border-b border-gray-400">
+    <div class="w-full p-3 bg-gray-800 text-white border-b rounded-t border-gray-400">
       <%= @readme.try { |r| r.name }%>
     </div>
-    <div class="w-full p-3 markdown">
+    <div class="w-full p-3 markdown bg-white rounded-b">
       <%=@readme_content %>
     </div>
   </div>
