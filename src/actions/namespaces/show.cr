@@ -1,4 +1,5 @@
 class Namespaces::Show < BrowserAction
+  include Auth::AllowGuests
   include RepositoryHelper
 
   get "/:namespace_slug" do
