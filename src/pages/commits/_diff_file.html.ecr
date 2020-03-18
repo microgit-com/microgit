@@ -4,6 +4,9 @@
       <%=patchy.file %> <%=patch.delta.new_file.size%> <span class="inline-block float-right"><%=patch.delta.status%></span>
     </div>
 <div class="w-full overflow-scroll bg-white rounded-b">
+  <% if patchy.too_large? %>
+    <div class="w-full text-center text-l">File too big</div>
+  <% else %>
 <div class="py-3 px-1 bg-gray-400 text-gray-800">
   <%= patchy.body.lines[4]%>
 </div>
@@ -17,6 +20,7 @@
     </pre>
   </div>
 </div>
+<% end %>
 <% end %>
 </div>
   </div>

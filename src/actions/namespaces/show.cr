@@ -1,5 +1,15 @@
 class Namespaces::Show < BrowserAction
-  route do
-    html ShowPage, namespace: NamespaceQuery.find(namespace_id)
+  include RepositoryHelper
+
+  get "/:namespace_slug" do
+    namespace = get_namespace
+    item = namespace.item
+    if item.is_a?(User)
+      html ShowUserPage, user: item
+    elsif item.is_a?(Team)
+      html ShowTeamPage, team: item, repositories: RepositoryQuery.new.preload_user.preload_team.team_id(item.id)
+    else
+      raise Lucky::RouteNotFoundError.new(context)
+    end
   end
 end

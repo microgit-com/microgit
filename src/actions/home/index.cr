@@ -3,7 +3,7 @@ class Home::Index < BrowserAction
 
   get "/" do
     if current_user?
-      redirect Me::Show
+      redirect Namespaces::Show.with(namespace_slug: current_user.not_nil!.namespace!.slug)
     else
       # When you're ready change this line to:
       #
