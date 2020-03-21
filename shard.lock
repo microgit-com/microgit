@@ -42,7 +42,7 @@ shards:
 
   git_diff_parser:
     github: microgit-com/git_diff_parser
-    commit: 097438d402f34b47f236b9a2a1845277a2d3cb61
+    commit: e9e7db8e14367680a8478cfcb569f6ff6c33e531
 
   habitat:
     github: luckyframework/habitat

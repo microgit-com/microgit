@@ -13,10 +13,9 @@ class RepositoryPolicy
   def self.repo_user?(repository : Repository, current_user : User | Nil)
     return false if current_user.nil? && repository.privated
     if repository.team
-      # !repository.team.users.id(current_user.id).first.nil? || !repository.privated
-      true
+      !repository.team.not_nil!.users!.find { |u| u.id == current_user.not_nil!.id }.nil? || !repository.privated
     elsif repository.user
-      repository.user.try { |u| u.id } == current_user.try { |u| u.id } || !repository.privated
+      repository.user.try { |u| u.id } == current_user.not_nil!.id || !repository.privated
     else
       false
     end

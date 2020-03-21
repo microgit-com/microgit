@@ -4,9 +4,11 @@ class Team < BaseModel
     column description : String
     has_one namespace : Namespace
     has_many repositories : Repository
+    has_many team_members : TeamMembers
+    has_many users : User, through: :team_members
   end
 
   def slug
-    namespace.slug
+    namespace!.slug
   end
 end

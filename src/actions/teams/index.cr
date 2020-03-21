@@ -1,5 +1,5 @@
 class Teams::Index < BrowserAction
   route do
-    html IndexPage, teams: TeamQuery.new.preload_namespace
+    html IndexPage, teams: current_user.teams!
   end
 end

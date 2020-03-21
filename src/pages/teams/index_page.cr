@@ -1,5 +1,5 @@
 class Teams::IndexPage < MainLayout
-  needs teams : TeamQuery
+  needs teams : Array(Team)
   quick_def page_title, "Teams"
 
   def content

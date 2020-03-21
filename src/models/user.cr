@@ -8,10 +8,12 @@ class User < BaseModel
     column encrypted_password : String
     has_one namespace : Namespace
     has_many apit_tokens : ApiToken
+    has_many team_members : TeamMembers
+    has_many teams : Team, through: :team_members
   end
 
   def slug
-    namespace.slug
+    namespace!.slug
   end
 
   def profile_pic_url

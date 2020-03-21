@@ -27,4 +27,8 @@ abstract class BrowserAction < Lucky::Action
   private def find_current_user(id) : User?
     UserQuery.new.id(id).first?
   end
+
+  def render(error : LuckyForbiddenError)
+    error_html message: "Forbidden", status: 403
+  end
 end

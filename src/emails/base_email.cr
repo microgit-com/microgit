@@ -1,4 +1,5 @@
 abstract class BaseEmail < Carbon::Email
+  from "info@microgit.com"
   # You can add defaults using the 'inherited' hook
   #
   # Example:
