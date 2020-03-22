@@ -9,9 +9,9 @@ class MicrogitGit
 
   def get_branch_diff(target_branch) : Git::Diff
     target_commit = Git::Commit.lookup(raw, target_branch.target_id)
-    master_commit = raw.last_commit
+    master_commit = last_commit("master")
 
-    master_commit.diff(target_commit)
+    master_commit.not_nil!.diff(target_commit)
   end
 
   def last_commit(branch = "master")
