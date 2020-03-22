@@ -13,7 +13,7 @@ class RepositoryPolicy
   def self.can_access_repo?(repository : Repository, current_user : User | Nil)
     return false if current_user.nil? && repository.privated
     if repository.team
-      !repository.team.not_nil!.users!.find { |u| u.id == current_user.not_nil!.id }.nil? || !repository.privated
+      !repository.team.not_nil!.users!.map(&.id).includes?(current_user.not_nil!.id) || !repository.privated
     elsif repository.user
       repository.user.not_nil!.id == current_user.not_nil!.id || !repository.privated
     else
@@ -27,11 +27,11 @@ class RepositoryPolicy
     return true if current_user.nil? && !repository.privated && method == "GET"
 
     if repository.team && method == "POST" && !current_user.nil?
-      !repository.team.not_nil!.users!.find { |u| u.id == current_user.not_nil!.id }.nil?
+      !repository.team.not_nil!.users!.map(&.id).includes?(current_user.not_nil!.id)
     elsif repository.user && method == "POST" && !current_user.nil?
       repository.user.not_nil!.id == current_user.not_nil!.id
     elsif repository.team && method == "GET" && !current_user.nil?
-      !repository.team.not_nil!.users!.find { |u| u.id == current_user.not_nil!.id }.nil? || !repository.privated
+      !repository.team.not_nil!.users!.map(&.id).includes?(current_user.not_nil!.id) || !repository.privated
     elsif repository.user && method == "GET" && !current_user.nil?
       repository.user.not_nil!.id == current_user.not_nil!.id || !repository.privated
     else
