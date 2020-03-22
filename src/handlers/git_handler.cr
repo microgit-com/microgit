@@ -39,7 +39,7 @@ class HTTP::GitHandler
     end
     return 0 if repo_model.nil?
     SignInUserGit.new(Avram::Params.new({"username" => username, "password" => password})).submit do |operation, authenticated_user|
-      return RepositoryPolicy.repo_user?(repo_model, authenticated_user).to_unsafe
+      return RepositoryPolicy.repo_member?(repo_model, authenticated_user, method).to_unsafe
     end
   rescue Avram::RecordNotFoundError
     return 404
