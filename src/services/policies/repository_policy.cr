@@ -15,7 +15,7 @@ class RepositoryPolicy
     if repository.team
       !repository.team.not_nil!.users!.find { |u| u.id == current_user.not_nil!.id }.nil? || !repository.privated
     elsif repository.user
-      repository.user.try { |u| u.id } == current_user.not_nil!.id || !repository.privated
+      repository.user.not_nil!.id == current_user.not_nil!.id || !repository.privated
     else
       false
     end
