@@ -3,7 +3,11 @@ class Namespaces::Show < BrowserAction
   include RepositoryHelper
 
   get "/:namespace_slug" do
-    namespace = get_namespace
+    begin
+      namespace = get_namespace
+    rescue Avram::RecordNotFoundError
+      raise Lucky::RouteNotFoundError.new(context)
+    end
     item = namespace.item
     if item.is_a?(User)
       repos = if !current_user.nil? && UserPolicy.list_private_repos?(item, current_user, context)
