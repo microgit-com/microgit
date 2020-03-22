@@ -88,6 +88,14 @@ shards:
     github: will/crystal-pg
     version: 0.20.0
 
+  pool:
+    github: ysbaddaden/pool
+    version: 0.2.3
+
+  redis:
+    github: stefanwille/crystal-redis
+    version: 2.5.3
+
   selenium:
     github: ysbaddaden/selenium-webdriver-crystal
     commit: bda2fd406c1a118251c5a2883f1e1f3af242116e

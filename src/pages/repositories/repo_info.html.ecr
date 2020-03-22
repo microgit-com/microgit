@@ -4,7 +4,7 @@
 <div>
   <p class="inline-block text-gray-700 text-sm px-2"><span class="fa fa-dot-circle"></span> <strong><%= @repo.commit_count %></strong> Commits</p>
   <p class="inline-block text-gray-700 text-sm px-2"><span class="fa fa-file-code"></span> <strong><%= @repo.size %> MB</strong> Files</p>
-  <p class="inline-block text-gray-700 text-sm px-2"><span class="fa fa-code-branch"></span> <strong><%= @repo.branches.each_name.size %></strong> Branches</p>
+  <p class="inline-block text-gray-700 text-sm px-2"><span class="fa fa-code-branch"></span> <strong><%= @repo.branches_count %></strong> Branches</p>
 </div>
 <p class="text-sm">
   <%= @repository.description %>

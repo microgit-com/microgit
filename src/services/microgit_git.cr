@@ -14,20 +14,31 @@ class MicrogitGit
     master_commit.diff(target_commit)
   end
 
-  def last_commit
-    return nil if @repo_git.empty?
-    raw.last_commit
+  def last_commit(branch = "master")
+    Git::Commit.lookup(raw, caching("last_commit/#{branch}") do
+      target = Git::Branch.lookup(raw, branch)
+      return nil if @repo_git.empty?
+      target.target_id
+    end)
   end
 
   def branches
     raw.branches
   end
 
+  def branches_count
+    caching("branches") do
+      branches.each_name.size
+    end
+  end
+
   def size
-    output = IO::Memory.new
-    cmd = "du -sk #{@repo.git_path}"
-    Process.run(cmd, shell: true, output: output)
-    ((output.to_s.split.first.to_f / 1024)).round(2)
+    caching("size") do
+      output = IO::Memory.new
+      cmd = "du -sk #{@repo.git_path}"
+      Process.run(cmd, shell: true, output: output)
+      ((output.to_s.split.first.to_f / 1024)).round(2)
+    end
   end
 
   def merge_branch(merge_request, user) : Git::Oid | Nil
@@ -73,13 +84,15 @@ class MicrogitGit
   end
 
   def commit_count(ref = last_commit)
-    return 0 if @repo_git.empty?
-    return 0 if ref.nil?
-    count = 0
-    @repo_git.walk(ref.sha) do |c|
-      count += 1
+    caching("commit_count") do
+      return 0 if @repo_git.empty?
+      return 0 if ref.nil?
+      count = 0
+      @repo_git.walk(ref.sha) do |c|
+        count += 1
+      end
+      count
     end
-    count
   end
 
   def find_file(file_path)
@@ -134,12 +147,14 @@ class MicrogitGit
   end
 
   def last_for_path(ref, path = nil)
-    log_by_shell(
-      ref, {
-      path:  path,
-      limit: 1,
-    }
-    ).first
+    Git::Commit.lookup(@repo_git, caching("last/#{path}") do
+      log_by_shell(
+        ref, {
+        path:  path,
+        limit: 1,
+      }
+      ).first.to_s
+    end)
   end
 
   def sha_from_ref(ref)
@@ -150,5 +165,14 @@ class MicrogitGit
     git_bin = ENV["git_path"]? || "git"
     command = "#{git_bin} #{command}"
     command
+  end
+
+  private def caching(key, &block)
+    redis = Redis::PooledClient.new
+    cached = redis.get("#{@repo.cache_key}/#{key}")
+    return cached unless cached.nil?
+    data = yield
+    redis.set("#{@repo.cache_key}/#{key}", data)
+    return data
   end
 end

@@ -16,13 +16,14 @@ class HTTP::GitHandler
 
       context.request.headers.delete("Authorization")
       git = GitServer.new(context)
+      clear_cache(repo) if context.request.method == "POST"
       return git.call
     else
       call_next(context)
     end
   end
 
-  private def get_repo(path)
+  private def get_repo(path) : Tuple(Nil | Namespace | Repository, Nil | Namespace | Repository)
     namespace, repo, git_type = namespace_repo_from_path(path)
     return nil, nil if namespace.nil? || repo.nil? || namespace.empty? || repo.empty?
     namespace_model = NamespaceQuery.new.preload_user.preload_team.slug(namespace.not_nil!).first
@@ -64,5 +65,11 @@ class HTTP::GitHandler
     context.response.puts "Forbidden"
     context.response.close
     return context
+  end
+
+  private def clear_cache(repo)
+    redis = Redis::PooledClient.new
+    keys = redis.keys("#{repo.cache_key}*").map(&.to_s)
+    redis.del(keys)
   end
 end

@@ -25,6 +25,10 @@ class Repository < BaseModel
     namespace.try { |n| n.slug } || ""
   end
 
+  def cache_key
+    "#{namespace_slug}/#{slug}"
+  end
+
   def git_url
     ["", namespace.try { |n| n.slug }, "#{slug}.git"].join("/")
   end
