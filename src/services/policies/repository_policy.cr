@@ -23,14 +23,16 @@ class RepositoryPolicy
 
   def self.repo_member?(repository : Repository, current_user : User | Nil, method : String)
     return false if current_user.nil? && repository.privated
+    return false if current_user.nil? && !repository.privated && method == "POST"
+    return true if current_user.nil? && !repository.privated && method == "GET"
 
-    if repository.team && method == "POST"
+    if repository.team && method == "POST" && !current_user.nil?
       !repository.team.not_nil!.users!.find { |u| u.id == current_user.not_nil!.id }.nil?
-    elsif repository.user && method == "POST"
+    elsif repository.user && method == "POST" && !current_user.nil?
       repository.user.not_nil!.id == current_user.not_nil!.id
-    elsif repository.team && method == "GET"
+    elsif repository.team && method == "GET" && !current_user.nil?
       !repository.team.not_nil!.users!.find { |u| u.id == current_user.not_nil!.id }.nil? || !repository.privated
-    elsif repository.user && method == "GET"
+    elsif repository.user && method == "GET" && !current_user.nil?
       repository.user.not_nil!.id == current_user.not_nil!.id || !repository.privated
     else
       false
