@@ -1,5 +1,6 @@
-class Repositories::Issues::ShowPage < MainLayout
+class Repositories::Issues::ShowPage < ShowLayout
   needs issue : Issue
+  needs current_user : User | Nil
   needs repository : Repository
   needs namespace : Namespace
   needs comments : ActivityForItemsQuery

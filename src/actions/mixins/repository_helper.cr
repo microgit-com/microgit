@@ -6,13 +6,13 @@ module RepositoryHelper
     else
       repository = RepositoryQuery.new.preload_team.preload_user.team_id(namespace.item.id).slug(repository_slug).first
     end
-    RepositoryPolicy.show?(repository, current_user, context)
+    RepositoryPolicy.show_not_found?(repository, current_user, context)
     repository
   end
 
   def check_simple_access_slug
     repository = RepositoryQuery.new.preload_team.preload_user.slug(repository_slug).first
-    RepositoryPolicy.show?(repository, current_user, context)
+    RepositoryPolicy.show_not_found?(repository, current_user, context)
     repository
   end
 

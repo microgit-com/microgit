@@ -1,7 +1,7 @@
 class Teams::Update < BrowserAction
   route do
     team = TeamQuery.find(team_id)
-    TeamPolicy.update?(team, current_user, context)
+    TeamPolicy.update_forbidden?(team, current_user, context)
     SaveTeam.update(team, params) do |operation, team|
       if operation.saved?
         flash.success = "The record has been updated"

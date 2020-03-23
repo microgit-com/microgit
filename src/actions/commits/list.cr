@@ -1,4 +1,5 @@
 class Commits::List < BrowserAction
+  include Auth::AllowGuests
   include RepositoryHelper
 
   get "/:namespace_slug/:repository_slug/commits/:ref" do

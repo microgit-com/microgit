@@ -1,6 +1,7 @@
-class Commits::IndexPage < MainLayout
+class Commits::IndexPage < ShowLayout
   needs repo : MicrogitGit
   needs repository : Repository
+  needs current_user : User | Nil
   needs namespace : Namespace
   needs target : String | Git::Oid
   needs ref : String

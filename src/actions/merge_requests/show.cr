@@ -1,4 +1,5 @@
 class Repositories::MergeRequests::Show < BrowserAction
+  include Auth::AllowGuests
   include RepositoryHelper
   get "/:namespace_slug/:repository_slug/merge_requests/:merge_request_id" do
     merge_request = MergeRequestQuery.new.preload_author.find(merge_request_id)

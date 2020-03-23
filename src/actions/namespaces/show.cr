@@ -10,7 +10,7 @@ class Namespaces::Show < BrowserAction
     end
     item = namespace.item
     if item.is_a?(User)
-      repos = if !current_user.nil? && UserPolicy.list_private_repos?(item, current_user, context)
+      repos = if !current_user.nil? && UserPolicy.list_private_repos?(item, current_user)
         RepositoryQuery.new.preload_user.preload_team.user_id(item.id)
       else
         RepositoryQuery.new.preload_user.preload_team.user_id(item.id).privated(false)
@@ -18,7 +18,7 @@ class Namespaces::Show < BrowserAction
 
       html ShowUserPage, user: item, repositories: repos.not_nil!
     elsif item.is_a?(Team)
-      repos = if !current_user.nil? && TeamPolicy.list_private_repos?(item, current_user, context)
+      repos = if !current_user.nil? && TeamPolicy.list_private_repos?(item, current_user)
         RepositoryQuery.new.preload_user.preload_team.team_id(item.id)
       else
         RepositoryQuery.new.preload_user.preload_team.team_id(item.id).privated(false)

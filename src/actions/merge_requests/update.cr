@@ -2,7 +2,7 @@ class Repositories::MergeRequests::Update < BrowserAction
   nested_route do
     merge_request = MergeRequestQuery.find(merge_request_id)
     repository = RepositoryQuery.find(repository_id)
-    RepositoryPolicy.show?(repository, current_user, context)
+    RepositoryPolicy.show_not_found?(repository, current_user, context)
     SaveMergeRequest.update(merge_request, params) do |operation, merge_request|
       if operation.saved?
         flash.success = "The record has been updated"

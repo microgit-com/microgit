@@ -1,7 +1,7 @@
 class UserInvitations::Create < BrowserAction
   post "/teams/:team_id/user_invitations" do
     team = TeamQuery.find(team_id)
-    TeamPolicy.invite?(team, current_user, context)
+    TeamPolicy.invite_forbidden?(team, current_user, context)
     InviteUser.create(params, inviter_id: current_user.id, team_id: team.id) do |op, user_invitation|
       if user_invitation
         flash.success = "Yay!"

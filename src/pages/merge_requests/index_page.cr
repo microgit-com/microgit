@@ -1,7 +1,8 @@
-class Repositories::MergeRequests::IndexPage < MainLayout
+class Repositories::MergeRequests::IndexPage < ShowLayout
   needs merge_requests : MergeRequestQuery
   needs repository : Repository
   needs namespace : Namespace
+  needs current_user : User | Nil
   quick_def page_title, "Merge Requests"
   quick_def single_page, "Merge Requests"
 

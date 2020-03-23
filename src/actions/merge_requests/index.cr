@@ -1,4 +1,5 @@
 class Repositories::MergeRequests::Index < BrowserAction
+  include Auth::AllowGuests
   include RepositoryHelper
   get "/:namespace_slug/:repository_slug/merge_requests" do
     repository = check_access

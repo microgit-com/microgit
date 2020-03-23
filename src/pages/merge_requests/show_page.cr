@@ -1,10 +1,11 @@
-class Repositories::MergeRequests::ShowPage < MainLayout
+class Repositories::MergeRequests::ShowPage < ShowLayout
   needs merge_request : MergeRequest
   needs repository : Repository
   needs namespace : Namespace
   needs comments : ActivityForItemsQuery
   needs operation : SaveActivityForItems
   needs diff : Git::Diff
+  needs current_user : User | Nil
   needs ahead : Int32
   needs behind : Int32
   quick_def page_title, @merge_request.name.to_s

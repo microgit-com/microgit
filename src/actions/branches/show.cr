@@ -1,4 +1,5 @@
 class Repositories::Branches::Show < BrowserAction
+  include Auth::AllowGuests
   include RepositoryHelper
 
   get "/:namespace_slug/:repository_slug/branches/:branch_name" do

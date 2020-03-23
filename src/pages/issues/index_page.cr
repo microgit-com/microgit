@@ -1,5 +1,6 @@
-class Repositories::Issues::IndexPage < MainLayout
+class Repositories::Issues::IndexPage < ShowLayout
   needs issues : IssueQuery
+  needs current_user : User | Nil
   needs repository : Repository
   needs namespace : Namespace
   quick_def page_title, "Issues"

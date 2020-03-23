@@ -1,8 +1,11 @@
 class Repositories::Issues::Delete < BrowserAction
-  nested_route do
-    repository = RepositoryQuery.find(repository_id)
-    RepositoryPolicy.show?(repository, current_user, context)
-    IssueQuery.find(issue_id).delete
+  include ::RepositoryHelper
+
+  delete "/:namespace_slug/:repository_slug/issues/:issue_id" do
+    repository = check_access
+    issue = IssueQuery.find(issue_id)
+    IssuePolicy.delete_forbidden?(issue, current_user, context)
+    issue.delete
     flash.success = "Deleted the record"
     redirect Index.with(repository.namespace_slug, repository.slug)
   end

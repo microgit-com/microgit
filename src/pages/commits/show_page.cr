@@ -1,6 +1,7 @@
-class Commits::ShowPage < MainLayout
+class Commits::ShowPage < ShowLayout
   needs repository : Repository
   needs repo : MicrogitGit
+  needs current_user : User | Nil
   needs commit : Git::Commit
   needs diff : Git::Diff
   include DiffHelper

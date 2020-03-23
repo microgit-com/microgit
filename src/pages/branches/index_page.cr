@@ -1,7 +1,8 @@
-class Repositories::Branches::IndexPage < MainLayout
+class Repositories::Branches::IndexPage < ShowLayout
   needs repo : MicrogitGit
   needs repository : Repository
   needs namespace : Namespace
+  needs current_user : User | Nil
   needs branches : Array(String)
   quick_def page_title, "Branches"
   quick_def single_page, "Branches"

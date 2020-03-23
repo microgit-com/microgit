@@ -1,4 +1,5 @@
 class Commits::Show < BrowserAction
+  include Auth::AllowGuests
   include RepositoryHelper
 
   get "/:namespace_slug/:repository_slug/commits/:branch_name/:sha" do
