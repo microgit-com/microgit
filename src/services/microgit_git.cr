@@ -168,7 +168,7 @@ class MicrogitGit
   end
 
   private def caching(key, &block)
-    redis = Redis::PooledClient.new
+    redis = Redis::PooledClient.new(pool_size: 5)
     cached = redis.get("#{@repo.cache_key}/#{key}")
     return cached unless cached.nil?
     data = yield
