@@ -1,7 +1,7 @@
 class Issue < BaseModel
-  enum Status
-    Open
-    Close
+  avram_enum Status do
+    Opened
+    Closed
   end
 
   table do
@@ -10,6 +10,6 @@ class Issue < BaseModel
     belongs_to repository : Repository
     belongs_to author : User
     belongs_to assignee : User?
-    column status : Int32
+    column status : Issue::AvramStatus
   end
 end

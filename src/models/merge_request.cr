@@ -1,15 +1,15 @@
 class MergeRequest < BaseModel
-  enum Status : Int32
-    Open
-    Close
-    Merged
+  avram_enum(Status) do
+    Open = 0
+    Closed = 1
+    Merged = 2
   end
 
   table do
     column name : LuckyEncrypted::StringEncrypted
     column description : String
     column branch : String
-    column status : Int32
+    column status : MergeRequest::AvramStatus
     belongs_to repository : Repository
     belongs_to author : User
   end

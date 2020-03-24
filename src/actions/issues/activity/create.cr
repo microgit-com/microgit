@@ -4,7 +4,7 @@ class Repositories::Issues::Activities::Create < BrowserAction
     repository = check_access
     namespace = get_namespace
     issue = IssueQuery.new.preload_author.find(issue_id)
-    SaveActivityForItems.create(params, issue_id: issue.id, user_id: current_user.id, type: 0) do |operation, comment|
+    SaveActivityForItems.create(params, issue_id: issue.id, user_id: current_user.id, type: ActivityForItems::AvramType.new(:comment)) do |operation, comment|
       if comment
         flash.success = "The record has been saved"
         redirect Issues::Show.with(repository.namespace_slug, repository.slug, issue.id)

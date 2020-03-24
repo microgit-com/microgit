@@ -12,7 +12,7 @@ class Repositories::MergeRequests::Merge < BrowserAction
 
     repo.merge_branch(merge_request, current_user)
 
-    SaveMergeRequest.update(merge_request, status: MergeRequest::Status::Merged.value) do |operation, merge_request|
+    SaveMergeRequest.update(merge_request, status: MergeRequest::AvramStatus.new(:merged)) do |operation, merge_request|
      if operation.saved?
        flash.success = "The record has been updated"
        redirect Show.with(repository.namespace_slug, repository.slug, merge_request.id)

@@ -6,6 +6,7 @@ Lucky::AssetHelpers.load_manifest
 require "./render_template"
 require "./app_database"
 require "./models/base_model"
+require "./initializers/**"
 require "./models/mixins/**"
 require "./models/**"
 require "./queries/mixins/**"

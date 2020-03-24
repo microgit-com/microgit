@@ -4,7 +4,7 @@ class Repositories::MergeRequests::Activities::Create < BrowserAction
     repository = check_access
     namespace = get_namespace
     merge_request = MergeRequestQuery.find(merge_request_id)
-    SaveActivityForItems.create(params, merge_request_id: merge_request.id, user_id: current_user.id, type: 0) do |operation, comment|
+    SaveActivityForItems.create(params, merge_request_id: merge_request.id, user_id: current_user.id, type: ActivityForItems::AvramType.new(:comment)) do |operation, comment|
       if comment
         flash.success = "The record has been saved"
         redirect MergeRequests::Show.with(repository.namespace_slug, repository.slug, merge_request.id)

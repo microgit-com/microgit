@@ -3,7 +3,11 @@ class Repositories::Show < BrowserAction
   include RepositoryHelper
 
   get "/:namespace_slug/:repository_slug" do
-    if namespace_slug == "" || repository_slug == ""
+
+    if namespace_slug.empty? || repository_slug.empty?
+      raise Lucky::RouteNotFoundError.new(context)
+    end
+    if ["css", "js"].includes?(namespace_slug)
       raise Lucky::RouteNotFoundError.new(context)
     end
     repository = check_access
