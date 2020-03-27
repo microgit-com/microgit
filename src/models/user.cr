@@ -7,7 +7,7 @@ class User < BaseModel
     column username : String
     column encrypted_password : String
     has_one namespace : Namespace
-    has_many apit_tokens : ApiToken
+    has_many api_tokens : ApiToken
     has_many team_members : TeamMembers
     has_many teams : Team, through: :team_members
   end
