@@ -1,4 +1,4 @@
-class RepositoryPolicy < BasePolicy
+class RepositoryPolicy < LuckyCan::BasePolicy
 
   can(show, repository, current_user) do
     return false if current_user.nil? && repository.privated

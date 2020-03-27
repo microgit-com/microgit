@@ -1,4 +1,4 @@
-class TeamPolicy < BasePolicy
+class TeamPolicy < LuckyCan::BasePolicy
 
   can show, team, current_user do
     true

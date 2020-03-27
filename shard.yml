@@ -44,3 +44,5 @@ dependencies:
   redis:
     github: stefanwille/crystal-redis
     version: ~> 2.5.3
+  lucky_can:
+    github: confact/lucky_can

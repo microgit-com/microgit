@@ -1,4 +1,4 @@
-class MergeRequestPolicy < BasePolicy
+class MergeRequestPolicy < LuckyCan::BasePolicy
 
   can create, current_user do
     !current_user.nil?
