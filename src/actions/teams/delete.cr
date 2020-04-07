@@ -1,6 +1,8 @@
 class Teams::Delete < BrowserAction
   route do
-    TeamQuery.find(team_id).delete
+    team = TeamQuery.find(team_id)
+    TeamPolicy.delete_forbidden?(team, current_user, context)
+    team.delete
     flash.success = "Deleted the record"
     redirect Index
   end

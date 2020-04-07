@@ -10,7 +10,7 @@ class SaveTeam < Team::SaveOperation
 
   def save_team_member(created_team : Team)
     unless created_by.nil?
-      SaveTeamMembers.create!(user_id: created_by.not_nil!.id, team_id: created_team.id)
+      SaveTeamMembers.create!(user_id: created_by.not_nil!.id, team_id: created_team.id, role: TeamMembers::AvramRole.new(:admin))
     end
   end
 end

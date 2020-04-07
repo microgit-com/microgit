@@ -6,6 +6,8 @@ class Namespaces::Members < BrowserAction
     item = namespace.item
     raise Lucky::RouteNotFoundError.new(context) unless item.is_a?(Team)
 
-    html MembersPage, team: item, members: item.users!
+    TeamPolicy.see_members_forbidden?(item, current_user, context)
+
+    html MembersPage, team: item, members: item.team_members!
   end
 end

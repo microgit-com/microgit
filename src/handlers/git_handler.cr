@@ -2,25 +2,23 @@ class HTTP::GitHandler
   include HTTP::Handler
 
   def call(context)
-    if /[-\/\w\.]+\.git/.match(context.request.path)
-      namespace, repo = get_repo(context.request.path)
-      if namespace.nil? || repo.nil?
-        context.response.status = HTTP::Status.new(404)
-        context.response.puts "Not Found"
-        context.response.close
-        return
-      end
+    return call_next(context) unless /[-\/\w\.]+\.git/.match(context.request.path)
 
-      user = get_user(context)
-      return forbidden_render(context) unless RepositoryPolicy.repo_member?(repo, user, context.request.method)
-
-      context.request.headers.delete("Authorization")
-      git = GitServer.new(context)
-      clear_cache(repo) if context.request.method == "POST"
-      return git.call
-    else
-      call_next(context)
+    namespace, repo = get_repo(context.request.path)
+    if namespace.nil? || repo.nil?
+      context.response.status = HTTP::Status.new(404)
+      context.response.puts "Not Found"
+      context.response.close
+      return
     end
+
+    user = get_user(context)
+    return forbidden_render(context) unless RepositoryPolicy.repo_member?(repo, user, context.request.method)
+
+    context.request.headers.delete("Authorization")
+    git = GitServer.new(context)
+    clear_cache(repo) if context.request.method == "POST"
+    return git.call
   end
 
   private def get_repo(path) : Tuple(Nil | Namespace | Repository, Nil | Namespace | Repository)

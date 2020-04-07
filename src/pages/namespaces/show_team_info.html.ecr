@@ -1,3 +1,6 @@
 <h1 class="text-3xl font-bold leading-tight text-gray-900"><%=@team.name.to_s%></h1>
 <p class="text-sm"><%=@team.description%></p>
-<% link "Edit", Teams::Edit.with(@team.id) %> | <% link "Members", Namespaces::Members.with(@team.slug) %>
+<% link "Edit", Teams::Edit.with(@team.id) %>
+<% if TeamPolicy.see_members?(@team, @current_user) %>
+ | <% link "Members", Namespaces::Members.with(@team.slug) %>
+<% end %>

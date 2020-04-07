@@ -5,12 +5,14 @@
         <thead>
           <tr>
             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Name</th>
+            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Delete?</th>
           </tr>
         </thead>
         <tbody>
           <% @teams.each do |team| %>
             <tr>
               <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-900"><% link team.name, Namespaces::Show.with(team.slug) %></td>
+              <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-900"><% if TeamPolicy.delete?(team, @current_user) %><% link "Delete", Teams::Delete.with(team), data_confirm: "Are you sure you want to delete token?" %> <% else %>Delete<% end %></td>
             </tr>
           <% end %>
         </tbody>
