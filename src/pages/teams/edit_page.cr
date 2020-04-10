@@ -1,5 +1,5 @@
 class Teams::EditPage < MainLayout
-  needs operation : SaveTeam
+  needs operation : UpdateTeam
   needs team : Team
   quick_def page_title, "Edit"
 

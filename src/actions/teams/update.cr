@@ -2,7 +2,7 @@ class Teams::Update < BrowserAction
   route do
     team = TeamQuery.find(team_id)
     TeamPolicy.update_forbidden?(team, current_user, context)
-    SaveTeam.update(team, params) do |operation, team|
+    UpdateTeam.update(team, params) do |operation, team|
       if operation.saved?
         flash.success = "The record has been updated"
         redirect Namespaces::Show.with(team.slug)

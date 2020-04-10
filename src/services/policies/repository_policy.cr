@@ -13,6 +13,16 @@ class RepositoryPolicy < LuckyCan::BasePolicy
     end
   end
 
+  can delete, repository, current_user do
+    return false if current_user.nil?
+
+    if repository.team
+      repository.team.not_nil!.users!.map(&.id).includes?(current_user.not_nil!.id) && repository.team.not_nil!.team_members!.find { |m| m.user_id == current_user.not_nil!.id }.not_nil!.role.value == TeamMembers::Role::Admin
+    else
+      repository.user.not_nil!.id == current_user.not_nil!.id
+    end
+  end
+
   can update, repository, current_user do
     return false if current_user.nil?
 

@@ -7,6 +7,8 @@
           <tr>
             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider bg-white">Name</th>
             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider bg-white">Description</th>
+            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider bg-white">Actions</th>
+
           </tr>
         </thead>
         <tbody>
@@ -14,7 +16,7 @@
             <tr>
               <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-900"><% link repository.name, ::Repositories::Show.with(repository.namespace_slug, repository.slug) %></td>
               <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-900"><%= repository.description %></td>
-              <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-900">Destroy</td>
+              <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-900"><% if RepositoryPolicy.delete?(repository, @current_user) %><% link "Delete", Repositories::Delete.with(repository), data_confirm: "Are you sure you want to delete repository?" %><% end %></td>
             </tr>
           <% end %>
         </tbody>

@@ -1,5 +1,5 @@
 class Teams::NewPage < MainLayout
-  needs operation : SaveTeam
+  needs operation : CreateTeam
   quick_def page_title, "New"
 
   def content

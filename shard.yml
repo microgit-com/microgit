@@ -8,15 +8,15 @@ targets:
   microgit:
     main: src/microgit.cr
 
-crystal: 0.33
+crystal: 0.34.0
 
 dependencies:
   lucky:
     github: luckyframework/lucky
-    version: ~> 0.19
+    version: ~> 0.20
   authentic:
     github: luckyframework/authentic
-    version: ~> 0.5.1
+    version: ~> 0.5.2
   carbon:
     github: luckyframework/carbon
     version: ~> 0.1.1
@@ -43,6 +43,6 @@ dependencies:
     github: microgit-com/git_diff_parser
   redis:
     github: stefanwille/crystal-redis
-    version: ~> 2.5.3
+    version: ~> 2.6
   lucky_can:
     github: confact/lucky_can

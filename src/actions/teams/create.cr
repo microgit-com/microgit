@@ -1,6 +1,6 @@
 class Teams::Create < BrowserAction
   route do
-    SaveTeam.create(params, created_by: current_user) do |operation, team|
+    CreateTeam.create(params, created_by: current_user) do |operation, team|
       if team
         flash.success = "The record has been saved"
         redirect Namespaces::Show.with(team.slug)

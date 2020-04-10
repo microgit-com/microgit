@@ -1,7 +1,10 @@
-require "logger"
+require "log"
 require "file_utils"
 
+Log.setup_from_env
+
 class GitServer
+  Log = ::Log.for(self)
   @contexted : HTTP::Server::Context
   @reqfile : String | Nil
   @rpc : String | Nil
@@ -36,8 +39,7 @@ class GitServer
 
     @dir = get_git_dir(path)
     if @dir.empty?
-      logger = Logger.new(STDOUT)
-      logger.info "GIT response - 404 - dir not exist - #{@dir}"
+      Log.info { "GIT response - 404 - dir not exist - #{@dir}" }
     end
 
     render_not_found unless @dir
@@ -59,8 +61,7 @@ class GitServer
 
     @contexted.response.status = HTTP::Status.new(200)
     @contexted.response.content_type = "application/x-git-%s-result" % @rpc
-    logger = Logger.new(STDOUT)
-    logger.info "GIT response - 200"
+    Log.info { "GIT response - 200" }
     command = git_command("#{@rpc} --stateless-rpc #{@dir}")
     Process.run(command, shell: true, input: (@contexted.request.body || IO::Memory.new), output: @contexted.response)
     @contexted.response.close
@@ -223,8 +224,7 @@ class GitServer
   # --------------------------------------
 
   def render_method_not_allowed
-    logger = Logger.new(STDOUT)
-    logger.info "GIT response - not allowed"
+    Log.info { "GIT response - not allowed" }
     if @contexted.request.version == "HTTP/1.1"
       @contexted.response.respond_with_status(HTTP::Status.new(405), "Method Not Allowed")
     else
@@ -233,8 +233,7 @@ class GitServer
   end
 
   def render_not_found
-    logger = Logger.new(STDOUT)
-    logger.info "GIT response - 404"
+    Log.info { "GIT response - 404" }
     @contexted.response.respond_with_status(HTTP::Status.new(404), "Not Found")
   end
 

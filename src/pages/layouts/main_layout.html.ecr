@@ -102,7 +102,7 @@
     </header>
     <main>
       <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <% Shared::FlashMessages.new(@context.flash) %>
+        <% mount Shared::FlashMessages.new(@context.flash) %>
         <% content %>
       </div>
     </main>
