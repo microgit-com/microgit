@@ -11,7 +11,7 @@ class Repositories::EditPage < MainLayout
   end
 
   def render_repository_form(op)
-    form_for Repositories::Update.with(@repository.id) do
+    form_for Repositories::Update.with(@repository.namespace_slug, @repository.slug) do
       mount Shared::Field.new(op.name), &.text_input(autofocus: "true", append_class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-2")
       mount Shared::Field.new(op.description), &.textarea(append_class: "form-textarea mt-1 block w-full shadow appearance-none")
       mount Shared::Field.new(op.privated), &.checkbox(append_class: "form-checkbox block clear-both my-2")

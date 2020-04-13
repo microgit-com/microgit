@@ -1,7 +1,6 @@
-class Repositories::MergeRequests::Create < BrowserAction
-  include RepositoryHelper
-  post "/:namespace_slug/:repository_slug/merge_requests/new" do
-    repository = check_access
+class Repositories::MergeRequests::Create < RepositoryAction
+  post "/:namespace_slug/:repository_slug/merge_requests" do
+    repository = get_repository
     namespace = get_namespace
     SaveMergeRequest.create(params, repository_id: repository.id, author_id: current_user.id, status: MergeRequest::AvramStatus.new(:open)) do |operation, merge_request|
       if merge_request

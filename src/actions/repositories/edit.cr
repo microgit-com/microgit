@@ -1,7 +1,6 @@
-class Repositories::Edit < BrowserAction
-  include RepositoryHelper
+class Repositories::Edit < RepositoryAction
   get "/:namespace_slug/:repository_slug/edit" do
-    repository = check_access
+    repository = get_repository
     html EditPage,
       operation: SaveRepository.new(repository),
       repository: repository

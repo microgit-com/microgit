@@ -1,7 +1,6 @@
-class Repositories::Issues::Activities::Create < BrowserAction
-  include RepositoryHelper
+class Repositories::Issues::Activities::Create < RepositoryAction
   post "/:namespace_slug/:repository_slug/issues/:issue_id/comment" do
-    repository = check_access
+    repository = get_repository
     namespace = get_namespace
     issue = IssueQuery.new.preload_author.find(issue_id)
     SaveActivityForItems.create(params, issue_id: issue.id, user_id: current_user.id, type: ActivityForItems::AvramType.new(:comment)) do |operation, comment|

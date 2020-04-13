@@ -1,7 +1,7 @@
-class Repositories::MergeRequests::Activities::Create < BrowserAction
-  include RepositoryHelper
+class Repositories::MergeRequests::Activities::Create < RepositoryAction
+
   post "/:namespace_slug/:repository_slug/merge_requests/:merge_request_id/comment" do
-    repository = check_access
+    repository = get_repository
     namespace = get_namespace
     merge_request = MergeRequestQuery.find(merge_request_id)
     SaveActivityForItems.create(params, merge_request_id: merge_request.id, user_id: current_user.id, type: ActivityForItems::AvramType.new(:comment)) do |operation, comment|

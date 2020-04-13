@@ -1,9 +1,8 @@
-class Repositories::MergeRequests::Show < BrowserAction
+class Repositories::MergeRequests::Show < RepositoryAction
   include Auth::AllowGuests
-  include RepositoryHelper
   get "/:namespace_slug/:repository_slug/merge_requests/:merge_request_id" do
     merge_request = MergeRequestQuery.new.preload_author.find(merge_request_id)
-    repository = check_access
+    repository = get_repository
     namespace = get_namespace
 
     begin

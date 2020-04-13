@@ -1,8 +1,7 @@
-class Repositories::Issues::Delete < BrowserAction
-  include ::RepositoryHelper
+class Repositories::Issues::Delete < RepositoryAction
 
   delete "/:namespace_slug/:repository_slug/issues/:issue_id" do
-    repository = check_access
+    repository = get_repository
     issue = IssueQuery.find(issue_id)
     IssuePolicy.delete_forbidden?(issue, current_user, context)
     issue.delete

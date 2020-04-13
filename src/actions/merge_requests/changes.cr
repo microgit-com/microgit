@@ -1,9 +1,10 @@
-class Repositories::MergeRequests::Changes < BrowserAction
+class Repositories::MergeRequests::Changes < RepositoryAction
   include RepositoryHelper
   get "/:namespace_slug/:repository_slug/merge_requests/:merge_request_id/changes" do
     merge_request = MergeRequestQuery.new.preload_author.find(merge_request_id)
-    repository = check_access
+    repository = get_repository
     namespace = get_namespace
+    
     begin
       repo = MicrogitGit.new(repository)
     rescue Exception

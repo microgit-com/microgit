@@ -1,16 +1,9 @@
-class Repositories::Show < BrowserAction
+class Repositories::Show < RepositoryAction
   include Auth::AllowGuests
-  include RepositoryHelper
 
   get "/:namespace_slug/:repository_slug" do
-
-    if namespace_slug.empty? || repository_slug.empty?
-      raise Lucky::RouteNotFoundError.new(context)
-    end
-    if ["css", "js"].includes?(namespace_slug)
-      raise Lucky::RouteNotFoundError.new(context)
-    end
-    repository = check_access
+    
+    repository = get_repository
     begin
       repo = MicrogitGit.new(repository)
     rescue Exception

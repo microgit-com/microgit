@@ -1,6 +1,6 @@
-class Repositories::Delete < BrowserAction
-  route do
-    repo = RepositoryQuery.find(repository_id)
+class Repositories::Delete < RepositoryAction
+  delete "/:namespace_slug/:repository_slug" do
+    repo = get_repository
     repo.remove_data
     repo.delete
     flash.success = "Deleted the record"

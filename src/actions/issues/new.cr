@@ -1,5 +1,4 @@
-class Repositories::Issues::New < BrowserAction
-  include RepositoryHelper
+class Repositories::Issues::New < RepositoryAction
 
   get "/:namespace_slug/:repository_slug/issues/new" do
     repository = check_access

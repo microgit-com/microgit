@@ -1,7 +1,8 @@
 class RepositoryPolicy < LuckyCan::BasePolicy
 
   can(show, repository, current_user) do
-    return false if current_user.nil? && repository.privated
+    return false if repository.nil?
+    return false if current_user.nil? && repository.not_nil!.privated
     if repository.team && !current_user.nil?
       repository.team.not_nil!.users!.map(&.id).includes?(current_user.not_nil!.id) || !repository.privated
     elsif repository.user && !current_user.nil?
