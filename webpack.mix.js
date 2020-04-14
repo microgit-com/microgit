@@ -47,6 +47,16 @@ mix
       ignored: /node_modules/
     }
   })
+  .babelConfig({
+    plugins: [
+      ["prismjs", {
+        "languages": ["javascript", "css", "markup", "crystal", "php", "python"],
+        "plugins": ["line-numbers"],
+        "theme": "twilight",
+        "css": false
+      }]
+    ]
+   })
   // Disable default Mix notifications because we're using our own notifier
   .disableNotifications()
 

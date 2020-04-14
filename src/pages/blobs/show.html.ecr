@@ -3,8 +3,8 @@
     <div class="w-full p-3 bg-gray-800 text-white border-b rounded-t border-gray-400">
       <%= @file.try { |r| r.name }%>
     </div>
-    <div class="w-full bg-white rounded-b">
-      <pre class="rounded-b"><code class="p-3 rounded-b language-<%=file_name.downcase%>"><%=@file_content %></code></pre>
+    <div class="w-full rounded-b">
+      <pre style="white-space: pre-wrap;"><code class="line-numbers language-<%=file_name.downcase%>"><%=@file_content %></code></pre>
     </div>
   </div>
 </div>

@@ -1237,6 +1237,11 @@ babel-plugin-dynamic-import-node@^2.3.0:
   dependencies:
     object.assign "^4.1.0"
 
+babel-plugin-prismjs@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/babel-plugin-prismjs/-/babel-plugin-prismjs-2.0.1.tgz#b56095f423926662259de8f5ee50a7afbcf0fd92"
+  integrity sha512-GqQGa3xX3Z2ft97oDbGvEFoxD8nKqb3ZVszrOc5H7icnEUA56BIjVYm86hfZZA82uuHLwTIfCXbEKzKG1BzKzg==
+
 backo2@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/backo2/-/backo2-1.0.2.tgz#31ab1ac8b129363463e35b3ebb69f4dfcfba7947"
