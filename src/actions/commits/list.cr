@@ -1,18 +1,15 @@
-class Commits::List < BrowserAction
+class Commits::List < RepositoryAction
   include Auth::AllowGuests
-  include RepositoryHelper
 
   get "/:namespace_slug/:repository_slug/commits/:ref" do
-    repository = check_access
-    namespace = get_namespace
     begin
-      repo = MicrogitGit.new(repository)
+      repo = MicrogitGit.new(@repository.not_nil!)
     rescue Exception
       raise Lucky::RouteNotFoundError.new(context)
     end
 
     target = Git::Branch.lookup(repo.raw, ref)
 
-    html IndexPage, repo: repo, target: target.target_id, ref: ref, repository: repository, namespace: namespace
+    html IndexPage, repo: repo, target: target.target_id, ref: ref, repository: @repository.not_nil!, namespace: @namespace.not_nil!
   end
 end

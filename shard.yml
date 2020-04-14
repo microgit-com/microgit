@@ -41,6 +41,8 @@ dependencies:
     github: microgit-com/lucky_encrypted
   git_diff_parser:
     github: microgit-com/git_diff_parser
+  linguist:
+    github: microgit-com/linguist.cr
   redis:
     github: stefanwille/crystal-redis
     version: ~> 2.6

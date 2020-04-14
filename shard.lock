@@ -1,16 +1,28 @@
 version: 1.0
 shards:
+  apatite:
+    github: watzon/apatite
+    commit: 420573592abf82fa139f6878491fa64f51fee55c
+
   authentic:
     github: luckyframework/authentic
     version: 0.5.4
 
   avram:
     github: luckyframework/avram
-    version: 0.13.0
+    version: 0.13.1
 
   blank:
     github: kostya/blank
     version: 0.1.0
+
+  cadmium_classifier:
+    github: cadmiumcr/classifier
+    commit: 22609f050564fb90595bdbdfdf4007e67861c5c4
+
+  cadmium_tokenizer:
+    github: cadmiumcr/tokenizer
+    commit: e7f8733e4d8ead9a811b6f41d0b5fa621ba03033
 
   carbon:
     github: luckyframework/carbon
@@ -22,7 +34,7 @@ shards:
 
   db:
     github: crystal-lang/crystal-db
-    version: 0.8.0
+    version: 0.9.0
 
   dexter:
     github: luckyframework/dexter
@@ -55,6 +67,10 @@ shards:
   kilt:
     github: jeromegn/kilt
     version: 0.6.0
+
+  linguist:
+    github: microgit-com/linguist.cr
+    commit: 01f81cc1fd32ad6b6d9ed6d1f218cd5dcabde64d
 
   lucky:
     github: luckyframework/lucky
@@ -90,7 +106,7 @@ shards:
 
   pg:
     github: will/crystal-pg
-    version: 0.20.0
+    version: 0.21.0
 
   pool:
     github: ysbaddaden/pool

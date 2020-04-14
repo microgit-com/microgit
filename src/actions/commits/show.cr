@@ -1,11 +1,9 @@
-class Commits::Show < BrowserAction
+class Commits::Show < RepositoryAction
   include Auth::AllowGuests
-  include RepositoryHelper
 
   get "/:namespace_slug/:repository_slug/commits/:branch_name/:sha" do
-    repository = check_access
     begin
-      repo = MicrogitGit.new(repository)
+      repo = MicrogitGit.new(@repository.not_nil!)
     rescue Exception
       raise Lucky::RouteNotFoundError.new(context)
     end
@@ -20,6 +18,6 @@ class Commits::Show < BrowserAction
 
 
 
-    html ShowPage, repo: repo, commit: commit, repository: repository, diff: diff
+    html ShowPage, repo: repo, commit: commit, repository: @repository.not_nil!, diff: diff
   end
 end

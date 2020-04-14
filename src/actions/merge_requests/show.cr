@@ -2,11 +2,9 @@ class Repositories::MergeRequests::Show < RepositoryAction
   include Auth::AllowGuests
   get "/:namespace_slug/:repository_slug/merge_requests/:merge_request_id" do
     merge_request = MergeRequestQuery.new.preload_author.find(merge_request_id)
-    repository = get_repository
-    namespace = get_namespace
 
     begin
-      repo = MicrogitGit.new(repository)
+      repo = MicrogitGit.new(@repository.not_nil!)
     rescue Exception
       raise Lucky::RouteNotFoundError.new(context)
     end
@@ -18,6 +16,6 @@ class Repositories::MergeRequests::Show < RepositoryAction
     ahead, behind = repo.ahead_behind_branch(target)
 
     comments = ActivityForItemsQuery.new.preload_user.merge_request_id(merge_request_id)
-    html ShowPage, operation: SaveActivityForItems.new, merge_request: merge_request, diff: diff, ahead: ahead, behind: behind, repository: repository, namespace: namespace, comments: comments
+    html ShowPage, operation: SaveActivityForItems.new, merge_request: merge_request, diff: diff, ahead: ahead, behind: behind, repository: @repository.not_nil!, namespace: @namespace.not_nil!, comments: comments
   end
 end

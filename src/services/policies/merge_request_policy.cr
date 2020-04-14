@@ -7,10 +7,9 @@ class MergeRequestPolicy < LuckyCan::BasePolicy
   can update, merge_request, current_user do
     return false if merge_request.nil? || merge_request.repository.nil?
     return false if current_user.nil?
+    return true if merge_request.author.id == current_user.id
 
     repo = merge_request.repository
-
-    return true if merge_request.author.id == current_user.id
 
     if repo.team
       repo.team.not_nil!.users!.map(&.id).includes?(current_user.not_nil!.id)
@@ -22,15 +21,14 @@ class MergeRequestPolicy < LuckyCan::BasePolicy
   can delete, merge_request, current_user do
     return false if merge_request.nil? || merge_request.repository.nil?
     return false if current_user.nil?
+    return true if merge_request.author.id == current_user.id
 
     repo = merge_request.repository
-
-    return true if merge_request.author.id == current_user.id
 
     if repo.team
       repo.team.not_nil!.users!.map(&.id).includes?(current_user.not_nil!.id)
     else
-      repo.user.id == current_user.not_nil!.id
+      repo.user.not_nil!.id == current_user.not_nil!.id
     end
   end
 end

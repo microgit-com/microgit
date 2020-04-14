@@ -8,7 +8,8 @@ class Namespaces::Show < BrowserAction
     rescue Avram::RecordNotFoundError
       raise Lucky::RouteNotFoundError.new(context)
     end
-    item = namespace.item
+    raise Lucky::RouteNotFoundError.new(context) if namespace.nil?
+    item = namespace.not_nil!.item
     if item.is_a?(User)
       repos = if !current_user.nil? && UserPolicy.list_private_repos?(item, current_user)
         RepositoryQuery.new.preload_user.preload_team.user_id(item.id)

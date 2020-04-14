@@ -1,8 +1,6 @@
 class Repositories::MergeRequests::New < RepositoryAction
 
   get "/:namespace_slug/:repository_slug/merge_requests/new" do
-    repository = get_repository
-    namespace = get_namespace
-    html NewPage, operation: SaveMergeRequest.new, repository: repository, namespace: namespace
+    html NewPage, operation: SaveMergeRequest.new, repository: @repository.not_nil!, namespace: @namespace.not_nil!
   end
 end

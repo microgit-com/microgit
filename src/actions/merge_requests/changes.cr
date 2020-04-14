@@ -2,11 +2,9 @@ class Repositories::MergeRequests::Changes < RepositoryAction
   include RepositoryHelper
   get "/:namespace_slug/:repository_slug/merge_requests/:merge_request_id/changes" do
     merge_request = MergeRequestQuery.new.preload_author.find(merge_request_id)
-    repository = get_repository
-    namespace = get_namespace
-    
+
     begin
-      repo = MicrogitGit.new(repository)
+      repo = MicrogitGit.new(@repository.not_nil!)
     rescue Exception
       raise Lucky::RouteNotFoundError.new(context)
     end
@@ -17,6 +15,6 @@ class Repositories::MergeRequests::Changes < RepositoryAction
 
     ahead, behind = repo.ahead_behind_branch(target)
 
-    html ChangesPage, repo: repo, diff: diff, behind: behind, ahead: ahead, merge_request: merge_request, repository: repository, namespace: namespace
+    html ChangesPage, repo: repo, diff: diff, behind: behind, ahead: ahead, merge_request: merge_request, repository: @repository.not_nil!, namespace: @namespace.not_nil!
   end
 end

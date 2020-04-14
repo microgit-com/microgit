@@ -1,18 +1,15 @@
-class Repositories::Branches::Index < BrowserAction
+class Repositories::Branches::Index < RepositoryAction
   include Auth::AllowGuests
-  include RepositoryHelper
 
   get "/:namespace_slug/:repository_slug/branches" do
-    repository = check_access
-    namespace = get_namespace
     begin
-      repo = MicrogitGit.new(repository)
+      repo = MicrogitGit.new(@repository.not_nil!)
     rescue Exception
       raise Lucky::RouteNotFoundError.new(context)
     end
 
     branches = repo.raw.branches.each_name.to_a
 
-    html IndexPage, repo: repo, branches: branches, repository: repository, namespace: namespace
+    html IndexPage, repo: repo, branches: branches, repository: @repository.not_nil!, namespace: @namespace.not_nil!
   end
 end

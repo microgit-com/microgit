@@ -1,8 +1,7 @@
 class Repositories::Edit < RepositoryAction
   get "/:namespace_slug/:repository_slug/edit" do
-    repository = get_repository
     html EditPage,
-      operation: SaveRepository.new(repository),
-      repository: repository
+      operation: SaveRepository.new(@repository.not_nil!),
+      repository: @repository.not_nil!
   end
 end

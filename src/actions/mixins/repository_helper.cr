@@ -1,5 +1,6 @@
 module RepositoryHelper
   @repository : Repository?
+  @namespace : Namespace?
   def check_access
     repository = get_repository
     RepositoryPolicy.show_not_found?(repository, current_user, context)
@@ -12,18 +13,25 @@ module RepositoryHelper
     repository
   end
 
-  def get_repository : Repository
-    return @repository.not_nil! unless @repository.nil?
+  def get_repository : Repository | Nil
+    return @repository unless @repository.nil?
     namespace = get_namespace
+    return nil if namespace.nil?
     if namespace.item.is_a?(User)
-      @repository = RepositoryQuery.new.preload_user.preload_team.user_id(namespace.item.id).slug(repository_slug).first
-    else
-      @repository = RepositoryQuery.new.preload_team.preload_user.team_id(namespace.item.id).slug(repository_slug).first
+      @repository = RepositoryQuery.new.preload_user.preload_team.user_id(namespace.not_nil!.item.id).slug(repository_slug).first
+    elsif namespace.item.is_a?(Team)
+      @repository = RepositoryQuery.new.preload_team.preload_user.team_id(namespace.not_nil!.item.id).slug(repository_slug).first
     end
-    return @repository.not_nil!
+    return @repository
+  rescue Avram::RecordNotFoundError
+    return nil
   end
 
-  def get_namespace
-    NamespaceQuery.new.preload_user.preload_team.slug(namespace_slug).first
+  def get_namespace : Namespace | Nil
+    return @namespace unless @namespace.nil?
+    @namespace = NamespaceQuery.new.preload_user.preload_team.slug(namespace_slug).first
+    return @namespace
+  rescue Avram::RecordNotFoundError
+    return nil
   end
 end

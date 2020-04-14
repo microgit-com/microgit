@@ -12,7 +12,7 @@ class Repositories::MergeRequests::EditPage < MainLayout
   end
 
   def render_merge_request_form(op)
-    form_for MergeRequests::Update.with(@repository.id, @merge_request.id) do
+    form_for MergeRequests::Update.with(@repository.namespace_slug, @repository.slug, @merge_request.id) do
       mount Shared::Field.new(op.name), &.text_input(autofocus: "true")
       mount Shared::Field.new(op.description)
 

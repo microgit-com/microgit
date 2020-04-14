@@ -9,7 +9,7 @@ require("turbolinks").start();
 
 require("alpinejs");
 
-require("prismjs");
+require("./components/prism");
 
 // If using Turbolinks, you can attach events to page load like this:
 //

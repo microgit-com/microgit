@@ -1,11 +1,12 @@
-class Repositories::MergeRequests::Edit < BrowserAction
-  nested_route do
+class Repositories::MergeRequests::Edit < RepositoryAction
+  get "/:namespace_slug/:repository_slug/merge_requests/:merge_request_id/edit" do
     merge_request = MergeRequestQuery.find(merge_request_id)
-    repository = RepositoryQuery.find(repository_id)
-    RepositoryPolicy.show_not_found?(repository, current_user, context)
+    
+    MergeRequestPolicy.update_forbidden?(merge_request, current_user, context)
+
     html EditPage,
       operation: SaveMergeRequest.new(merge_request),
       merge_request: merge_request,
-      repository: repository
+      repository: @repository.not_nil!
   end
 end

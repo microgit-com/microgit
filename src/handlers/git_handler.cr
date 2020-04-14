@@ -3,25 +3,22 @@ class HTTP::GitHandler
 
   def call(context)
     return call_next(context) unless /[-\/\w\.]+\.git/.match(context.request.path)
+    Lucky.logger.debug({handled_by: "GitServer"})
 
     namespace, repo = get_repo(context.request.path)
-    if namespace.nil? || repo.nil?
-      context.response.status = HTTP::Status.new(404)
-      context.response.puts "Not Found"
-      context.response.close
-      return
-    end
+    return not_found(context) if namespace.nil? || repo.nil?
 
     user = get_user(context)
     return forbidden_render(context) unless RepositoryPolicy.repo_member?(repo, user, context.request.method)
 
     context.request.headers.delete("Authorization")
+    
     git = GitServer.new(context)
     clear_cache(repo) if context.request.method == "POST"
     return git.call
   end
 
-  private def get_repo(path) : Tuple(Nil | Namespace | Repository, Nil | Namespace | Repository)
+  private def get_repo(path) : Tuple(Nil | Namespace, Nil | Repository)
     namespace, repo, git_type = namespace_repo_from_path(path)
     return nil, nil if namespace.nil? || repo.nil? || namespace.empty? || repo.empty?
     namespace_model = NamespaceQuery.new.preload_user.preload_team.slug(namespace.not_nil!).first
@@ -37,7 +34,7 @@ class HTTP::GitHandler
     return nil, nil
   end
 
-  private def get_user(context)
+  private def get_user(context) : User | Nil
     if context.request.headers.has_key?("Authorization")
       _, enc = context.request.headers["Authorization"].split
       username, password = Base64.decode_string(enc).split(":")
@@ -55,6 +52,13 @@ class HTTP::GitHandler
     repo_name = match.not_nil!["repo"]? || ""
     git_type = match.not_nil!["type"]? || ""
     return namespace, repo_name, git_type
+  end
+
+  private def not_found(context)
+    context.response.status = HTTP::Status.new(404)
+    context.response.puts "Not Found"
+    context.response.close
+    return context
   end
 
   private def forbidden_render(context)

@@ -2,10 +2,8 @@ class Repositories::Show < RepositoryAction
   include Auth::AllowGuests
 
   get "/:namespace_slug/:repository_slug" do
-    
-    repository = get_repository
     begin
-      repo = MicrogitGit.new(repository)
+      repo = MicrogitGit.new(@repository.not_nil!)
     rescue Exception
       raise Lucky::RouteNotFoundError.new(context)
     end
@@ -18,6 +16,6 @@ class Repositories::Show < RepositoryAction
         readme_content = Markd.to_html(readme_content.try { |r| r.content })
       end
     end
-    html ShowPage, repository: repository, repo: repo, tree: repo.tree, branch_name: "master", readme: readme, readme_content: readme_content, namespace_slug: namespace_slug
+    html ShowPage, repository: @repository.not_nil!, repo: repo, tree: repo.tree, branch_name: "master", readme: readme, readme_content: readme_content, namespace_slug: namespace_slug
   end
 end

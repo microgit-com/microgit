@@ -1,11 +1,9 @@
-class Repositories::Branches::Show < BrowserAction
+class Repositories::Branches::Show < RepositoryAction
   include Auth::AllowGuests
-  include RepositoryHelper
 
   get "/:namespace_slug/:repository_slug/branches/:branch_name" do
-    repository = check_access
     begin
-      repo = MicrogitGit.new(repository)
+      repo = MicrogitGit.new(@repository.not_nil!)
     rescue Exception
       raise Lucky::RouteNotFoundError.new(context)
     end
@@ -15,6 +13,6 @@ class Repositories::Branches::Show < BrowserAction
     tree = target_commit.tree
 
 
-    html ShowPage, repo: repo, tree: tree, repository: repository, branch_name: branch_name
+    html ShowPage, repo: repo, tree: tree, repository: @repository.not_nil!, branch_name: branch_name
   end
 end
