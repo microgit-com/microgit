@@ -6,18 +6,15 @@
         <thead>
           <tr>
             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider bg-white">Name</th>
-            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider bg-white">Last commit</th>
           </tr>
         </thead>
 
         <tbody class="bg-white">
           <% @tree.try { |t| t.each do |tree|
-            commit = @repo.last_for_path(@branch_name.nil? ? "master" : @branch_name, tree.name)
-            url = [@repository.namespace_slug, @repository.slug, "blob", @branch_name, tree.name].join("/")
+            url = [@repository.namespace_slug, @repository.slug, "blob", @branch_name, (@path.split("/")+[tree.name]).join("/")].join("/")
             %>
             <tr>
               <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-900"><span class="text-gray-900 fa <%= tree.type == LibGit::OType::TREE ? "fa-folder" : "fa-file"%> mr-2"></span> <% a tree.name, href: "/"+url %></td>
-              <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-900"><a href="/<%=@repository.namespace_slug%>/<%=@repository.slug%>/commits/<%=@branch_name%>/<%= commit.try { |c| c.sha } %>"><%= commit.try { |c| @repo.commit_topic(c.message) } %></a></td>
             </tr>
           <% end } %>
         </tbody>

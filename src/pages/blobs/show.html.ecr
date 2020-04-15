@@ -1,10 +1,10 @@
 <div class="mb-8 mt-8 border-solid border border-gray-400 m-auto rounded">
   <div class="flex flex-wrap">
     <div class="w-full p-3 bg-gray-800 text-white border-b rounded-t border-gray-400">
-      <%= @file.try { |r| r.name }%>
+      <%= @file.try { |r| r.name }%><span class="inline-block float-right"><%=@file_name%></span>
     </div>
     <div class="w-full rounded-b">
-      <pre style="white-space: pre-wrap;"><code class="line-numbers language-<%=file_name.downcase%>"><%=@file_content %></code></pre>
+      <pre class="rounded-b p-3" style="white-space: pre-wrap;"><code class="rounded-b line-numbers language-<%=file_name.downcase%>"><%=@file_content %></code></pre>
     </div>
   </div>
 </div>

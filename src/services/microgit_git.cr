@@ -99,23 +99,34 @@ class MicrogitGit
     return nil if tree.nil?
     return nil if @repo_git.empty?
     tree.try { |t| t.path(file_path) }
+  rescue Git::Error
+    return nil
   end
 
   def find_file_blob(file_path = nil)
-    return nil if @repo_git.empty?
+    return nil if raw.empty?
     entry = find_file(file_path)
     return nil if entry.nil?
-    Git::Blob.lookup(@repo_git, entry.oid)
+    Git::Blob.lookup(raw, entry.oid)
+  rescue Git::Error
+    return nil
   end
 
   def tree(ref = last_commit)
     return nil if ref.nil?
-    return nil if @repo_git.empty?
+    return nil if raw.empty?
     ref.tree
   end
 
+  def tree_by_path(path, branch = "master")
+    return nil if raw.empty?
+    tree_entry = tree(last_commit(branch))
+    return nil if tree_entry.nil?
+    raw.lookup_tree(tree_entry.not_nil!.path(path).oid)
+  end
+
   def log_by_walk(sha, options)
-    walker = @repo_git.walk(sha)
+    walker = raw.walk(sha)
     walker.to_a
   end
 

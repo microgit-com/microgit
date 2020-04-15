@@ -10,14 +10,21 @@ class Repositories::Blobs::Show < RepositoryAction
 
     filename = path.split("/").last
     lang = languages.find_by_extension(filename)
-    filename = lang.first.name
+    filename = lang.size > 0 ? lang.first.name : ""
 
     file = nil
     file_content = nil
+    raise Lucky::RouteNotFoundError.new(context) if repo.raw.empty?
     unless repo.raw.empty?
       file = repo.find_file(path)
-      file_content = repo.find_file_blob(path).try { |r| r.content }
+      raise Lucky::RouteNotFoundError.new(context) if file.nil?
     end
-    html ShowPage, repo: repo, repository: @repository.not_nil!, file: file, file_content: file_content, file_name: filename
+    if file.not_nil!.type != LibGit::OType::TREE
+      file_content = repo.find_file_blob(path).try { |r| r.content }
+      html ShowFilePage, repo: repo, repository: @repository.not_nil!, path: path, file: file, file_content: file_content, file_name: filename
+    else
+      file_list = repo.tree_by_path(path, branch_name)
+      html ShowListPage, repo: repo, repository: @repository.not_nil!, path: path, file: file, file_list: file_list, file_name: filename, branch_name: branch_name
+    end
   end
 end
