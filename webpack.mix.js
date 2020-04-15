@@ -50,7 +50,7 @@ mix
   .babelConfig({
     plugins: [
       ["prismjs", {
-        "languages": ["javascript", "css", "markup", "crystal", "php", "python"],
+        "languages": ["javascript", "css", "markdown", "yaml", "json", "markup", "crystal", "php", "python"],
         "plugins": ["line-numbers"],
         "theme": "twilight",
         "css": false

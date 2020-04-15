@@ -2,7 +2,7 @@ class HTTP::GitHandler
   include HTTP::Handler
 
   def call(context)
-    return call_next(context) unless /[-\/\w\.]+\.git/.match(context.request.path)
+    return call_next(context) unless /[-\/\w\.]+\.git(?!\w)/.match(context.request.path)
     Lucky.logger.debug({handled_by: "GitServer"})
 
     namespace, repo = get_repo(context.request.path)
@@ -12,7 +12,7 @@ class HTTP::GitHandler
     return forbidden_render(context) unless RepositoryPolicy.repo_member?(repo, user, context.request.method)
 
     context.request.headers.delete("Authorization")
-    
+
     git = GitServer.new(context)
     clear_cache(repo) if context.request.method == "POST"
     return git.call
