@@ -24,7 +24,7 @@ class Repositories::Blobs::Show < RepositoryAction
       html ShowFilePage, repo: repo, repository: @repository.not_nil!, path: path, file: file, file_content: file_content, file_name: filename
     else
       file_list = repo.tree_by_path(path, branch_name)
-      html ShowListPage, repo: repo, repository: @repository.not_nil!, path: path, file: file, file_list: file_list, file_name: filename, branch_name: branch_name
+      html ShowListPage, repo: repo, repository: @repository.not_nil!, path: path, file: file, tree: file_list, file_name: filename, branch_name: branch_name
     end
   end
 end
