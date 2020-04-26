@@ -7,7 +7,7 @@ class HTTP::FileGlobHandler
     namespace, repo, branch, path = namespace_repo_from_path(context.request.path)
 
     action = Repositories::Blobs::Show.new(context, {"namespace_slug" => namespace, "repository_slug" => repo, "branch_name" => branch, "path" => path})
-    Lucky.logger.debug({handled_by: action.class.name.to_s})
+    Lucky::Log.dexter.debug { {handled_by: action.class.name.to_s} }
     action.perform_action
   end
 

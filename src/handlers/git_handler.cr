@@ -3,7 +3,7 @@ class HTTP::GitHandler
 
   def call(context)
     return call_next(context) unless /[-\/\w\.]+\.git(?!\w)/.match(context.request.path)
-    Lucky.logger.debug({handled_by: "GitServer"})
+    Lucky::Log.dexter.debug { {handled_by: "GitServer"} }
 
     namespace, repo = get_repo(context.request.path)
     return not_found(context) if namespace.nil? || repo.nil?
