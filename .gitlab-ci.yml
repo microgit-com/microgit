@@ -1,0 +1,14 @@
+image: docker:stable
+
+services:
+  - docker:dind
+
+before_script:
+  - docker info
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+
+build_image:
+  script:
+    - docker build -t registry.gitlab.com/devality2/microgit/microgit.cr/master:latest -t registry.gitlab.com/devality2/microgit/microgit.cr/master:$CI_COMMIT_SHA .
+    - docker push registry.gitlab.com/devality2/microgit/microgit.cr/master:$CI_COMMIT_SHA
+    - docker push registry.gitlab.com/devality2/microgit/microgit.cr/master:latest
