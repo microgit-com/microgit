@@ -2,7 +2,7 @@ version: 1.0
 shards:
   apatite:
     github: watzon/apatite
-    commit: 420573592abf82fa139f6878491fa64f51fee55c
+    commit: 9ed28220eb7136eecc05c70cb16b7a41a6d0e958
 
   authentic:
     github: luckyframework/authentic
@@ -70,11 +70,11 @@ shards:
 
   linguist:
     github: microgit-com/linguist.cr
-    commit: 01f81cc1fd32ad6b6d9ed6d1f218cd5dcabde64d
+    version: 0.2.2
 
   lucky:
     github: luckyframework/lucky
-    version: 0.21.0
+    version: 0.21.1
 
   lucky_can:
     github: confact/lucky_can

@@ -6,11 +6,9 @@ class Repositories::Blobs::Show < RepositoryAction
       raise Lucky::RouteNotFoundError.new(context)
     end
 
-    languages = Linguist::LanguageContainer.new
-
     filename = path.split("/").last
-    lang = languages.find_by_extension(filename)
-    filename = lang.size > 0 ? lang.first.name : ""
+
+    target = Git::Branch.lookup(repo.raw, "master")
 
     file = nil
     file_content = nil
@@ -20,7 +18,17 @@ class Repositories::Blobs::Show < RepositoryAction
       raise Lucky::RouteNotFoundError.new(context) if file.nil?
     end
     if file.not_nil!.type != LibGit::OType::TREE
-      file_content = repo.find_file_blob(path).try { |r| r.content }
+
+      blob = repo.find_file_blob(path)
+      unless blob.nil?
+        ling_repo = Linguist::Repository.new(repo.raw, target.target_id)
+        detector = Linguist::Detector.new(ling_repo)
+        detector.set_blob_git(blob.not_nil!, filename)
+        lang = detector.language
+        filename = !lang.nil? ? lang.name : ""
+      end
+
+      file_content = blob.try { |r| r.content }
       html ShowFilePage, repo: repo, repository: @repository.not_nil!, path: path, file: file, file_content: file_content, file_name: filename
     else
       file_list = repo.tree_by_path(path, branch_name)
