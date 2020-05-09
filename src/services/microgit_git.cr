@@ -1,4 +1,5 @@
 class MicrogitGit
+  include Caching
   def initialize(@repo : Repository)
     @repo_git = Git::Repo.open(@repo.git_path)
   end
@@ -176,14 +177,5 @@ class MicrogitGit
     git_bin = ENV["git_path"]? || "git"
     command = "#{git_bin} #{command}"
     command
-  end
-
-  private def caching(key, &block)
-    redis = Redis::PooledClient.new(pool_size: 5)
-    cached = redis.get("#{@repo.cache_key}/#{key}")
-    return cached unless cached.nil?
-    data = yield
-    redis.set("#{@repo.cache_key}/#{key}", data)
-    return data
   end
 end

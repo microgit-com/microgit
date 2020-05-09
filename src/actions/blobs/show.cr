@@ -8,7 +8,7 @@ class Repositories::Blobs::Show < RepositoryAction
 
     filename = path.split("/").last
 
-    target = Git::Branch.lookup(repo.raw, "master")
+    target = Git::Branch.lookup(repo.raw, branch_name)
 
     file = nil
     file_content = nil
@@ -21,11 +21,9 @@ class Repositories::Blobs::Show < RepositoryAction
 
       blob = repo.find_file_blob(path)
       if !blob.nil?
-        ling_repo = Linguist::Repository.new(repo.raw, target.target_id)
-        detector = Linguist::Detector.new(ling_repo)
-        detector.set_blob_git(blob.not_nil!, filename)
-        lang = detector.language
-        filename = !lang.nil? ? lang.name : ""
+        linguist = LinguistHelper.new(@repository.not_nil!)
+        lang = linguist.get_language_name(path, filename, blob, target)
+        filename = lang
         file_content = if !blob.binary?
           blob.content
         end
