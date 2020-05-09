@@ -4,7 +4,11 @@
       <%= @file.try { |r| r.name }%><span class="inline-block float-right"><%=@file_name%></span>
     </div>
     <div class="w-full rounded-b">
+      <% if @file_content.nil? %>
+        <div class="rounded-b text-center text-big language-none p-2 text-white" style="background-color: #2d2d2d">This file was mostly binary, we don't show binary content.</div>
+      <% else %>
       <pre class="rounded-b p-3" style="white-space: pre-wrap;"><code class="rounded-b line-numbers language-<%=file_name.downcase%>"><%=@file_content %></code></pre>
+      <% end %>
     </div>
   </div>
 </div>

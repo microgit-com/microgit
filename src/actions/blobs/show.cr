@@ -20,15 +20,17 @@ class Repositories::Blobs::Show < RepositoryAction
     if file.not_nil!.type != LibGit::OType::TREE
 
       blob = repo.find_file_blob(path)
-      unless blob.nil?
+      if !blob.nil?
         ling_repo = Linguist::Repository.new(repo.raw, target.target_id)
         detector = Linguist::Detector.new(ling_repo)
         detector.set_blob_git(blob.not_nil!, filename)
         lang = detector.language
         filename = !lang.nil? ? lang.name : ""
+        file_content = if !blob.binary?
+          blob.content
+        end
       end
 
-      file_content = blob.try { |r| r.content }
       html ShowFilePage, repo: repo, repository: @repository.not_nil!, path: path, file: file, file_content: file_content, file_name: filename
     else
       file_list = repo.tree_by_path(path, branch_name)
