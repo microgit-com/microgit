@@ -6,10 +6,16 @@ class User < BaseModel
     column email : String
     column username : String
     column encrypted_password : String
+    column confirmed_at : Time?
+    column confirmed_token : String
     has_one namespace : Namespace
     has_many api_tokens : ApiToken
     has_many team_members : TeamMembers
     has_many teams : Team, through: :team_members
+  end
+
+  def confirmed?
+    !confirmed_at.nil?
   end
 
   def slug

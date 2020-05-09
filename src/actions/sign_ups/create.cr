@@ -4,8 +4,7 @@ class SignUps::Create < BrowserAction
   route do
     SignUpUser.create(params) do |operation, user|
       if user
-        flash.info = "Thanks for signing up"
-        sign_in(user)
+        flash.info = "Sent an email for confirm"
         redirect to: Home::Index
       else
         flash.info = "Couldn't sign you up"

@@ -8,9 +8,9 @@ class SignUps::NewPage < AuthLayout
   private def render_sign_up_form(op)
     form_for SignUps::Create do
       sign_up_fields(op)
+      link "Sign in instead", to: SignIns::New, class: "float-right inline-block py-2 px-4 font-bold"
       submit "Sign Up", flow_id: "sign-up-button", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
     end
-    link "Sign in instead", to: SignIns::New
   end
 
   private def sign_up_fields(op)
