@@ -7,6 +7,7 @@
     "babel-plugin-prismjs": "^2.0.1",
     "normalize-scss": "^7.0.1",
     "prismjs": "^1.19.0",
+    "simplemde": "^1.11.2",
     "tailwindcss": "^1.1.4",
     "turbolinks": "^5.2.0"
   },

@@ -14,7 +14,7 @@ class Repositories::MergeRequests::NewPage < MainLayout
   def render_merge_request_form(op)
     form_for MergeRequests::Create.with(@namespace.slug, @repository.slug) do
       mount Shared::Field.new(op.name)
-      mount Shared::Field.new(op.description)
+      mount Shared::Field.new(op.description), &.textarea(append_class: "form-textarea mt-1 block w-full shadow appearance-none", id: "simple_editor")
       label_for(op.branch)
       select_input(op.branch, class: "shadow block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") do
         options_for_select(op.branch, options_for_branches)
