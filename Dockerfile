@@ -10,8 +10,8 @@ RUN git clone https://github.com/luckyframework/lucky_cli && cd lucky_cli && git
 COPY . /app
 RUN shards install
 
-RUN lucky build.release
 RUN yarn prod
+RUN lucky build.release
 
 
 FROM crystallang/crystal:0.34.0-alpine-build
