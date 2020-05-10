@@ -1,5 +1,5 @@
 class Repositories::MergeRequests::NewPage < MainLayout
-  needs operation : SaveMergeRequest
+  needs operation : CreateMergeRequest
   needs repository : Repository
   needs namespace : Namespace
   quick_def page_title, "New"

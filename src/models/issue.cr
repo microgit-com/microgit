@@ -11,5 +11,6 @@ class Issue < BaseModel
     belongs_to author : User
     belongs_to assignee : User?
     column status : Issue::AvramStatus
+    column scoped_id : Int32
   end
 end

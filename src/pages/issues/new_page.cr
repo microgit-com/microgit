@@ -1,5 +1,5 @@
 class Repositories::Issues::NewPage < MainLayout
-  needs operation : SaveIssue
+  needs operation : CreateIssue
   needs repository : Repository
   quick_def page_title, "New"
   quick_def single_page, "New Issue"
