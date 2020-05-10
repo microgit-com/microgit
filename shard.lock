@@ -12,6 +12,10 @@ shards:
     github: luckyframework/avram
     version: 0.14.0
 
+  avram_scoped_id:
+    github: microgit-com/avram_scoped_id
+    commit: d5853177e55fabc04c9456f5b45f073e3f5a54d9
+
   blank:
     github: kostya/blank
     version: 0.1.0

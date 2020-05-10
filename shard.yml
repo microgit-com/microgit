@@ -48,3 +48,5 @@ dependencies:
     version: ~> 2.6
   lucky_can:
     github: confact/lucky_can
+  avram_scoped_id:
+    github: microgit-com/avram_scoped_id
