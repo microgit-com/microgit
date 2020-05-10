@@ -8,6 +8,10 @@ class MicrogitGit
     @repo_git
   end
 
+  def can_get_git_data?
+    !raw.empty?
+  end
+
   def get_branch_diff(target_branch) : Git::Diff
     target_commit = Git::Commit.lookup(raw, target_branch.target_id)
     master_commit = last_commit("master")
@@ -16,6 +20,7 @@ class MicrogitGit
   end
 
   def last_commit(branch = "master")
+    return unless can_get_git_data?
     Git::Commit.lookup(raw, caching("last_commit/#{branch}") do
       target = Git::Branch.lookup(raw, branch)
       return nil if @repo_git.empty?
