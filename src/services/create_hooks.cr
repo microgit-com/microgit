@@ -9,13 +9,20 @@ class CreateHooks
   def create_post_receive
     bash_content = <<-BASH
     #!/bin/bash
+    cd ./../../../../
     while read oldrev newrev ref
     do
-      ./../../../../lucky microgit.hooks -id #{@repo.id} -or $oldrev -nr $newrev -ref $ref
+      lucky microgit.hooks --id=#{@repo.id} --oldrev=$oldrev --newrev=$newrev --ref=$ref
     done
     BASH
-    File.open("#{@repo.git_path}/hooks/post-receive", "w") do |file|
+    add_to_file("post-receive") do |file|
       file.puts bash_content
+    end
+  end
+
+  def add_to_file(name, &block)
+    File.open("#{@repo.git_path}/hooks/#{name}", "w", File::Permissions::OtherExecute) do |file|
+      yield file
     end
   end
 end

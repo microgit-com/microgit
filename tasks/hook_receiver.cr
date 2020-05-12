@@ -10,16 +10,16 @@ class HookReceiver < LuckyCli::Task
     repo_id = 0
     OptionParser.parse(args) do |parser|
       parser.banner = "Usage: lucky microgit.hooks"
-      parser.on("-or rev", "--oldrev rev", "old revision") do |orn|
+      parser.on("-or OLDREV", "--oldrev=OLDREV", "old revision") do |orn|
         oldrev = orn
       end
-      parser.on("-nr rev", "--newrev rev", "new revision") do |nr|
+      parser.on("-nr NEWREV", "--newrev=NEWREV", "new revision") do |nr|
         newrev = nr
       end
-      parser.on("-ref ref", "--ref ref", "reference") do |nref|
+      parser.on("-ref REF", "--ref=REF", "reference") do |nref|
         ref = nref
       end
-      parser.on("-id id", "--id id", "repo id") do |id|
+      parser.on("-id ID", "--id=ID", "repo id") do |id|
         repo_id = id.to_i
       end
       parser.invalid_option do |flag|
@@ -33,9 +33,9 @@ class HookReceiver < LuckyCli::Task
       end
     end
 
-    File.open("#{@repo.git_path}/../../hooks.log", "w") do |file|
+    File.open("./hooks.log", "w") do |file|
       file.puts "repoid: #{repo_id}"
-      file.puts "test #{reference}"
+      file.puts "test #{ref}"
     end
     #HookWorker.async.perform(repo_id, oldrev, newrev, ref)
   end
