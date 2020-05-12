@@ -9,7 +9,7 @@ class CreateHooks
   def create_post_receive
     bash_content = <<-BASH
     #!/bin/bash
-    cd ./../../../../
+    cd $PWD/../../../
     while read oldrev newrev ref
     do
       lucky microgit.hooks --id=#{@repo.id} --oldrev=$oldrev --newrev=$newrev --ref=$ref
