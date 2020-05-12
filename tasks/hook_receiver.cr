@@ -37,6 +37,7 @@ class HookReceiver < LuckyCli::Task
       file.puts "repoid: #{repo_id}"
       file.puts "test #{ref}"
     end
+    puts "Saved a log for #{ref} for #{repo_id}"
     #HookWorker.async.perform(repo_id, oldrev, newrev, ref)
   end
 end
