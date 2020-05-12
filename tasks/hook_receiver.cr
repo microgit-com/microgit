@@ -33,8 +33,10 @@ class HookReceiver < LuckyCli::Task
       end
     end
 
-    puts "repoid: #{repo_id}"
-    puts "test #{reference}"
+    File.open("#{@repo.git_path}/../../hooks.log", "w") do |file|
+      file.puts "repoid: #{repo_id}"
+      file.puts "test #{reference}"
+    end
     #HookWorker.async.perform(repo_id, oldrev, newrev, ref)
   end
 end
