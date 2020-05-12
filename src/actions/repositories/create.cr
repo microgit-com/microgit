@@ -3,7 +3,9 @@ class Repositories::Create < BrowserAction
     SaveRepository.create(params, created_by_id: current_user.id, user_id: current_user.id) do |operation, repository|
       if repository
         repository = RepositoryQuery.new.preload_user.preload_team.find(repository.id)
-        Git::Repo.init_at(repository.git_path, true)
+        repo = Git::Repo.init_at(repository.git_path, true)
+        hooks = CreateHooks.new(repository)
+        hooks.create_all_hooks
         flash.success = "The record has been saved"
         redirect Show.with(repository.namespace_slug, repository.slug)
       else

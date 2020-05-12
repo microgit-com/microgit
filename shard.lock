@@ -104,6 +104,10 @@ shards:
     github: icyleaf/markd
     version: 0.2.0
 
+  mosquito:
+    github: robacarp/mosquito
+    version: 0.7.0
+
   openssl_ext:
     github: stakach/openssl_ext
     version: 1.2.0
