@@ -3,24 +3,36 @@
     <div class="w-full p-3 bg-gray-800 border-b text-white rounded-t border-gray-400">
       <%=patchy.file %> <%=patch.delta.new_file.size%> <span class="inline-block float-right"><%=patch.delta.status%></span>
     </div>
-<div class="w-full overflow-scroll bg-white rounded-b">
+<div class="w-full overflow-x-scroll overflow-y-hidden bg-white rounded-b">
   <% if patchy.too_large? %>
     <div class="w-full text-center text-l">File too big</div>
   <% else %>
 <div class="py-3 px-1 bg-gray-400 text-gray-800">
   <%= patchy.body.lines[4]%>
 </div>
+<table class="w-full flex">
+<tbody class="w-full">
 <% patchy.all_lines[1..-1].each do |line| %>
-<div class="flex">
-  <div class="w-13 bg-gray-400 text-gray-800 p-3 text-center text-sm"><%= line.mode == GitDiffParser::Line::Mode::Removed ? line.number : "-" %></div>
-  <div class="w-13 bg-gray-400 text-gray-800 p-3 text-center text-sm"><%= line.mode == GitDiffParser::Line::Mode::Modified ? line.number : "-" %></div>
-  <div class="w-full">
-    <pre class="p-1 <%= line_color(line) %>">
+<tr class="w-full">
+  <% if line.mode == GitDiffParser::Line::Mode::Unchanged %>
+    <td class="w-13 bg-gray-400 text-gray-800 p-3 text-center text-sm"><%= line.number %></td>
+    <td class="w-13 bg-gray-400 text-gray-800 p-3 text-center text-sm"><%= line.number %></td>
+  <% elsif line.mode == GitDiffParser::Line::Mode::Removed %>
+    <td class="w-13 bg-gray-400 text-gray-800 p-3 text-center text-sm <%= line_color_bg(line) %>"><%= line.number %></td>
+    <td class="w-13 bg-gray-400 text-gray-800 p-3 text-center text-sm <%= line_color_bg(line) %>"></td>
+  <% else %>
+    <td class="w-13 bg-gray-400 text-gray-800 p-3 text-center text-sm <%= line_color_bg(line) %>"></td>
+    <td class="w-13 bg-gray-400 text-gray-800 p-3 text-center text-sm <%= line_color_bg(line) %>"><%= line.number %></td>
+  <% end %>
+  <td class="w-full py-3 <%= line_color(line) %>">
+    <pre style="height:1rem;">
     <%=HTML.escape(line.content)%>
     </pre>
-  </div>
-</div>
+  </td>
+</tr>
 <% end %>
+</tbody>
+</table>
 <% end %>
 </div>
   </div>
