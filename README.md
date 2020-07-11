@@ -27,6 +27,8 @@ Microgit is meant to be a self-hosting open source that will be an alternative t
 * optmization
 * Cleaning up code
 * Upgrades of Lucky and Crystal
+* tests
+* ssh support?
 
 This is a project written using [Lucky](https://luckyframework.org). Enjoy!
 
