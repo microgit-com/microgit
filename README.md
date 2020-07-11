@@ -1,4 +1,32 @@
-# microgit.cr
+# Microgit
+
+Microgit is meant to be a self-hosting open source that will be an alternative to gitlab. See this as a crystal version of gitea but with own design.
+
+## What it can do now:
+* Git pull/push/fetch
+* See tree of files
+* See last commit
+* See commit list
+* See branch list
+* see commits for specific branch
+* See diffs
+* See file content (non-binary files)
+* Create issues
+* Create Merge Requests
+* See diff of merge request compare to master
+* Commenting on merge request
+* Commenting on issue
+* Merge merge request
+
+## What is left to be done:
+* Squash merge
+* add labels to issues and merge requests
+* Show logs of changes on issue and merge requests
+* add related issue, merge requests
+* Better assignee and owner handling
+* optmization
+* Cleaning up code
+* Upgrades of Lucky and Crystal
 
 This is a project written using [Lucky](https://luckyframework.org). Enjoy!
 
@@ -9,6 +37,7 @@ This is a project written using [Lucky](https://luckyframework.org). Enjoy!
 1. Run `script/setup`
 1. Run `lucky dev` to start the app
 
-### Learning Lucky
+## Contributing
+Microgit is built to be fully open and transparent. You can help contribute and do push this project forward.
 
-Lucky uses the [Crystal](https://crystal-lang.org) programming language. You can learn about Lucky from the [Lucky Guides](https://luckyframework.org/guides/getting-started/why-lucky).
+Fork this repo, add push your changes to a new branch and create an pull request.
