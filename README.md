@@ -17,6 +17,8 @@ Microgit is meant to be a self-hosting open source that will be an alternative t
 * Commenting on merge request
 * Commenting on issue
 * Merge merge request
+* teams
+* user invite to team
 
 ## What is left to be done:
 * Squash merge
