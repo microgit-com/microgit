@@ -12,6 +12,6 @@ class MergeRequest < BaseModel
     column status : MergeRequest::AvramStatus
     belongs_to repository : Repository
     belongs_to author : User
-    column scoped_id : Int32
+    column scoped_id : Int64
   end
 end

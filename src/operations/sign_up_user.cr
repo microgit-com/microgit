@@ -13,7 +13,12 @@ class SignUpUser < User::SaveOperation
     validate_required username
     validate_uniqueness_of email
     validate_uniqueness_of username
-    confirmed_token.value = Random::Secure.hex(32)
+    confirm_token = Random::Secure.hex(32)
+    confirmed_token.value = confirm_token
+    if Lucky::Env.development?
+      puts "Confirmation token: #{confirm_token}"
+      puts "Go to #{UserConfirmations::Show.url(token: confirm_token)}"
+    end
     Authentic.copy_and_encrypt password, to: encrypted_password
   end
 

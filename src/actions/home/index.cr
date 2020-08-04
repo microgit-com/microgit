@@ -7,12 +7,12 @@ class Home::Index < BrowserAction
     else
       # When you're ready change this line to:
       #
-      #   redirect SignIns::New
+      redirect SignIns::New
       #
       # Or maybe show signed out users a marketing page:
       #
       #   html Marketing::IndexPage
-      html Home::WelcomePage
+      #html Home::WelcomePage
     end
   end
 end
