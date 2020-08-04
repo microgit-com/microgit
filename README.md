@@ -17,8 +17,11 @@ Microgit is meant to be a self-hosting open source that will be an alternative t
 * Commenting on merge request
 * Commenting on issue
 * Merge merge request
+* teams
+* user invite to team
 
 ## What is left to be done:
+* Better handling of git updates, using git hooks
 * Squash merge
 * add labels to issues and merge requests
 * Show logs of changes on issue and merge requests
@@ -27,6 +30,8 @@ Microgit is meant to be a self-hosting open source that will be an alternative t
 * optmization
 * Cleaning up code
 * Upgrades of Lucky and Crystal
+* tests
+* ssh support?
 
 This is a project written using [Lucky](https://luckyframework.org). Enjoy!
 
