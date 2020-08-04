@@ -21,6 +21,7 @@ Microgit is meant to be a self-hosting open source that will be an alternative t
 * user invite to team
 
 ## What is left to be done:
+* Better handling of git updates, using git hooks
 * Squash merge
 * add labels to issues and merge requests
 * Show logs of changes on issue and merge requests
