@@ -15,7 +15,7 @@ class SignUpUser < User::SaveOperation
     validate_uniqueness_of username
     confirm_token = Random::Secure.hex(32)
     confirmed_token.value = confirm_token
-    if Lucky::Env.development?
+    if LuckyEnv.development?
       puts "Confirmation token: #{confirm_token}"
       puts "Go to #{UserConfirmations::Show.url(token: confirm_token)}"
     end

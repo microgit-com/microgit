@@ -13,8 +13,8 @@ class Repositories::MergeRequests::EditPage < MainLayout
 
   def render_merge_request_form(op)
     form_for MergeRequests::Update.with(@repository.namespace_slug, @repository.slug, @merge_request.id) do
-      mount Shared::Field.new(op.name), &.text_input(autofocus: "true")
-      mount Shared::Field.new(op.description), &.textarea(append_class: "form-textarea mt-1 block w-full shadow appearance-none", id: "simple_editor")
+      mount Shared::Field, attribute: op.name, &.text_input(autofocus: "true")
+      mount Shared::Field, attribute: op.description, &.textarea(append_class: "form-textarea mt-1 block w-full shadow appearance-none", id: "simple_editor")
 
       submit "Update", data_disable_with: "Updating..."
     end

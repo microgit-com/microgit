@@ -1,12 +1,13 @@
-database_name = "microgit_#{Lucky::Env.name}"
+database_name = "microgit_#{LuckyEnv.name}"
 
 AppDatabase.configure do |settings|
-  if Lucky::Env.production?
-    settings.url = ENV.fetch("DATABASE_URL")
+  if LuckyEnv.production?
+    settings.credentials = Avram::Credentials.parse(ENV["DATABASE_URL"])
   else
-    settings.url = ENV["DATABASE_URL"]? || Avram::PostgresURL.build(
+    settings.credentials = Avram::Credentials.parse?(ENV["DATABASE_URL"]?) || Avram::Credentials.new(
       database: database_name,
       hostname: ENV["DB_HOST"]? || "localhost",
+      port: ENV["DB_PORT"]?.try(&.to_i) || 5432,
       # Some common usernames are "postgres", "root", or your system username (run 'whoami')
       username: ENV["DB_USERNAME"]? || "postgres",
       # Some Postgres installations require no password. Use "" if that is the case.
@@ -20,5 +21,9 @@ Avram.configure do |settings|
 
   # In production, allow lazy loading (N+1).
   # In development and test, raise an error if you forget to preload associations
-  settings.lazy_load_enabled = Lucky::Env.production?
+  settings.lazy_load_enabled = LuckyEnv.production?
+  
+  # Always parse `Time` values with these specific formats.
+  # Used for both database values, and datetime input fields.
+  # settings.time_formats << "%F"
 end

@@ -11,7 +11,7 @@ class User < BaseModel
     has_one namespace : Namespace
     has_many api_tokens : ApiToken
     has_many team_members : TeamMembers
-    has_many teams : Team, through: :team_members
+    has_many teams : Team, through: [:team_members, :team]
   end
 
   def confirmed?

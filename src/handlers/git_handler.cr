@@ -38,7 +38,8 @@ class HTTP::GitHandler
     if context.request.headers.has_key?("Authorization")
       _, enc = context.request.headers["Authorization"].split
       username, password = Base64.decode_string(enc).split(":")
-      SignInUserGit.new(Avram::Params.new({"username" => username, "password" => password})).submit do |operation, authenticated_user|
+      params = Avram::Params.new({"username" => username, "password" => password})
+      SignInUserGit.run(params) do |operation, authenticated_user|
         return authenticated_user
       end
     end

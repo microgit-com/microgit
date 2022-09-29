@@ -1,5 +1,5 @@
 require "option_parser"
-class HookReceiver < LuckyCli::Task
+class HookReceiver < LuckyTask::Task
   summary "Updating data on repository"
   name "microgit.hooks"
 

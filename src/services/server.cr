@@ -9,7 +9,7 @@ class GitServer
   @reqfile : String | Nil
   @rpc : String | Nil
   @dir : String
-  @services : Array(Tuple(String, Proc((Bool | Nil)) | Proc((Bool | UInt64 | Nil)), String, String))
+  @services : Array(Tuple(String, Proc((Bool | Nil)) | Proc((Int64 | Nil)), String, String))
 
   def initialize(context)
     @contexted = context

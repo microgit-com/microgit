@@ -1,5 +1,5 @@
 class Teams::Update < BrowserAction
-  route do
+  put "/teams/:team_id" do
     team = TeamQuery.find(team_id)
     TeamPolicy.update_forbidden?(team, current_user, context)
     UpdateTeam.update(team, params) do |operation, team|

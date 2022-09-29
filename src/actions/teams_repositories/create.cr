@@ -1,5 +1,5 @@
 class Teams::Repositories::Create < BrowserAction
-  nested_route do
+  post "/teams/:team_id/repositories" do
     SaveRepository.create(params, team_id: team_id.to_i64, created_by_id: current_user.id) do |operation, repository|
       if repository
         repository = RepositoryQuery.new.preload_user.preload_team.find(repository.id)

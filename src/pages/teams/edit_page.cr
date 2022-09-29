@@ -10,8 +10,8 @@ class Teams::EditPage < MainLayout
 
   def render_team_form(op)
     form_for Teams::Update.with(@team.id) do
-      mount Shared::Field.new(op.name)
-      mount Shared::Field.new(op.description)
+      mount Shared::Field, attribute: op.name
+      mount Shared::Field, attribute: op.description
 
       submit "Update", data_disable_with: "Updating..."
     end

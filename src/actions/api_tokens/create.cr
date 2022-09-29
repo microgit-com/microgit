@@ -1,5 +1,5 @@
 class ApiTokens::Create < BrowserAction
-  route do
+  post "/api_tokens" do
     SaveApiToken.create(token: Random::Secure.base64, user_id: current_user.id) do |operation, api_token|
       if api_token
         flash.success = "The record has been saved"

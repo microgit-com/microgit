@@ -21,7 +21,7 @@ class SignIns::NewPage < AuthLayout
   end
 
   private def sign_in_fields(op)
-    mount Shared::Field.new(op.email), &.email_input(autofocus: "true", append_class: "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-2")
-    mount Shared::Field.new(op.password), &.password_input(append_class: "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-2")
+    mount Shared::Field, attribute: op.email, label_text: "Email", &.email_input(autofocus: "true", append_class: "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-2")
+    mount Shared::Field, attribute: op.password, label_text: "Password", &.password_input(append_class: "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-2")
   end
 end

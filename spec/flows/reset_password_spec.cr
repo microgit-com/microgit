@@ -1,8 +1,8 @@
 require "../spec_helper"
 
-describe "Reset password flow" do
+describe "Reset password flow", tags: "flow" do
   it "works" do
-    user = UserBox.create
+    user = UserFactory.create
     flow = ResetPasswordFlow.new(user)
 
     flow.request_password_reset

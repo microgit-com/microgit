@@ -5,7 +5,7 @@ class Team < BaseModel
     has_one namespace : Namespace
     has_many repositories : Repository
     has_many team_members : TeamMembers
-    has_many users : User, through: :team_members
+    has_many users : User, through: [:team_members, :user]
   end
 
   def slug

@@ -1,9 +1,12 @@
+# This class handles error responses and reporting.
+#
+# https://luckyframework.org/guides/http-and-routing/error-handling
 class Errors::Show < Lucky::ErrorAction
   DEFAULT_MESSAGE = "Something went wrong."
   default_format :html
-  dont_report [Lucky::RouteNotFoundError]
+  dont_report [Lucky::RouteNotFoundError, Avram::RecordNotFoundError]
 
-  def render(error : Lucky::RouteNotFoundError)
+  def render(error : Lucky::RouteNotFoundError | Avram::RecordNotFoundError)
     if html?
       error_html "Sorry, we couldn't find that page.", status: 404
     else
@@ -47,7 +50,7 @@ class Errors::Show < Lucky::ErrorAction
 
   private def error_html(message : String, status : Int)
     context.response.status_code = status
-    html Errors::ShowPage, message: message, status: status
+    html_with_status Errors::ShowPage, status, message: message, status_code: status
   end
 
   private def error_json(message : String, status : Int, details = nil, param = nil)

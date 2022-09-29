@@ -1,5 +1,5 @@
 class Teams::Create < BrowserAction
-  route do
+  post "/teams" do
     CreateTeam.create(params, created_by: current_user) do |operation, team|
       if team
         flash.success = "The record has been saved"

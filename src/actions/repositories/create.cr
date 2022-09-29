@@ -1,5 +1,5 @@
 class Repositories::Create < BrowserAction
-  route do
+  post "/repositories" do
     SaveRepository.create(params, created_by_id: current_user.id, user_id: current_user.id) do |operation, repository|
       if repository
         repository = RepositoryQuery.new.preload_user.preload_team.find(repository.id)
