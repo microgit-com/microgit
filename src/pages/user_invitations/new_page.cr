@@ -5,7 +5,7 @@ class UserInvitations::NewPage < MainLayout
 
   def content
     form_for UserInvitations::Create.with(@team.id) do
-      mount Shared::Field.new(@operation.invitee_email)
+      mount Shared::Field, attribute: @operation.invitee_email
       submit "Invite", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded focus:outline-none focus:shadow-outline"
     end
   end

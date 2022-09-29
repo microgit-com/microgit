@@ -3,10 +3,15 @@
 # Look at config/route_helper.cr if you want to change the domain used when
 # generating links with `Action.url`.
 Lucky::Server.configure do |settings|
-  if Lucky::Env.production?
+  if LuckyEnv.production?
     settings.secret_key_base = secret_key_from_env
     settings.host = "0.0.0.0"
     settings.port = ENV["PORT"].to_i
+    # By default certain content types will be gzipped.
+    # For a full list look in
+    # https://github.com/luckyframework/lucky/blob/main/src/lucky/server.cr
+    # To add additional extensions do something like this:
+    # settings.gzip_content_types << "content/type"
   else
     settings.secret_key_base = "F5oxSs4EYtvuwDlf8grfI81qIS2SKr2VkHFnGzzytk4="
     # Change host/port in config/watch.yml
@@ -20,7 +25,7 @@ Lucky::Server.configure do |settings|
   # However you could use a CDN when in production like this:
   #
   #   Lucky::Server.configure do |settings|
-  #     if Lucky::Env.production?
+  #     if LuckyEnv.production?
   #       settings.asset_host = "https://mycdnhost.com"
   #     else
   #       settings.asset_host = ""
@@ -33,12 +38,21 @@ Lucky::ForceSSLHandler.configure do |settings|
   # To force SSL in production, uncomment the lines below.
   # This will cause http requests to be redirected to https:
   #
-  #    settings.enabled = Lucky::Env.production?
+  #    settings.enabled = LuckyEnv.production?
   #    settings.strict_transport_security = {max_age: 1.year, include_subdomains: true}
   #
   # Or, leave it disabled:
   settings.enabled = false
 end
+
+# Set a unique ID for each HTTP request.
+# To enable the request ID, uncomment the lines below.
+# You can set your own custom String, or use a random UUID.
+# Lucky::RequestIdHandler.configure do |settings|
+#   settings.set_request_id = ->(context : HTTP::Server::Context) {
+#     UUID.random.to_s
+#   }
+# end
 
 private def secret_key_from_env
   ENV["SECRET_KEY_BASE"]? || raise_missing_secret_key_in_production

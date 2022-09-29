@@ -12,7 +12,7 @@
   <body>
     <div class="container mx-auto flex-grow lg:w-2/5 md:w-3/5  sm:w-4/5 px-2 pt-4">
     <h1 class="text-center my-5">Microgit</h1>
-    <% mount Shared::FlashMessages.new(@context.flash) %>
+    <% mount Shared::FlashMessages, context.flash %>
     <% content %>
     </div>
   </body>

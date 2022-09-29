@@ -1,146 +1,179 @@
-version: 1.0
+# NOTICE: This lockfile contains some overrides from shard.override.yml
+version: 2.0
 shards:
   apatite:
-    github: watzon/apatite
-    commit: 9ed28220eb7136eecc05c70cb16b7a41a6d0e958
+    git: https://github.com/watzon/apatite.git
+    version: 0.1.0+git.commit.4df520caa1c36ed3a0a920988b7794422b32abb1
 
   authentic:
-    github: luckyframework/authentic
-    version: 0.5.4
+    git: https://github.com/luckyframework/authentic.git
+    version: 0.8.2
 
-  avram:
-    github: luckyframework/avram
-    version: 0.14.0
+  avram: # Overridden
+    git: https://github.com/luckyframework/avram.git
+    version: 0.23.0
 
   avram_scoped_id:
-    github: microgit-com/avram_scoped_id
-    commit: d5853177e55fabc04c9456f5b45f073e3f5a54d9
-
-  blank:
-    github: kostya/blank
-    version: 0.1.0
-
-  cadmium_classifier:
-    github: cadmiumcr/classifier
-    commit: 22609f050564fb90595bdbdfdf4007e67861c5c4
-
-  cadmium_tokenizer:
-    github: cadmiumcr/tokenizer
-    commit: e7f8733e4d8ead9a811b6f41d0b5fa621ba03033
-
-  carbon:
-    github: luckyframework/carbon
-    version: 0.1.1
-
-  cry:
-    github: paulcsmith/cry
-    version: 0.4.2
-
-  db:
-    github: crystal-lang/crystal-db
-    version: 0.9.0
-
-  dexter:
-    github: luckyframework/dexter
+    git: https://github.com/microgit-com/avram_scoped_id.git
     version: 0.2.0
 
-  dotenv:
-    github: gdotdesign/cr-dotenv
-    version: 0.3.0
+  backtracer:
+    git: https://github.com/sija/backtracer.cr.git
+    version: 1.2.2
 
-  exception_page:
-    github: crystal-loot/exception_page
-    version: 0.1.4
+  bindata:
+    git: https://github.com/spider-gazelle/bindata.git
+    version: 1.11.0
 
-  git:
-    github: microgit-com/libgit2.cr
-    commit: 7069411d3357628a6294af97f88e9c718e87f8e9
+  cadmium_classifier:
+    git: https://github.com/cadmiumcr/classifier.git
+    version: 0.2.0+git.commit.f9c70d89b16fe8fbb279c0048588e3ec0bc1a1af
 
-  git_diff_parser:
-    github: microgit-com/git_diff_parser
-    commit: e9e7db8e14367680a8478cfcb569f6ff6c33e531
+  cadmium_tokenizer:
+    git: https://github.com/cadmiumcr/tokenizer.git
+    version: 0.1.0+git.commit.e7f8733e4d8ead9a811b6f41d0b5fa621ba03033
 
-  habitat:
-    github: luckyframework/habitat
+  cadmium_transliterator:
+    git: https://github.com/cadmiumcr/transliterator.git
+    version: 0.1.0+git.commit.46c4c14594057dbcfaf27e7e7c8c164d3f0ce3f1
+
+  carbon:
+    git: https://github.com/luckyframework/carbon.git
+    version: 0.2.1
+
+  carbon_sendgrid_adapter:
+    git: https://github.com/luckyframework/carbon_sendgrid_adapter.git
+    version: 0.2.1
+
+  cry:
+    git: https://github.com/luckyframework/cry.git
     version: 0.4.3
 
+  crystar:
+    git: https://github.com/naqvis/crystar.git
+    version: 0.2.0+git.commit.56db8bb9dfbd5ed6d7908353405a5fae632a6561
+
+  db:
+    git: https://github.com/crystal-lang/crystal-db.git
+    version: 0.11.0
+
+  dexter:
+    git: https://github.com/luckyframework/dexter.git
+    version: 0.3.4
+
+  exception_page:
+    git: https://github.com/crystal-loot/exception_page.git
+    version: 0.2.2
+
+  git:
+    git: https://github.com/microgit-com/libgit2.cr.git
+    version: 0.1.0+git.commit.7069411d3357628a6294af97f88e9c718e87f8e9
+
+  git_diff_parser:
+    git: https://github.com/microgit-com/git_diff_parser.git
+    version: 0.1.0+git.commit.e9e7db8e14367680a8478cfcb569f6ff6c33e531
+
+  habitat:
+    git: https://github.com/luckyframework/habitat.git
+    version: 0.4.7
+
   jwt:
-    github: crystal-community/jwt
-    version: 1.2.0
+    git: https://github.com/crystal-community/jwt.git
+    version: 1.6.0
 
   kilt:
-    github: jeromegn/kilt
-    version: 0.6.0
+    git: https://github.com/jeromegn/kilt.git
+    version: 0.6.1
 
   linguist:
-    github: microgit-com/linguist.cr
+    git: https://github.com/microgit-com/linguist.cr.git
     version: 0.2.2
 
   lucky:
-    github: luckyframework/lucky
-    version: 0.21.1
+    git: https://github.com/luckyframework/lucky.git
+    version: 0.30.1
+
+  lucky_cache:
+    git: https://github.com/luckyframework/lucky_cache.git
+    version: 0.1.1
 
   lucky_can:
-    github: confact/lucky_can
-    commit: 2004fe0e4d02a43ca3f7b4728c28b1c501285a9c
-
-  lucky_cli:
-    github: luckyframework/lucky_cli
-    version: 0.21.0
+    git: https://github.com/confact/lucky_can.git
+    version: 0.1.0+git.commit.2004fe0e4d02a43ca3f7b4728c28b1c501285a9c
 
   lucky_encrypted:
-    github: microgit-com/lucky_encrypted
-    commit: 7f8f8ae16b4801d9237cc75044f915d1ea67f323
+    git: https://github.com/microgit-com/lucky_encrypted.git
+    version: 0.4.0
+
+  lucky_env:
+    git: https://github.com/luckyframework/lucky_env.git
+    version: 0.1.4
 
   lucky_flow:
-    github: luckyframework/lucky_flow
-    version: 0.6.3
+    git: https://github.com/luckyframework/lucky_flow.git
+    version: 0.7.3
 
   lucky_router:
-    github: luckyframework/lucky_router
-    version: 0.2.2
+    git: https://github.com/luckyframework/lucky_router.git
+    version: 0.5.1
+
+  lucky_task:
+    git: https://github.com/luckyframework/lucky_task.git
+    version: 0.1.1
 
   markd:
-    github: icyleaf/markd
-    version: 0.2.0
+    git: https://github.com/icyleaf/markd.git
+    version: 0.5.0
 
   mosquito:
-    github: robacarp/mosquito
-    version: 0.7.0
+    git: https://github.com/robacarp/mosquito.git
+    version: 0.11.2
 
   openssl_ext:
-    github: stakach/openssl_ext
-    version: 1.2.0
+    git: https://github.com/spider-gazelle/openssl_ext.git
+    version: 2.2.0
 
   pg:
-    github: will/crystal-pg
-    version: 0.21.0
+    git: https://github.com/will/crystal-pg.git
+    version: 0.26.0
 
   pool:
-    github: ysbaddaden/pool
+    git: https://github.com/ysbaddaden/pool.git
+    version: 0.2.4
+
+  pulsar:
+    git: https://github.com/luckyframework/pulsar.git
     version: 0.2.3
 
   redis:
-    github: stefanwille/crystal-redis
-    version: 2.6.0
+    git: https://github.com/stefanwille/crystal-redis.git
+    version: 2.8.3
 
   selenium:
-    github: ysbaddaden/selenium-webdriver-crystal
-    commit: bda2fd406c1a118251c5a2883f1e1f3af242116e
+    git: https://github.com/matthewmcgarvey/selenium.cr.git
+    version: 0.9.1
 
   shell-table:
-    github: luckyframework/shell-table.cr
-    commit: 078a04ea58ead5203bb435a3b5fff448ddabaeea
+    git: https://github.com/luckyframework/shell-table.cr.git
+    version: 0.9.3
 
   sluggr:
-    github: microgit-com/sluggr
-    commit: 789ba497be050135465e8ef12b9b969514c5d2fd
+    git: https://github.com/microgit-com/sluggr.git
+    version: 0.1.0+git.commit.789ba497be050135465e8ef12b9b969514c5d2fd
+
+  splay_tree_map:
+    git: https://github.com/wyhaines/splay_tree_map.cr.git
+    version: 0.2.2
 
   teeplate:
-    github: luckyframework/teeplate
-    version: 0.8.1
+    git: https://github.com/luckyframework/teeplate.git
+    version: 0.8.5
+
+  webdrivers:
+    git: https://github.com/matthewmcgarvey/webdrivers.cr.git
+    version: 0.4.1
 
   wordsmith:
-    github: luckyframework/wordsmith
-    version: 0.2.0
+    git: https://github.com/luckyframework/wordsmith.git
+    version: 0.3.0
 

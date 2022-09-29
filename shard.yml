@@ -8,27 +8,30 @@ targets:
   microgit:
     main: src/microgit.cr
 
-crystal: 0.34.0
+crystal: 1.3.2
 
 dependencies:
   lucky:
     github: luckyframework/lucky
-    version: ~> 0.21
+    version: ~> 0.30.0
   authentic:
     github: luckyframework/authentic
-    version: ~> 0.5.4
+    version: ~> 0.8.2
   carbon:
     github: luckyframework/carbon
+    version: ~> 0.2.1
+  carbon_sendgrid_adapter:
+    github: luckyframework/carbon_sendgrid_adapter
+    version: ~> 0.2.1
+  lucky_env:
+    github: luckyframework/lucky_env
+    version: ~> 0.1.4
+  lucky_task:
+    github: luckyframework/lucky_task
     version: ~> 0.1.1
-  dotenv:
-    github: gdotdesign/cr-dotenv
-    version: 0.3.0
-  lucky_flow:
-    github: luckyframework/lucky_flow
-    version: ~> 0.6.3
   jwt:
     github: crystal-community/jwt
-    version: ~> 1.2.0
+    version: ~> 1.6.0
   git:
     github: microgit-com/libgit2.cr
   kilt:
@@ -52,3 +55,7 @@ dependencies:
     github: microgit-com/avram_scoped_id
   mosquito:
     github: robacarp/mosquito
+development_dependencies:
+  lucky_flow:
+    github: luckyframework/lucky_flow
+    version: ~> 0.7.3
